@@ -1,0 +1,6 @@
+framework module Pods_DraggableImageForm {
+  umbrella header "Pods-DraggableImageForm-umbrella.h"
+
+  export *
+  module * { export * }
+}
