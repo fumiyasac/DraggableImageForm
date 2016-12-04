@@ -17,6 +17,8 @@
 		DE11B55C1DF1BE5700EE9E75 /* DraggableImageFormUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE11B55B1DF1BE5700EE9E75 /* DraggableImageFormUITests.swift */; };
 		DE3D960F1DF2C419002C6965 /* AddController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3D960E1DF2C418002C6965 /* AddController.swift */; };
 		DE3D96131DF2CB52002C6965 /* PaintController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE3D96121DF2CB52002C6965 /* PaintController.swift */; };
+		DEF844961DF3AF34006D8CBD /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF844941DF3AF34006D8CBD /* PhotoCell.swift */; };
+		DEF844971DF3AF34006D8CBD /* PhotoCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DEF844951DF3AF34006D8CBD /* PhotoCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +57,8 @@
 		DE11B55D1DF1BE5700EE9E75 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DE3D960E1DF2C418002C6965 /* AddController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddController.swift; sourceTree = "<group>"; };
 		DE3D96121DF2CB52002C6965 /* PaintController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaintController.swift; sourceTree = "<group>"; };
+		DEF844941DF3AF34006D8CBD /* PhotoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
+		DEF844951DF3AF34006D8CBD /* PhotoCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,6 +189,7 @@
 		DE3D96151DF2CB96002C6965 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				DEF844931DF3A953006D8CBD /* CollectionView */,
 				DE3D96161DF2CBA0002C6965 /* TableViewCell */,
 			);
 			name = Components;
@@ -209,6 +214,15 @@
 			children = (
 			);
 			name = Draggable;
+			sourceTree = "<group>";
+		};
+		DEF844931DF3A953006D8CBD /* CollectionView */ = {
+			isa = PBXGroup;
+			children = (
+				DEF844941DF3AF34006D8CBD /* PhotoCell.swift */,
+				DEF844951DF3AF34006D8CBD /* PhotoCell.xib */,
+			);
+			name = CollectionView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -322,6 +336,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DEF844971DF3AF34006D8CBD /* PhotoCell.xib in Resources */,
 				DE11B5461DF1BE5700EE9E75 /* LaunchScreen.storyboard in Resources */,
 				DE11B5431DF1BE5700EE9E75 /* Assets.xcassets in Resources */,
 				DE11B5411DF1BE5700EE9E75 /* Main.storyboard in Resources */,
@@ -372,7 +387,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run \'pod install\' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		92C21D497A12C1EA5CD0441A /* [CP] Embed Pods Frameworks */ = {
@@ -398,6 +413,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DE3D96131DF2CB52002C6965 /* PaintController.swift in Sources */,
+				DEF844961DF3AF34006D8CBD /* PhotoCell.swift in Sources */,
 				DE3D960F1DF2C419002C6965 /* AddController.swift in Sources */,
 				DE11B53E1DF1BE5700EE9E75 /* ViewController.swift in Sources */,
 				DE11B53C1DF1BE5700EE9E75 /* AppDelegate.swift in Sources */,
