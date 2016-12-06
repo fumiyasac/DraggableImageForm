@@ -20,12 +20,104 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NSM-a2-pKt">
+                                <rect key="frame" x="0.0" y="0.0" width="240" height="667"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="MnK-jv-Zdv"/>
+                                </constraints>
+                                <connections>
+                                    <segue destination="WxM-yR-Q4r" kind="embed" id="Kbg-l0-YAv"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YmO-dr-Mni">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <connections>
+                                    <segue destination="22g-3P-B2H" kind="embed" id="5xk-fY-wOo"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="NSM-a2-pKt" secondAttribute="bottom" id="26H-mW-vWE"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="YmO-dr-Mni" secondAttribute="bottom" id="Cfu-lp-vMd"/>
+                            <constraint firstItem="YmO-dr-Mni" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="FOv-bf-hvm"/>
+                            <constraint firstItem="YmO-dr-Mni" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="MgT-8d-t7e"/>
+                            <constraint firstAttribute="trailing" secondItem="YmO-dr-Mni" secondAttribute="trailing" id="O8L-LU-yjK"/>
+                            <constraint firstItem="NSM-a2-pKt" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="aPe-Lb-Szr"/>
+                            <constraint firstItem="NSM-a2-pKt" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="qWC-of-9Xe"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="24.800000000000001" y="36.431784107946029"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="95n-Qc-4Oi">
+            <objects>
+                <navigationController id="22g-3P-B2H" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="psX-IX-M9R">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="2UQ-zL-udG" kind="relationship" relationship="rootViewController" id="Qwf-hX-bGA"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dEu-2m-28g" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="870" y="-165"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="wA6-O4-GVn">
+            <objects>
+                <viewController id="2UQ-zL-udG" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="uVB-kp-buQ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="pyA-ty-EEj"/>
+                    <connections>
+                        <segue destination="hg2-zF-pns" kind="show" id="8ed-Aj-ldV"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fu0-bw-eWE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1639" y="-165"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="hew-xP-SxY">
+            <objects>
+                <viewController id="hg2-zF-pns" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Egx-Ce-zCA"/>
+                        <viewControllerLayoutGuide type="bottom" id="sAq-SD-gZR"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="4wQ-Dv-EQY">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="chW-XU-O6L" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2367" y="-165"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="msj-Pd-oEj">
+            <objects>
+                <viewController id="WxM-yR-Q4r" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cxY-XR-H6Q">
+                        <rect key="frame" x="0.0" y="0.0" width="240" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lKY-hb-KXy" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-83" y="771"/>
         </scene>
     </scenes>
 </document>
