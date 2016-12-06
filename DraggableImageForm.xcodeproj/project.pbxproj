@@ -18,6 +18,8 @@
 		DEE21AFD1DF6E34300ED28B5 /* MakeReciptController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEE21AFC1DF6E34300ED28B5 /* MakeReciptController.swift */; };
 		DEE21AFF1DF6E36900ED28B5 /* ArchiveReciptController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEE21AFE1DF6E36900ED28B5 /* ArchiveReciptController.swift */; };
 		DEE21B011DF6E51900ED28B5 /* Tutorial.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DEE21B001DF6E51900ED28B5 /* Tutorial.storyboard */; };
+		DEE21B061DF6E7E500ED28B5 /* BWWalkthroughPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEE21B041DF6E7E500ED28B5 /* BWWalkthroughPageViewController.swift */; };
+		DEE21B071DF6E7E500ED28B5 /* BWWalkthroughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEE21B051DF6E7E500ED28B5 /* BWWalkthroughViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +59,8 @@
 		DEE21AFC1DF6E34300ED28B5 /* MakeReciptController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MakeReciptController.swift; sourceTree = "<group>"; };
 		DEE21AFE1DF6E36900ED28B5 /* ArchiveReciptController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArchiveReciptController.swift; sourceTree = "<group>"; };
 		DEE21B001DF6E51900ED28B5 /* Tutorial.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Tutorial.storyboard; sourceTree = "<group>"; };
+		DEE21B041DF6E7E500ED28B5 /* BWWalkthroughPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BWWalkthroughPageViewController.swift; sourceTree = "<group>"; };
+		DEE21B051DF6E7E500ED28B5 /* BWWalkthroughViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BWWalkthroughViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +131,7 @@
 		DE11B53A1DF1BE5700EE9E75 /* DraggableImageForm */ = {
 			isa = PBXGroup;
 			children = (
+				DEE21B021DF6E7C200ED28B5 /* Libs */,
 				DE3D96151DF2CB96002C6965 /* Components */,
 				DE3D96141DF2CB7A002C6965 /* Storyboard */,
 				DE3D96111DF2C8B1002C6965 /* ViewController */,
@@ -213,6 +218,23 @@
 			children = (
 			);
 			name = Draggable;
+			sourceTree = "<group>";
+		};
+		DEE21B021DF6E7C200ED28B5 /* Libs */ = {
+			isa = PBXGroup;
+			children = (
+				DEE21B031DF6E7CD00ED28B5 /* BWWalkThrough */,
+			);
+			name = Libs;
+			sourceTree = "<group>";
+		};
+		DEE21B031DF6E7CD00ED28B5 /* BWWalkThrough */ = {
+			isa = PBXGroup;
+			children = (
+				DEE21B041DF6E7E500ED28B5 /* BWWalkthroughPageViewController.swift */,
+				DEE21B051DF6E7E500ED28B5 /* BWWalkthroughViewController.swift */,
+			);
+			name = BWWalkThrough;
 			sourceTree = "<group>";
 		};
 		DEF844931DF3A953006D8CBD /* CollectionView */ = {
@@ -411,8 +433,10 @@
 			files = (
 				DEE21AFD1DF6E34300ED28B5 /* MakeReciptController.swift in Sources */,
 				DEE21AFF1DF6E36900ED28B5 /* ArchiveReciptController.swift in Sources */,
+				DEE21B071DF6E7E500ED28B5 /* BWWalkthroughViewController.swift in Sources */,
 				DE11B53E1DF1BE5700EE9E75 /* ViewController.swift in Sources */,
 				DE11B53C1DF1BE5700EE9E75 /* AppDelegate.swift in Sources */,
+				DEE21B061DF6E7E500ED28B5 /* BWWalkthroughPageViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
