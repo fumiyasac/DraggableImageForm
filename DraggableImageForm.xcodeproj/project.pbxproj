@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		430F9C67BB45E5533A151F06 /* Pods_DraggableImageForm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AB9F7BD0A9E807BBACC9C34 /* Pods_DraggableImageForm.framework */; };
+		DE0F466A1DF8599100145416 /* Gallery.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE0F46691DF8599100145416 /* Gallery.storyboard */; };
+		DE0F466C1DF85A1700145416 /* GalleryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0F466B1DF85A1700145416 /* GalleryController.swift */; };
 		DE11B53C1DF1BE5700EE9E75 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE11B53B1DF1BE5700EE9E75 /* AppDelegate.swift */; };
 		DE11B53E1DF1BE5700EE9E75 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE11B53D1DF1BE5700EE9E75 /* ViewController.swift */; };
 		DE11B5411DF1BE5700EE9E75 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE11B53F1DF1BE5700EE9E75 /* Main.storyboard */; };
@@ -43,6 +45,8 @@
 		8AB9F7BD0A9E807BBACC9C34 /* Pods_DraggableImageForm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DraggableImageForm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F2DA21F883CF9BF1544E48C /* Pods-DraggableImageForm.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DraggableImageForm.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DraggableImageForm/Pods-DraggableImageForm.debug.xcconfig"; sourceTree = "<group>"; };
 		920496E9693AD2CD3B94706F /* Pods-DraggableImageForm.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DraggableImageForm.release.xcconfig"; path = "Pods/Target Support Files/Pods-DraggableImageForm/Pods-DraggableImageForm.release.xcconfig"; sourceTree = "<group>"; };
+		DE0F46691DF8599100145416 /* Gallery.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Gallery.storyboard; sourceTree = "<group>"; };
+		DE0F466B1DF85A1700145416 /* GalleryController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryController.swift; sourceTree = "<group>"; };
 		DE11B5381DF1BE5700EE9E75 /* DraggableImageForm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DraggableImageForm.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE11B53B1DF1BE5700EE9E75 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DE11B53D1DF1BE5700EE9E75 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -177,6 +181,7 @@
 				DE11B53D1DF1BE5700EE9E75 /* ViewController.swift */,
 				DEE21AFC1DF6E34300ED28B5 /* MakeReciptController.swift */,
 				DEE21AFE1DF6E36900ED28B5 /* ArchiveReciptController.swift */,
+				DE0F466B1DF85A1700145416 /* GalleryController.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -186,6 +191,7 @@
 			children = (
 				DE11B53F1DF1BE5700EE9E75 /* Main.storyboard */,
 				DEE21B001DF6E51900ED28B5 /* Tutorial.storyboard */,
+				DE0F46691DF8599100145416 /* Gallery.storyboard */,
 			);
 			name = Storyboard;
 			sourceTree = "<group>";
@@ -356,6 +362,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DE11B5461DF1BE5700EE9E75 /* LaunchScreen.storyboard in Resources */,
+				DE0F466A1DF8599100145416 /* Gallery.storyboard in Resources */,
 				DE11B5431DF1BE5700EE9E75 /* Assets.xcassets in Resources */,
 				DEE21B011DF6E51900ED28B5 /* Tutorial.storyboard in Resources */,
 				DE11B5411DF1BE5700EE9E75 /* Main.storyboard in Resources */,
@@ -432,6 +439,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DEE21AFD1DF6E34300ED28B5 /* MakeReciptController.swift in Sources */,
+				DE0F466C1DF85A1700145416 /* GalleryController.swift in Sources */,
 				DEE21AFF1DF6E36900ED28B5 /* ArchiveReciptController.swift in Sources */,
 				DEE21B071DF6E7E500ED28B5 /* BWWalkthroughViewController.swift in Sources */,
 				DE11B53E1DF1BE5700EE9E75 /* ViewController.swift in Sources */,

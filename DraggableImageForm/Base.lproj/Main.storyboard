@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -48,6 +49,10 @@
                             <constraint firstItem="NSM-a2-pKt" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="qWC-of-9Xe"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="mainMenuContainer" destination="YmO-dr-Mni" id="YbK-3K-ag7"/>
+                        <outlet property="subMenuContainer" destination="YmO-dr-Mni" id="Cco-m7-7hz"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -69,28 +74,121 @@
             </objects>
             <point key="canvasLocation" x="870" y="-165"/>
         </scene>
-        <!--View Controller-->
+        <!--Make Recipt Controller-->
         <scene sceneID="wA6-O4-GVn">
             <objects>
-                <viewController id="2UQ-zL-udG" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="2UQ-zL-udG" customClass="MakeReciptController" customModule="DraggableImageForm" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="BQJ-bY-Gs9"/>
+                        <viewControllerLayoutGuide type="bottom" id="pcK-M9-a8y"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="uVB-kp-buQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8dj-aN-QTd">
+                                <rect key="frame" x="0.0" y="94" width="375" height="58"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="58" id="Ga6-za-cQc"/>
+                                </constraints>
+                            </scrollView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="shO-Fz-Swf">
+                                <rect key="frame" x="16" y="603" width="343" height="48"/>
+                                <color key="backgroundColor" red="0.80000000000000004" green="0.59999999999999998" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="ayj-fF-Pmw"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
+                                <state key="normal" title="画像をドラッグして登録！（押すとデータクリア）">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Fyp-Fs-CHI">
+                                <rect key="frame" x="0.0" y="182" width="375" height="330"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="inP-b1-m1O">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="cGq-A7-ud2">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Step1. カレンダーから日付を選択してください。" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sdd-md-kWN">
+                                <rect key="frame" x="0.0" y="64" width="375" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="O6k-6P-Hk7"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Step2. 画像から直感でレシピを選択してください。" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jip-9p-Blf">
+                                <rect key="frame" x="0.0" y="152" width="375" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="w2t-5A-FvB"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d08-sy-JBL">
+                                <rect key="frame" x="0.0" y="512" width="375" height="75"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="75" id="Abi-xa-arK"/>
+                                </constraints>
+                            </view>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="shO-Fz-Swf" firstAttribute="leading" secondItem="uVB-kp-buQ" secondAttribute="leadingMargin" id="5dy-b0-xHt"/>
+                            <constraint firstItem="shO-Fz-Swf" firstAttribute="trailing" secondItem="uVB-kp-buQ" secondAttribute="trailingMargin" id="Afh-sG-hkW"/>
+                            <constraint firstAttribute="trailing" secondItem="Fyp-Fs-CHI" secondAttribute="trailing" id="HMQ-uG-aRk"/>
+                            <constraint firstItem="8dj-aN-QTd" firstAttribute="leading" secondItem="uVB-kp-buQ" secondAttribute="leading" id="JlR-NG-Gw7"/>
+                            <constraint firstAttribute="trailing" secondItem="Jip-9p-Blf" secondAttribute="trailing" id="MRF-Yb-WVv"/>
+                            <constraint firstAttribute="trailing" secondItem="Sdd-md-kWN" secondAttribute="trailing" id="O8f-Nf-2AQ"/>
+                            <constraint firstItem="8dj-aN-QTd" firstAttribute="top" secondItem="Sdd-md-kWN" secondAttribute="bottom" id="Rwt-ko-ZOz"/>
+                            <constraint firstItem="d08-sy-JBL" firstAttribute="leading" secondItem="uVB-kp-buQ" secondAttribute="leading" id="SIF-SP-4hH"/>
+                            <constraint firstItem="pcK-M9-a8y" firstAttribute="top" secondItem="shO-Fz-Swf" secondAttribute="bottom" constant="16" id="XlA-EB-yuW"/>
+                            <constraint firstAttribute="trailing" secondItem="8dj-aN-QTd" secondAttribute="trailing" id="ZRI-zt-KVX"/>
+                            <constraint firstItem="Jip-9p-Blf" firstAttribute="top" secondItem="8dj-aN-QTd" secondAttribute="bottom" id="c5K-gL-Txx"/>
+                            <constraint firstItem="shO-Fz-Swf" firstAttribute="top" secondItem="d08-sy-JBL" secondAttribute="bottom" constant="16" id="cZX-Jm-N1o"/>
+                            <constraint firstItem="Fyp-Fs-CHI" firstAttribute="top" secondItem="Jip-9p-Blf" secondAttribute="bottom" id="fmb-gY-M4I"/>
+                            <constraint firstItem="Sdd-md-kWN" firstAttribute="leading" secondItem="uVB-kp-buQ" secondAttribute="leading" id="n16-zz-ivw"/>
+                            <constraint firstItem="Fyp-Fs-CHI" firstAttribute="leading" secondItem="uVB-kp-buQ" secondAttribute="leading" id="p8W-8R-rsK"/>
+                            <constraint firstAttribute="trailing" secondItem="d08-sy-JBL" secondAttribute="trailing" id="sYO-FD-TyE"/>
+                            <constraint firstItem="Sdd-md-kWN" firstAttribute="top" secondItem="BQJ-bY-Gs9" secondAttribute="bottom" id="xeS-au-Sj9"/>
+                            <constraint firstItem="d08-sy-JBL" firstAttribute="top" secondItem="Fyp-Fs-CHI" secondAttribute="bottom" id="yss-5J-hWm"/>
+                            <constraint firstItem="Jip-9p-Blf" firstAttribute="leading" secondItem="uVB-kp-buQ" secondAttribute="leading" id="zwL-Qo-bJp"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="pyA-ty-EEj"/>
                     <connections>
+                        <outlet property="calendarScrollView" destination="8dj-aN-QTd" id="7hm-By-uYW"/>
+                        <outlet property="dragAreaButton" destination="shO-Fz-Swf" id="vMG-Xs-9at"/>
+                        <outlet property="receiptCollectionView" destination="Fyp-Fs-CHI" id="MDn-83-5vD"/>
+                        <outlet property="selectDataDisplayArea" destination="d08-sy-JBL" id="0i0-Wh-Eeh"/>
                         <segue destination="hg2-zF-pns" kind="show" id="8ed-Aj-ldV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fu0-bw-eWE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1639" y="-165"/>
+            <point key="canvasLocation" x="1637.5999999999999" y="-165.06746626686657"/>
         </scene>
-        <!--View Controller-->
+        <!--Archive Recipt Controller-->
         <scene sceneID="hew-xP-SxY">
             <objects>
-                <viewController id="hg2-zF-pns" sceneMemberID="viewController">
+                <viewController id="hg2-zF-pns" customClass="ArchiveReciptController" customModule="DraggableImageForm" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Egx-Ce-zCA"/>
                         <viewControllerLayoutGuide type="bottom" id="sAq-SD-gZR"/>
@@ -105,10 +203,22 @@
             </objects>
             <point key="canvasLocation" x="2367" y="-165"/>
         </scene>
+        <!--Page View Controller-->
+        <scene sceneID="U5d-l9-gx1">
+            <objects>
+                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="UNh-B4-tmr" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YQu-DI-FSK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3071" y="-165"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="msj-Pd-oEj">
             <objects>
                 <viewController id="WxM-yR-Q4r" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="osn-u6-m12"/>
+                        <viewControllerLayoutGuide type="bottom" id="Np0-aE-vNq"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="cxY-XR-H6Q">
                         <rect key="frame" x="0.0" y="0.0" width="240" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

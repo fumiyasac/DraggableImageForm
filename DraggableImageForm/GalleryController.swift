@@ -1,19 +1,15 @@
 //
-//  ViewController.swift
+//  GalleryController.swift
 //  DraggableImageForm
 //
-//  Created by 酒井文也 on 2016/12/02.
+//  Created by 酒井文也 on 2016/12/07.
 //  Copyright © 2016年 just1factory. All rights reserved.
 //
 
 import UIKit
 
-class ViewController: UIViewController {
+class GalleryController: UIViewController {
 
-    //各種パーツのOutlet接続
-    @IBOutlet weak var mainMenuContainer: UIView!
-    @IBOutlet weak var subMenuContainer: UIView!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -21,6 +17,4 @@ class ViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
 }
-
