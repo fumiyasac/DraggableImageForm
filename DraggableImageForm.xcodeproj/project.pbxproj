@@ -24,6 +24,7 @@
 		DEE21B071DF6E7E500ED28B5 /* BWWalkthroughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEE21B051DF6E7E500ED28B5 /* BWWalkthroughViewController.swift */; };
 		DEFF332F1E0ADB6A00D7F0BF /* CalculateCalendarLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEFF332E1E0ADB6A00D7F0BF /* CalculateCalendarLogic.swift */; };
 		DEFF33331E0ADDE000D7F0BF /* CommonSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEFF33321E0ADDE000D7F0BF /* CommonSetting.swift */; };
+		DEFF33351E0AED1600D7F0BF /* RecipeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEFF33341E0AED1500D7F0BF /* RecipeCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		DEE21B051DF6E7E500ED28B5 /* BWWalkthroughViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BWWalkthroughViewController.swift; sourceTree = "<group>"; };
 		DEFF332E1E0ADB6A00D7F0BF /* CalculateCalendarLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculateCalendarLogic.swift; sourceTree = "<group>"; };
 		DEFF33321E0ADDE000D7F0BF /* CommonSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonSetting.swift; sourceTree = "<group>"; };
+		DEFF33341E0AED1500D7F0BF /* RecipeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -252,6 +254,7 @@
 		DEF844931DF3A953006D8CBD /* CollectionView */ = {
 			isa = PBXGroup;
 			children = (
+				DEFF33341E0AED1500D7F0BF /* RecipeCell.swift */,
 			);
 			name = CollectionView;
 			sourceTree = "<group>";
@@ -465,6 +468,7 @@
 				DE0F466C1DF85A1700145416 /* GalleryController.swift in Sources */,
 				DEE21AFF1DF6E36900ED28B5 /* ArchiveReciptController.swift in Sources */,
 				DEE21B071DF6E7E500ED28B5 /* BWWalkthroughViewController.swift in Sources */,
+				DEFF33351E0AED1600D7F0BF /* RecipeCell.swift in Sources */,
 				DE11B53E1DF1BE5700EE9E75 /* ViewController.swift in Sources */,
 				DEFF332F1E0ADB6A00D7F0BF /* CalculateCalendarLogic.swift in Sources */,
 				DE11B53C1DF1BE5700EE9E75 /* AppDelegate.swift in Sources */,
