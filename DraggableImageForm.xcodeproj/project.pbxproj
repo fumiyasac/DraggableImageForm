@@ -22,6 +22,7 @@
 		DEE21B011DF6E51900ED28B5 /* Tutorial.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DEE21B001DF6E51900ED28B5 /* Tutorial.storyboard */; };
 		DEE21B061DF6E7E500ED28B5 /* BWWalkthroughPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEE21B041DF6E7E500ED28B5 /* BWWalkthroughPageViewController.swift */; };
 		DEE21B071DF6E7E500ED28B5 /* BWWalkthroughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEE21B051DF6E7E500ED28B5 /* BWWalkthroughViewController.swift */; };
+		DEFF332F1E0ADB6A00D7F0BF /* CalculateCalendarLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEFF332E1E0ADB6A00D7F0BF /* CalculateCalendarLogic.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		DEE21B001DF6E51900ED28B5 /* Tutorial.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Tutorial.storyboard; sourceTree = "<group>"; };
 		DEE21B041DF6E7E500ED28B5 /* BWWalkthroughPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BWWalkthroughPageViewController.swift; sourceTree = "<group>"; };
 		DEE21B051DF6E7E500ED28B5 /* BWWalkthroughViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BWWalkthroughViewController.swift; sourceTree = "<group>"; };
+		DEFF332E1E0ADB6A00D7F0BF /* CalculateCalendarLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculateCalendarLogic.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -229,6 +231,7 @@
 		DEE21B021DF6E7C200ED28B5 /* Libs */ = {
 			isa = PBXGroup;
 			children = (
+				DEFF332D1E0ADB0800D7F0BF /* CalculateCalendarLogic */,
 				DEE21B031DF6E7CD00ED28B5 /* BWWalkThrough */,
 			);
 			name = Libs;
@@ -248,6 +251,14 @@
 			children = (
 			);
 			name = CollectionView;
+			sourceTree = "<group>";
+		};
+		DEFF332D1E0ADB0800D7F0BF /* CalculateCalendarLogic */ = {
+			isa = PBXGroup;
+			children = (
+				DEFF332E1E0ADB6A00D7F0BF /* CalculateCalendarLogic.swift */,
+			);
+			name = CalculateCalendarLogic;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -443,6 +454,7 @@
 				DEE21AFF1DF6E36900ED28B5 /* ArchiveReciptController.swift in Sources */,
 				DEE21B071DF6E7E500ED28B5 /* BWWalkthroughViewController.swift in Sources */,
 				DE11B53E1DF1BE5700EE9E75 /* ViewController.swift in Sources */,
+				DEFF332F1E0ADB6A00D7F0BF /* CalculateCalendarLogic.swift in Sources */,
 				DE11B53C1DF1BE5700EE9E75 /* AppDelegate.swift in Sources */,
 				DEE21B061DF6E7E500ED28B5 /* BWWalkthroughPageViewController.swift in Sources */,
 			);
