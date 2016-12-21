@@ -23,6 +23,7 @@
 		DEE21B061DF6E7E500ED28B5 /* BWWalkthroughPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEE21B041DF6E7E500ED28B5 /* BWWalkthroughPageViewController.swift */; };
 		DEE21B071DF6E7E500ED28B5 /* BWWalkthroughViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEE21B051DF6E7E500ED28B5 /* BWWalkthroughViewController.swift */; };
 		DEFF332F1E0ADB6A00D7F0BF /* CalculateCalendarLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEFF332E1E0ADB6A00D7F0BF /* CalculateCalendarLogic.swift */; };
+		DEFF33331E0ADDE000D7F0BF /* CommonSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEFF33321E0ADDE000D7F0BF /* CommonSetting.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		DEE21B041DF6E7E500ED28B5 /* BWWalkthroughPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BWWalkthroughPageViewController.swift; sourceTree = "<group>"; };
 		DEE21B051DF6E7E500ED28B5 /* BWWalkthroughViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BWWalkthroughViewController.swift; sourceTree = "<group>"; };
 		DEFF332E1E0ADB6A00D7F0BF /* CalculateCalendarLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculateCalendarLogic.swift; sourceTree = "<group>"; };
+		DEFF33321E0ADDE000D7F0BF /* CommonSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonSetting.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +139,7 @@
 		DE11B53A1DF1BE5700EE9E75 /* DraggableImageForm */ = {
 			isa = PBXGroup;
 			children = (
+				DEFF33301E0ADDA700D7F0BF /* Constants */,
 				DEE21B021DF6E7C200ED28B5 /* Libs */,
 				DE3D96151DF2CB96002C6965 /* Components */,
 				DE3D96141DF2CB7A002C6965 /* Storyboard */,
@@ -259,6 +262,14 @@
 				DEFF332E1E0ADB6A00D7F0BF /* CalculateCalendarLogic.swift */,
 			);
 			name = CalculateCalendarLogic;
+			sourceTree = "<group>";
+		};
+		DEFF33301E0ADDA700D7F0BF /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				DEFF33321E0ADDE000D7F0BF /* CommonSetting.swift */,
+			);
+			name = Constants;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -449,6 +460,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DEFF33331E0ADDE000D7F0BF /* CommonSetting.swift in Sources */,
 				DEE21AFD1DF6E34300ED28B5 /* MakeReciptController.swift in Sources */,
 				DE0F466C1DF85A1700145416 /* GalleryController.swift in Sources */,
 				DEE21AFF1DF6E36900ED28B5 /* ArchiveReciptController.swift in Sources */,
