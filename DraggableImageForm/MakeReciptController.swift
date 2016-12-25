@@ -12,13 +12,23 @@ struct RecipeSetting {
     static let recipeMaxCount = 20
 }
 
+struct CalenderSetting {
+    static let areaRect     = 58
+    static let centerPos    = 29
+    static let buttonRect   = 44
+    static let buttonRadius = 22
+}
+
 class MakeReciptController: UIViewController, UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     //ドラッグ可能なイメージビュー
     var draggableImageView: UIImageView!
     
-    //選択状態
+    //選択状態の判定用のフラグ
     var isSelectedFlag: Bool = false
+
+    //スクロールビュー内のボタンを一度だけ生成するフラグ
+    fileprivate var layoutOnceFlag: Bool = false
     
     //データ格納用の配列
     //var selectedDataList: Array<Any>!
@@ -56,8 +66,60 @@ class MakeReciptController: UIViewController, UINavigationControllerDelegate, UI
         rightMenuButton.setTitleTextAttributes(attrsButton, for: .normal)
         navigationItem.rightBarButtonItem = rightMenuButton
     }
+
+    //レイアウト処理が完了した際のライフサイクル
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        //UIScrollViewへのボタン配置を行う
+        //※AutoLayoutのConstraintを用いたアニメーションの際には動的に配置する見た目要素は一度だけ実行する
+        if layoutOnceFlag == false {
+            
+            //コンテンツ用のScrollViewを初期化
+            initScrollViewDefinition()
+            
+            let targetButtonList: [UIButton] = CalendarView.getCalendarOfCurrentButtonList()
+            
+            //スクロールビュー内のサイズを決定する（AutoLayoutで配置を行った場合でもこの部分はコードで設定しないといけない）
+            calendarScrollView.contentSize = CGSize(
+                width: CGFloat(CalenderSetting.areaRect * targetButtonList.count),
+                height: calendarScrollView.frame.height
+            )
+            
+            //カレンダーのスクロールビュー内にボタンを配置する
+            for i in 0...(targetButtonList.count - 1) {
+                
+                //メニュー用のスクロールビューにボタンを配置
+                calendarScrollView.addSubview(targetButtonList[i])
+
+                //サイズの決定
+                targetButtonList[i].frame.size = CGSize(
+                    width: CalenderSetting.buttonRect,
+                    height: CalenderSetting.buttonRect
+                )
+
+                //中心位置の決定
+                targetButtonList[i].center = CGPoint(
+                    x: CalenderSetting.centerPos + CalenderSetting.areaRect * i,
+                    y: CalenderSetting.centerPos
+                )
+
+                //装飾とターゲットの決定
+                targetButtonList[i].layer.cornerRadius = CGFloat(CalenderSetting.buttonRadius)
+                targetButtonList[i].addTarget(self, action: #selector(MakeReciptController.calendarButtonTapped(button:)), for: .touchUpInside)
+            }
+            
+            //一度だけ実行するフラグを有効化
+            layoutOnceFlag = true
+        }
+    }
     
     /* (Instance Methods) */
+
+    //カレンダーのボタンを押した時のアクション
+    func calendarButtonTapped(button: UIButton) {
+        print("選択した日付は\(button.tag)日です。")
+    }
     
     //Reloadボタンを押した時のアクション
     func reloadButtonTapped(button: UIButton) {
@@ -253,6 +315,21 @@ class MakeReciptController: UIViewController, UINavigationControllerDelegate, UI
     internal func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         
         return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    }
+    
+    /* (Fileprivate functions) */
+    
+    //コンテンツ用のUIScrollViewの初期化を行う
+    fileprivate func initScrollViewDefinition() {
+        
+        //スクロールビュー内の各プロパティ値を設定する
+        calendarScrollView.isPagingEnabled = false
+        calendarScrollView.isScrollEnabled = true
+        calendarScrollView.isDirectionalLockEnabled = false
+        calendarScrollView.showsHorizontalScrollIndicator = true
+        calendarScrollView.showsVerticalScrollIndicator = false
+        calendarScrollView.bounces = false
+        calendarScrollView.scrollsToTop = false
     }
 
 }

@@ -17,6 +17,7 @@
 		DE11B5461DF1BE5700EE9E75 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE11B5441DF1BE5700EE9E75 /* LaunchScreen.storyboard */; };
 		DE11B5511DF1BE5700EE9E75 /* DraggableImageFormTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE11B5501DF1BE5700EE9E75 /* DraggableImageFormTests.swift */; };
 		DE11B55C1DF1BE5700EE9E75 /* DraggableImageFormUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE11B55B1DF1BE5700EE9E75 /* DraggableImageFormUITests.swift */; };
+		DE1E5E7E1E0FFAEC0049E6D7 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1E5E7D1E0FFAEC0049E6D7 /* CalendarView.swift */; };
 		DEE21AFD1DF6E34300ED28B5 /* MakeReciptController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEE21AFC1DF6E34300ED28B5 /* MakeReciptController.swift */; };
 		DEE21AFF1DF6E36900ED28B5 /* ArchiveReciptController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEE21AFE1DF6E36900ED28B5 /* ArchiveReciptController.swift */; };
 		DEE21B011DF6E51900ED28B5 /* Tutorial.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DEE21B001DF6E51900ED28B5 /* Tutorial.storyboard */; };
@@ -63,6 +64,7 @@
 		DE11B5571DF1BE5700EE9E75 /* DraggableImageFormUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DraggableImageFormUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE11B55B1DF1BE5700EE9E75 /* DraggableImageFormUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraggableImageFormUITests.swift; sourceTree = "<group>"; };
 		DE11B55D1DF1BE5700EE9E75 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DE1E5E7D1E0FFAEC0049E6D7 /* CalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		DEE21AFC1DF6E34300ED28B5 /* MakeReciptController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MakeReciptController.swift; sourceTree = "<group>"; };
 		DEE21AFE1DF6E36900ED28B5 /* ArchiveReciptController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArchiveReciptController.swift; sourceTree = "<group>"; };
 		DEE21B001DF6E51900ED28B5 /* Tutorial.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Tutorial.storyboard; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 		DE11B53A1DF1BE5700EE9E75 /* DraggableImageForm */ = {
 			isa = PBXGroup;
 			children = (
+				DE1E5E7F1E0FFAF20049E6D7 /* Structs */,
 				DEFF33301E0ADDA700D7F0BF /* Constants */,
 				DEE21B021DF6E7C200ED28B5 /* Libs */,
 				DE3D96151DF2CB96002C6965 /* Components */,
@@ -171,6 +174,14 @@
 				DE11B55D1DF1BE5700EE9E75 /* Info.plist */,
 			);
 			path = DraggableImageFormUITests;
+			sourceTree = "<group>";
+		};
+		DE1E5E7F1E0FFAF20049E6D7 /* Structs */ = {
+			isa = PBXGroup;
+			children = (
+				DE1E5E7D1E0FFAEC0049E6D7 /* CalendarView.swift */,
+			);
+			name = Structs;
 			sourceTree = "<group>";
 		};
 		DE3D96101DF2C42F002C6965 /* Classes */ = {
@@ -463,6 +474,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DE1E5E7E1E0FFAEC0049E6D7 /* CalendarView.swift in Sources */,
 				DEFF33331E0ADDE000D7F0BF /* CommonSetting.swift in Sources */,
 				DEE21AFD1DF6E34300ED28B5 /* MakeReciptController.swift in Sources */,
 				DE0F466C1DF85A1700145416 /* GalleryController.swift in Sources */,
