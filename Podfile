@@ -8,6 +8,7 @@ target 'DraggableImageForm' do
   pod 'SwiftyJSON'
   pod 'MBCircularProgressBar'
   pod 'Kingfisher'
+  pod 'BrightFutures'
 
   post_install do |installer|
     installer.pods_project.targets.each do |target|
