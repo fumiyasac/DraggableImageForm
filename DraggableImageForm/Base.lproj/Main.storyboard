@@ -94,12 +94,12 @@
                             </scrollView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="shO-Fz-Swf">
                                 <rect key="frame" x="16" y="603" width="343" height="48"/>
-                                <color key="backgroundColor" red="0.80000000000000004" green="0.59999999999999998" blue="0.40000000000000002" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="ayj-fF-Pmw"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
-                                <state key="normal" title="画像をドラッグして登録！（押すとデータクリア）">
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                <state key="normal" title="画像をドラッグして追加!(押すとメニュー表示)">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                             </button>
@@ -209,9 +209,62 @@
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d08-sy-JBL">
                                 <rect key="frame" x="0.0" y="512" width="375" height="75"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JH2-9q-Nkm">
+                                        <rect key="frame" x="20" y="28" width="180" height="18"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="180" id="J8P-xN-rVf"/>
+                                            <constraint firstAttribute="height" constant="18" id="j4G-Wx-CKk"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vXG-zc-yF4">
+                                        <rect key="frame" x="20" y="49" width="180" height="18"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="18" id="Z2F-Qc-7Dn"/>
+                                            <constraint firstAttribute="width" constant="180" id="eyF-Mz-UkJ"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EQ5-CM-eJm">
+                                        <rect key="frame" x="309" y="14" width="46" height="46"/>
+                                        <color key="backgroundColor" red="1" green="0.59999999999999998" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="46" id="5Fl-gm-0D0"/>
+                                            <constraint firstAttribute="height" constant="46" id="i0X-cX-Kwb"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="11"/>
+                                        <state key="normal" title="Reload">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FNP-tl-YCT">
+                                        <rect key="frame" x="20" y="8" width="180" height="18"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="18" id="bLd-4B-zqN"/>
+                                            <constraint firstAttribute="width" constant="180" id="k1j-zm-Aom"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
                                 <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="vXG-zc-yF4" secondAttribute="bottom" constant="8" id="5ns-eC-aL6"/>
                                     <constraint firstAttribute="height" constant="75" id="Abi-xa-arK"/>
+                                    <constraint firstItem="EQ5-CM-eJm" firstAttribute="top" secondItem="d08-sy-JBL" secondAttribute="top" constant="14" id="LAQ-7f-ga6"/>
+                                    <constraint firstAttribute="bottom" secondItem="EQ5-CM-eJm" secondAttribute="bottom" constant="15" id="PG7-ds-eRR"/>
+                                    <constraint firstItem="FNP-tl-YCT" firstAttribute="leading" secondItem="d08-sy-JBL" secondAttribute="leading" constant="20" id="Wgh-nW-H7D"/>
+                                    <constraint firstAttribute="trailing" secondItem="EQ5-CM-eJm" secondAttribute="trailing" constant="20" id="YRY-gs-hDJ"/>
+                                    <constraint firstItem="vXG-zc-yF4" firstAttribute="top" secondItem="JH2-9q-Nkm" secondAttribute="bottom" constant="3" id="ck1-2h-UhJ"/>
+                                    <constraint firstItem="vXG-zc-yF4" firstAttribute="leading" secondItem="d08-sy-JBL" secondAttribute="leading" constant="20" id="d2d-S6-ksH"/>
+                                    <constraint firstItem="JH2-9q-Nkm" firstAttribute="leading" secondItem="d08-sy-JBL" secondAttribute="leading" constant="20" id="lNd-B8-lHm"/>
+                                    <constraint firstItem="FNP-tl-YCT" firstAttribute="top" secondItem="d08-sy-JBL" secondAttribute="top" constant="8" id="xF1-RU-R9G"/>
+                                    <constraint firstItem="JH2-9q-Nkm" firstAttribute="top" secondItem="FNP-tl-YCT" secondAttribute="bottom" constant="2" id="ykb-GX-tnB"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -241,9 +294,13 @@
                     <navigationItem key="navigationItem" id="pyA-ty-EEj"/>
                     <connections>
                         <outlet property="calendarScrollView" destination="8dj-aN-QTd" id="7hm-By-uYW"/>
+                        <outlet property="currentYearAndMonthLabel" destination="FNP-tl-YCT" id="gmQ-Vh-6xu"/>
                         <outlet property="dragAreaButton" destination="shO-Fz-Swf" id="vMG-Xs-9at"/>
                         <outlet property="receiptCollectionView" destination="Fyp-Fs-CHI" id="MDn-83-5vD"/>
+                        <outlet property="reloadDataButton" destination="EQ5-CM-eJm" id="KnW-m3-tAE"/>
                         <outlet property="selectDataDisplayArea" destination="d08-sy-JBL" id="0i0-Wh-Eeh"/>
+                        <outlet property="selectedDayLabel" destination="JH2-9q-Nkm" id="tQx-Y0-lvO"/>
+                        <outlet property="selectedRecipeCountLabel" destination="vXG-zc-yF4" id="Bfz-9H-m4W"/>
                         <segue destination="hg2-zF-pns" kind="show" id="8ed-Aj-ldV"/>
                     </connections>
                 </viewController>

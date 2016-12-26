@@ -19,6 +19,43 @@ struct CalenderSetting {
     static let buttonRadius = 22
 }
 
+struct MessageSetting {
+
+    //現在の年・月を表示する
+    static func getDisplayYearAndMonth() -> String {
+        return "現在の日付："
+            + String(CalendarView.getCalendarOfCurrentYear()) + "年"
+            + String(CalendarView.getCalendarOfCurrentMonth()) + "月"
+    }
+
+    //選択をした日付を表示する
+    static func getSelectedDateMessage(day: Int) -> String {
+        return "選んだ日付："
+            + String(CalendarView.getCalendarOfCurrentYear()) + "年"
+            + String(CalendarView.getCalendarOfCurrentMonth()) + "月"
+            + String(day) + "日"
+    }
+    
+    //データをクリアした際の文言を表示する
+    static func getClearDateMessage() -> String {
+        return "該当日付を選択して下さい"
+    }
+
+    //レシピ選択時の文言を表示する
+    static func getCountRecipeMessage(count: Int) -> String {
+        let targetCount = RecipeSetting.recipeMaxCount - count
+        if targetCount == 0 {
+            return "登録可能レシピは20点までです"
+        }
+        return "現在" + String(count) + "点選択中"
+    }
+
+    //データをクリアした際の文言を表示する
+    static func getClearRecipeMessage() -> String {
+        return "レシピは20点まで登録できます"
+    }
+}
+
 class MakeReciptController: UIViewController, UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     //ドラッグ可能なイメージビュー
@@ -36,12 +73,22 @@ class MakeReciptController: UIViewController, UINavigationControllerDelegate, UI
     //APIから取得したデータを格納する配列
     //var apiDataList: Array<Any>!
     
+    //選択された日を設定する
+    var targetDay: Int? = nil
+    
     //MakeReciptControllerクラス内のUIパーツ
     @IBOutlet weak var calendarScrollView: UIScrollView!
     @IBOutlet weak var receiptCollectionView: UICollectionView!
     @IBOutlet weak var dragAreaButton: UIButton!
     @IBOutlet weak var selectDataDisplayArea: UIView!
-
+    
+    //ステータス表示エリア内のUIパーツ
+    @IBOutlet weak var currentYearAndMonthLabel: UILabel!
+    @IBOutlet weak var selectedDayLabel: UILabel!
+    @IBOutlet weak var selectedRecipeCountLabel: UILabel!
+    @IBOutlet weak var reloadDataButton: UIButton!
+    
+    
     //メニューボタンの属性値
     let attrsButton = [
         NSForegroundColorAttributeName : UIColor.gray,
@@ -65,14 +112,17 @@ class MakeReciptController: UIViewController, UINavigationControllerDelegate, UI
         let rightMenuButton = UIBarButtonItem(title: "Archive", style: .plain, target: self, action: #selector(MakeReciptController.archiveButtonTapped(button:)))
         rightMenuButton.setTitleTextAttributes(attrsButton, for: .normal)
         navigationItem.rightBarButtonItem = rightMenuButton
+
+        //配置したUIパーツに対するターゲットや初期設定
+        initDefaultUiSetting()
+        initTargetMessageSetting()
     }
 
     //レイアウト処理が完了した際のライフサイクル
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        //UIScrollViewへのボタン配置を行う
-        //※AutoLayoutのConstraintを用いたアニメーションの際には動的に配置する見た目要素は一度だけ実行する
+        //UIScrollViewへのボタン配置を行う ※AutoLayoutのConstraintを用いたアニメーションの際には動的に配置する見た目要素は一度だけ実行する
         if layoutOnceFlag == false {
             
             //コンテンツ用のScrollViewを初期化
@@ -118,12 +168,18 @@ class MakeReciptController: UIViewController, UINavigationControllerDelegate, UI
 
     //カレンダーのボタンを押した時のアクション
     func calendarButtonTapped(button: UIButton) {
-        print("選択した日付は\(button.tag)日です。")
+        targetDay = button.tag
+        selectedDayLabel.text = MessageSetting.getSelectedDateMessage(day: button.tag)
     }
     
     //Reloadボタンを押した時のアクション
     func reloadButtonTapped(button: UIButton) {
         print("Reload button tapped.")
+    }
+    
+    //現在データのハンドリングを行うアクション
+    func handleButtonTapped(button: UIButton) {
+        print("Handle button tapped.")
     }
 
     //Archiveボタンを押した時のアクション
@@ -200,13 +256,13 @@ class MakeReciptController: UIViewController, UINavigationControllerDelegate, UI
             let maxY = dragAreaButton.frame.origin.y + dragAreaButton.frame.size.height
 
             //DEBUG: ぶつかるエリアの具体的な値
-            print("x:\(minX) ~ \(maxX), y:\(minY) ~ \(maxY)");
-            print("x:\(pressPoint.x), y:\(pressPoint.y)");
+            //print("x:\(minX) ~ \(maxX), y:\(minY) ~ \(maxY)");
+            //print("x:\(pressPoint.x), y:\(pressPoint.y)");
 
             if ((minX <= centerX && centerX <= maxX) && (minY <= centerY && centerY <= maxY)) {
 
                 //ぶつかる範囲内にドラッグ可能なImageViewがある場合
-                dragAreaButton.backgroundColor = UIColor.yellow
+                dragAreaButton.backgroundColor = UIColor.orange
                 isSelectedFlag = true
 
             } else {
@@ -238,12 +294,12 @@ class MakeReciptController: UIViewController, UINavigationControllerDelegate, UI
                 //TODO: CollectionView内のデータを1件削除して更新する処理を作成する
 
                 //DEBUG: ぶつかるエリア内にある
-                print("Yes")
+                //print("Yes")
 
             } else {
 
                 //DEBUG: ぶつかるエリア内にない
-                print("No")
+                //print("No")
             }
             isSelectedFlag = false
         }
@@ -276,7 +332,7 @@ class MakeReciptController: UIViewController, UINavigationControllerDelegate, UI
         //cellのタグを決定する(LongTapGestureRecognizerからの逆引き用に設定)
         cell.tag = indexPath.row
         
-        //セルに対してLongTapGestureRecognizerを付与する
+        //LongTapGestureRecognizerの定義を行う
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(MakeReciptController.longPressCell(sender:)))
         
         //イベント発生までのタップ時間：0.24秒
@@ -284,7 +340,8 @@ class MakeReciptController: UIViewController, UINavigationControllerDelegate, UI
 
         //指のズレを許容する範囲：10px
         longPressGesture.allowableMovement = 10.0
-        
+
+        //セルに対してLongTapGestureRecognizerを付与する
         cell.addGestureRecognizer(longPressGesture)
 
         return cell
@@ -318,7 +375,28 @@ class MakeReciptController: UIViewController, UINavigationControllerDelegate, UI
     }
     
     /* (Fileprivate functions) */
+
+    //UI表示の初期化を行う
+    fileprivate func initDefaultUiSetting() {
+
+        //UIパーツの表示時の設定をここに記載する
+        dragAreaButton.addTarget(self, action: #selector(MakeReciptController.handleButtonTapped(button:)), for: .touchUpInside)
+        reloadDataButton.addTarget(self, action: #selector(MakeReciptController.reloadButtonTapped(button:)), for: .touchUpInside)
+        reloadDataButton.layer.cornerRadius = CGFloat(reloadDataButton.frame.width / 2)
+    }
     
+    //メッセージ表示の初期化を行う
+    fileprivate func initTargetMessageSetting() {
+
+        //TODO: データ一時格納用の変数を初期化する
+        
+
+        //選択リセット時または初期表示時の
+        currentYearAndMonthLabel.text = MessageSetting.getDisplayYearAndMonth()
+        selectedDayLabel.text = MessageSetting.getClearDateMessage()
+        selectedRecipeCountLabel.text = MessageSetting.getClearRecipeMessage()
+    }
+
     //コンテンツ用のUIScrollViewの初期化を行う
     fileprivate func initScrollViewDefinition() {
         
