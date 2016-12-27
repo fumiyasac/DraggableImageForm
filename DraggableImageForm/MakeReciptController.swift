@@ -17,8 +17,8 @@ struct RecipeSetting {
 struct CalenderSetting {
     static let areaRect     = 58
     static let centerPos    = 29
-    static let buttonRect   = 44
-    static let buttonRadius = 22
+    static let buttonRect   = 46
+    static let buttonRadius = 23
 }
 
 struct MessageSetting {
@@ -406,7 +406,7 @@ class MakeReciptController: UIViewController, UINavigationControllerDelegate, UI
         calendarScrollView.isPagingEnabled = false
         calendarScrollView.isScrollEnabled = true
         calendarScrollView.isDirectionalLockEnabled = false
-        calendarScrollView.showsHorizontalScrollIndicator = true
+        calendarScrollView.showsHorizontalScrollIndicator = false
         calendarScrollView.showsVerticalScrollIndicator = false
         calendarScrollView.bounces = false
         calendarScrollView.scrollsToTop = false

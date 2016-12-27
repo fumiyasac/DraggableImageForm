@@ -37,6 +37,18 @@ public enum Weekday: Int {
         case .Sat: return "土"
         }
     }
+
+    var englishName: String {
+        switch self {
+        case .Sun: return "Sun"
+        case .Mon: return "Mon"
+        case .Tue: return "Tue"
+        case .Wed: return "Wed"
+        case .Thu: return "Thu"
+        case .Fri: return "Fri"
+        case .Sat: return "Sat"
+        }
+    }
     
     var mediumName: String {
         return shortName + "曜"
