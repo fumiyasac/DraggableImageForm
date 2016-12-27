@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+import SwiftyJSON
 
 struct RecipeSetting {
     static let recipeMaxCount = 20

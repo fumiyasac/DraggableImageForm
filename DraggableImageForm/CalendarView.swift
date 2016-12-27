@@ -32,15 +32,18 @@ struct CalendarView {
             let button: UIButton = UIButton()
             
             //祝祭日の判定を行う
-            let holidayFlag = holiday.judgeJapaneseHoliday(year, month: month, day: i)
+            let holidayFlag = holiday.judgeJapaneseHoliday(year: year, month: month, day: i)
             
             //タグと日付の設定を行う
             button.setTitle(String(i), for: UIControlState())
             button.titleLabel!.font = UIFont(name: "Arial", size: 15)!
             button.tag = i
-
+            
+            //曜日の数値を取得する（0:日曜日 ... 6:土曜日）
+            let weekday = Weekday.init(year: year, month: month, day: i)?.rawValue
+            
             //日曜日or祝祭日の場合の色設定
-            if i % 7 == 0 || holidayFlag == true {
+            if weekday! % 7 == 0 || holidayFlag == true {
                 
                 button.backgroundColor = UIColor(
                     red: CGFloat(0.831),
@@ -50,7 +53,7 @@ struct CalendarView {
                 )
 
             //土曜日の場合の色設定
-            } else if i % 7 == 6 {
+            } else if weekday! % 7 == 6 {
                 
                 button.backgroundColor = UIColor(
                     red: CGFloat(0.400),
