@@ -69,7 +69,7 @@ class MakeReciptController: UIViewController, UINavigationControllerDelegate, UI
     fileprivate var layoutOnceFlag: Bool = false
     
     //データ格納用の配列
-    //var selectedDataList: Array<Any>!
+    var selectedDataList: [(indication: String, published: String, title: String, image: String, url: String)] = []
     
     //APIから取得したデータを格納する配列
     var apiDataList: [(indication: String, published: String, title: String, image: String, url: String)] = []
@@ -88,6 +88,7 @@ class MakeReciptController: UIViewController, UINavigationControllerDelegate, UI
     @IBOutlet weak var selectedDayLabel: UILabel!
     @IBOutlet weak var selectedRecipeCountLabel: UILabel!
     @IBOutlet weak var reloadDataButton: UIButton!
+    @IBOutlet weak var resetDataButton: UIButton!
 
     //メニューボタンの属性値
     let attrsButton = [
@@ -116,43 +117,12 @@ class MakeReciptController: UIViewController, UINavigationControllerDelegate, UI
         //配置したUIパーツに対するターゲットや初期設定
         initDefaultUiSetting()
         initTargetMessageSetting()
-
-        //TEST: APIのテスト
-        let parameterList = ["format" : "json", "applicationId" : CommonSetting.apiKey, "categoryId" : "20"]
-        let api = ApiManager(path: "/Recipe/CategoryRanking/20121121", method: .get, parameters: parameterList)
-        api.request(success: { (data: Dictionary) in
-
-            //取得結果
-            let jsonList = JSON(data)
-            let results = jsonList["result"]
-
-            //CollectionViewへ表示するためのデータをまとめたタプル
-            var displayDataList: [(indication: String, published: String, title: String, image: String, url: String)] = []
-            
-            for (_, result) in results {
-
-                //
-                let recipePublishday = String(describing: result["recipePublishday"])
-                let published = recipePublishday.substring(to: recipePublishday.index(recipePublishday.startIndex, offsetBy: 10))
-
-                //
-                let target = (
-                    String(describing: result["recipeIndication"]),
-                    published,
-                    String(describing: result["recipeTitle"]),
-                    String(describing: result["foodImageUrl"]),
-                    String(describing: result["recipeUrl"])
-                ) as (indication: String, published: String, title: String, image: String, url: String)
-                displayDataList.append(target)
-            }
-            
-            print(displayDataList)
-            
-        }, fail: { (error: Error?) in
-            print(error)
-        })
     }
 
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+    
     //レイアウト処理が完了した際のライフサイクル
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -209,7 +179,12 @@ class MakeReciptController: UIViewController, UINavigationControllerDelegate, UI
     
     //Reloadボタンを押した時のアクション
     func reloadButtonTapped(button: UIButton) {
-        print("Reload button tapped.")
+        loadApiData(categoryId: "10")
+    }
+
+    //Resetボタンを押した時のアクション
+    func resetButtonTapped(button: UIButton) {
+        print("Reset button tapped.")
     }
     
     //現在データのハンドリングを行うアクション
@@ -340,10 +315,6 @@ class MakeReciptController: UIViewController, UINavigationControllerDelegate, UI
         }
 
     }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
 
     /* (UICollectionViewDataSource) */
     
@@ -411,13 +382,55 @@ class MakeReciptController: UIViewController, UINavigationControllerDelegate, UI
     
     /* (Fileprivate functions) */
 
+    //
+    fileprivate func loadApiData(categoryId: String) {
+
+        let parameterList = ["format" : "json", "applicationId" : CommonSetting.apiKey, "categoryId" : categoryId]
+        let api = ApiManager(path: "/Recipe/CategoryRanking/20121121", method: .get, parameters: parameterList)
+        api.request(success: { (data: Dictionary) in
+            
+            //取得結果
+            let jsonList = JSON(data)
+            let results = jsonList["result"]
+
+            //
+            for (_, result) in results {
+                
+                //
+                let recipePublishday = String(describing: result["recipePublishday"])
+                let published = recipePublishday.substring(to: recipePublishday.index(recipePublishday.startIndex, offsetBy: 10))
+                
+                //CollectionViewへ表示するためのデータをまとめたタプル
+                let targetData = (
+                    String(describing: result["recipeIndication"]),
+                    published,
+                    String(describing: result["recipeTitle"]),
+                    String(describing: result["foodImageUrl"]),
+                    String(describing: result["recipeUrl"])
+                    ) as (indication: String, published: String, title: String, image: String, url: String)
+                self.apiDataList.append(targetData)
+            }
+
+            //CollectionViewをリロードする
+            self.receiptCollectionView.reloadData()
+
+        }, fail: { (error: Error?) in
+            
+            //TODO: エラーハンドリングをする必要がある
+        })
+    }
+    
     //UI表示の初期化を行う
     fileprivate func initDefaultUiSetting() {
 
         //UIパーツの表示時の設定をここに記載する
         dragAreaButton.addTarget(self, action: #selector(MakeReciptController.handleButtonTapped(button:)), for: .touchUpInside)
+
         reloadDataButton.addTarget(self, action: #selector(MakeReciptController.reloadButtonTapped(button:)), for: .touchUpInside)
         reloadDataButton.layer.cornerRadius = CGFloat(reloadDataButton.frame.width / 2)
+        
+        resetDataButton.addTarget(self, action: #selector(MakeReciptController.resetButtonTapped(button:)), for: .touchUpInside)
+        resetDataButton.layer.cornerRadius = CGFloat(resetDataButton.frame.width / 2)
     }
     
     //メッセージ表示の初期化を行う
