@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Alamofire
 import SwiftyJSON
 
 struct RecipeSetting {
@@ -73,7 +72,7 @@ class MakeReciptController: UIViewController, UINavigationControllerDelegate, UI
     //var selectedDataList: Array<Any>!
     
     //APIから取得したデータを格納する配列
-    //var apiDataList: Array<Any>!
+    var apiDataList: [(indication: String, published: String, title: String, image: String, url: String)] = []
     
     //選択された日を設定する
     var targetDay: Int? = nil
@@ -89,8 +88,7 @@ class MakeReciptController: UIViewController, UINavigationControllerDelegate, UI
     @IBOutlet weak var selectedDayLabel: UILabel!
     @IBOutlet weak var selectedRecipeCountLabel: UILabel!
     @IBOutlet weak var reloadDataButton: UIButton!
-    
-    
+
     //メニューボタンの属性値
     let attrsButton = [
         NSForegroundColorAttributeName : UIColor.gray,
@@ -118,6 +116,41 @@ class MakeReciptController: UIViewController, UINavigationControllerDelegate, UI
         //配置したUIパーツに対するターゲットや初期設定
         initDefaultUiSetting()
         initTargetMessageSetting()
+
+        //TEST: APIのテスト
+        let parameterList = ["format" : "json", "applicationId" : CommonSetting.apiKey, "categoryId" : "20"]
+        let api = ApiManager(path: "/Recipe/CategoryRanking/20121121", method: .get, parameters: parameterList)
+        api.request(success: { (data: Dictionary) in
+
+            //取得結果
+            let jsonList = JSON(data)
+            let results = jsonList["result"]
+
+            //CollectionViewへ表示するためのデータをまとめたタプル
+            var displayDataList: [(indication: String, published: String, title: String, image: String, url: String)] = []
+            
+            for (_, result) in results {
+
+                //
+                let recipePublishday = String(describing: result["recipePublishday"])
+                let published = recipePublishday.substring(to: recipePublishday.index(recipePublishday.startIndex, offsetBy: 10))
+
+                //
+                let target = (
+                    String(describing: result["recipeIndication"]),
+                    published,
+                    String(describing: result["recipeTitle"]),
+                    String(describing: result["foodImageUrl"]),
+                    String(describing: result["recipeUrl"])
+                ) as (indication: String, published: String, title: String, image: String, url: String)
+                displayDataList.append(target)
+            }
+            
+            print(displayDataList)
+            
+        }, fail: { (error: Error?) in
+            print(error)
+        })
     }
 
     //レイアウト処理が完了した際のライフサイクル

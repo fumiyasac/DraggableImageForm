@@ -20,6 +20,7 @@
 		DE1E5E7E1E0FFAEC0049E6D7 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1E5E7D1E0FFAEC0049E6D7 /* CalendarView.swift */; };
 		DE30839C1E1165B800F595F8 /* BaseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE30839B1E1165B800F595F8 /* BaseData.swift */; };
 		DE30839E1E1165D500F595F8 /* RecipeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE30839D1E1165D500F595F8 /* RecipeData.swift */; };
+		DE35AD651E138A4D0032C4B5 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE35AD641E138A4D0032C4B5 /* APIManager.swift */; };
 		DEE21AFD1DF6E34300ED28B5 /* MakeReciptController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEE21AFC1DF6E34300ED28B5 /* MakeReciptController.swift */; };
 		DEE21AFF1DF6E36900ED28B5 /* ArchiveReciptController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEE21AFE1DF6E36900ED28B5 /* ArchiveReciptController.swift */; };
 		DEE21B011DF6E51900ED28B5 /* Tutorial.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DEE21B001DF6E51900ED28B5 /* Tutorial.storyboard */; };
@@ -69,6 +70,7 @@
 		DE1E5E7D1E0FFAEC0049E6D7 /* CalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		DE30839B1E1165B800F595F8 /* BaseData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseData.swift; sourceTree = "<group>"; };
 		DE30839D1E1165D500F595F8 /* RecipeData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeData.swift; sourceTree = "<group>"; };
+		DE35AD641E138A4D0032C4B5 /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		DEE21AFC1DF6E34300ED28B5 /* MakeReciptController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MakeReciptController.swift; sourceTree = "<group>"; };
 		DEE21AFE1DF6E36900ED28B5 /* ArchiveReciptController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArchiveReciptController.swift; sourceTree = "<group>"; };
 		DEE21B001DF6E51900ED28B5 /* Tutorial.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Tutorial.storyboard; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 			isa = PBXGroup;
 			children = (
 				DE1E5E7D1E0FFAEC0049E6D7 /* CalendarView.swift */,
+				DE35AD641E138A4D0032C4B5 /* APIManager.swift */,
 			);
 			name = Structs;
 			sourceTree = "<group>";
@@ -494,6 +497,7 @@
 				DE30839E1E1165D500F595F8 /* RecipeData.swift in Sources */,
 				DEE21AFD1DF6E34300ED28B5 /* MakeReciptController.swift in Sources */,
 				DE0F466C1DF85A1700145416 /* GalleryController.swift in Sources */,
+				DE35AD651E138A4D0032C4B5 /* APIManager.swift in Sources */,
 				DEE21AFF1DF6E36900ED28B5 /* ArchiveReciptController.swift in Sources */,
 				DEE21B071DF6E7E500ED28B5 /* BWWalkthroughViewController.swift in Sources */,
 				DEFF33351E0AED1600D7F0BF /* RecipeCell.swift in Sources */,
