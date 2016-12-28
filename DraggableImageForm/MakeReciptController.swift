@@ -8,11 +8,14 @@
 
 import UIKit
 import SwiftyJSON
+import Kingfisher
 
+//選択用レシピ表示＆登録用のレシピ最大数に関する定義
 struct RecipeSetting {
     static let recipeMaxCount = 20
 }
 
+//月間カレンダーの大きさに関する定義
 struct CalenderSetting {
     static let areaRect     = 58
     static let centerPos    = 29
@@ -20,18 +23,19 @@ struct CalenderSetting {
     static let buttonRadius = 23
 }
 
+//メッセージエリアに表示する文言に関する定義
 struct MessageSetting {
 
     //現在の年・月を表示する
     static func getDisplayYearAndMonth() -> String {
-        return "現在の日付："
+        return "現在月："
             + String(CalendarView.getCalendarOfCurrentYear()) + "年"
             + String(CalendarView.getCalendarOfCurrentMonth()) + "月"
     }
 
     //選択をした日付を表示する
     static func getSelectedDateMessage(day: Int) -> String {
-        return "選んだ日付："
+        return "選択日："
             + String(CalendarView.getCalendarOfCurrentYear()) + "年"
             + String(CalendarView.getCalendarOfCurrentMonth()) + "月"
             + String(day) + "日"
@@ -46,14 +50,14 @@ struct MessageSetting {
     static func getCountRecipeMessage(count: Int) -> String {
         let targetCount = RecipeSetting.recipeMaxCount - count
         if targetCount == 0 {
-            return "登録可能レシピは20点までです"
+            return "レシピ登録は20点までです"
         }
         return "現在" + String(count) + "点選択中"
     }
 
     //データをクリアした際の文言を表示する
     static func getClearRecipeMessage() -> String {
-        return "レシピは20点まで登録できます"
+        return "レシピ登録は20点までです"
     }
 }
 
@@ -179,12 +183,15 @@ class MakeReciptController: UIViewController, UINavigationControllerDelegate, UI
     
     //Reloadボタンを押した時のアクション
     func reloadButtonTapped(button: UIButton) {
-        loadApiData(categoryId: "10")
+        if apiDataList.count < RecipeSetting.recipeMaxCount {
+            loadApiData(categoryId: CategoryList.fetchTargetCategory())
+        }
     }
 
     //Resetボタンを押した時のアクション
     func resetButtonTapped(button: UIButton) {
-        print("Reset button tapped.")
+        apiDataList.removeAll()
+        receiptCollectionView.reloadData()
     }
     
     //現在データのハンドリングを行うアクション
@@ -320,20 +327,23 @@ class MakeReciptController: UIViewController, UINavigationControllerDelegate, UI
     
     //セクションのアイテム数を設定する
     internal func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return RecipeSetting.recipeMaxCount
+        return apiDataList.count
     }
     
     //セルに表示する値を設定する
     internal func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RecipeCell", for: indexPath) as! RecipeCell
 
-        //セルへ受け渡された値を設定する
-        cell.recipeNameLabel.text = "せせらぎ豚の生姜焼き定食（ライス・スープ付き）"
-        cell.recipeDateLabel.text = "2015/12/25"
-        cell.recipeCategoryLabel.text = "主菜・メイン"
+        let targetData = apiDataList[indexPath.row] 
         
-        //画像データの設定
-        cell.recipeImageView.image = UIImage(named: "sample")!
+        //セルへ受け渡された値を設定する
+        cell.recipeNameLabel.text = targetData.title
+        cell.recipeDateLabel.text = targetData.published
+        cell.recipeCategoryLabel.text = targetData.indication
+        
+        //Kingfisherのキャッシュを活用した画像データの設定
+        let url = URL(string: targetData.image)
+        cell.recipeImageView.kf.setImage(with: url)
 
         //cellのタグを決定する(LongTapGestureRecognizerからの逆引き用に設定)
         cell.tag = indexPath.row
@@ -382,7 +392,7 @@ class MakeReciptController: UIViewController, UINavigationControllerDelegate, UI
     
     /* (Fileprivate functions) */
 
-    //
+    //Alamofireでの楽天レシピAPIからランキング上位のレシピ情報をカテゴリー
     fileprivate func loadApiData(categoryId: String) {
 
         let parameterList = ["format" : "json", "applicationId" : CommonSetting.apiKey, "categoryId" : categoryId]
@@ -393,10 +403,10 @@ class MakeReciptController: UIViewController, UINavigationControllerDelegate, UI
             let jsonList = JSON(data)
             let results = jsonList["result"]
 
-            //
+            //取得した結果を表示用の配列に格納する
             for (_, result) in results {
                 
-                //
+                //レシピの公開日をyyyy:MM:ddの形式にする
                 let recipePublishday = String(describing: result["recipePublishday"])
                 let published = recipePublishday.substring(to: recipePublishday.index(recipePublishday.startIndex, offsetBy: 10))
                 
@@ -408,6 +418,8 @@ class MakeReciptController: UIViewController, UINavigationControllerDelegate, UI
                     String(describing: result["foodImageUrl"]),
                     String(describing: result["recipeUrl"])
                     ) as (indication: String, published: String, title: String, image: String, url: String)
+
+                //表示用のデータを追加する
                 self.apiDataList.append(targetData)
             }
 
@@ -437,7 +449,6 @@ class MakeReciptController: UIViewController, UINavigationControllerDelegate, UI
     fileprivate func initTargetMessageSetting() {
 
         //TODO: データ一時格納用の変数を初期化する
-        
 
         //選択リセット時または初期表示時の
         currentYearAndMonthLabel.text = MessageSetting.getDisplayYearAndMonth()
