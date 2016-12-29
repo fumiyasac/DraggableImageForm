@@ -136,7 +136,8 @@ class MakeReciptController: UIViewController, UINavigationControllerDelegate, UI
             
             //コンテンツ用のScrollViewを初期化
             initScrollViewDefinition()
-            
+
+            //カレンダーボタンのリストを取得する
             let targetButtonList: [UIButton] = CalendarView.getCalendarOfCurrentButtonList()
             
             //スクロールビュー内のサイズを決定する（AutoLayoutで配置を行った場合でもこの部分はコードで設定しないといけない）
@@ -183,15 +184,12 @@ class MakeReciptController: UIViewController, UINavigationControllerDelegate, UI
     
     //Reloadボタンを押した時のアクション
     func reloadButtonTapped(button: UIButton) {
-        if apiDataList.count < RecipeSetting.recipeMaxCount {
-            loadApiData(categoryId: CategoryList.fetchTargetCategory())
-        }
+        loadApiData(categoryId: CategoryList.fetchTargetCategory())
     }
 
     //Resetボタンを押した時のアクション
     func resetButtonTapped(button: UIButton) {
-        apiDataList.removeAll()
-        receiptCollectionView.reloadData()
+        initTargetMessageSetting()
     }
     
     //現在データのハンドリングを行うアクション
@@ -210,6 +208,9 @@ class MakeReciptController: UIViewController, UINavigationControllerDelegate, UI
         //長押ししたセルのタグ名と現在位置を設定する
         let targetTag: Int = (sender.view?.tag)!
         let pressPoint: CGPoint = sender.location(ofTouch: 0, in: self.view)
+
+        //タグの値(=indexPath.row)の値を元にデータを抽出する
+        let selectedData: (indication: String, published: String, title: String, image: String, url: String) = apiDataList[targetTag]
         
         //対象の画像サイズと中心位置を算出する
         let targetWidth = RecipeCell.cellOfSize().width
@@ -217,15 +218,17 @@ class MakeReciptController: UIViewController, UINavigationControllerDelegate, UI
         let centerX = pressPoint.x - (targetWidth / 2)
         let centerY = pressPoint.y - (targetHeight / 2)
         
-        //長押し対象のセルに配置されていたイメージ
-        var targetImage: UIImage?
-        var targetCell: RecipeCell?
+        //長押し対象のセルに配置されていたものを格納するための変数
+        var targetImage: UIImage? = nil
+        var targetCell: RecipeCell? = nil
         
         //CollectionView内の要素で該当のセルのものを抽出する
         for targetView in receiptCollectionView.subviews {
             if targetView is RecipeCell {
                 let cc: RecipeCell = targetView as! RecipeCell
                 if cc.tag == targetTag {
+
+                    //該当のセルとその中に配置されているUIImageを抽出する
                     targetCell = cc
                     targetImage = targetCell?.recipeImageView.image
                     break
@@ -301,23 +304,27 @@ class MakeReciptController: UIViewController, UINavigationControllerDelegate, UI
             //対象のcellにあるImageViewを表示
             targetCell?.recipeImageView.isHidden = false
 
-            //dropViewの色を戻す
+            //ぶつかる範囲の基準となるボタンの色を戻す
             dragAreaButton.backgroundColor = UIColor.lightGray
             
             if isSelectedFlag {
-                
-                //TODO: 選択済みデータに追加する処理を作成する
-                
-                //TODO: CollectionView内のデータを1件削除して更新する処理を作成する
 
-                //DEBUG: ぶつかるエリア内にある
-                //print("Yes")
+                //登録できる最大数以下の場合は選択時の処理を行う
+                if selectedDataList.count < RecipeSetting.recipeMaxCount {
 
-            } else {
+                    //選択済みデータに追加する処理を作成する
+                    selectedDataList.append(selectedData)
 
-                //DEBUG: ぶつかるエリア内にない
-                //print("No")
+                    //CollectionView内のデータを1件削除して更新する処理を作成する
+                    apiDataList.remove(at: targetTag)
+                    receiptCollectionView.reloadData()
+
+                    //レシピの現在選択数を表示する
+                    selectedRecipeCountLabel.text = MessageSetting.getCountRecipeMessage(count: selectedDataList.count)
+                }
             }
+
+            //選択状態フラグをリセットする
             isSelectedFlag = false
         }
 
@@ -332,17 +339,19 @@ class MakeReciptController: UIViewController, UINavigationControllerDelegate, UI
     
     //セルに表示する値を設定する
     internal func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+
+        //セルの定義を行う
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RecipeCell", for: indexPath) as! RecipeCell
 
-        let targetData = apiDataList[indexPath.row] 
-        
         //セルへ受け渡された値を設定する
+        let targetData = apiDataList[indexPath.row]
         cell.recipeNameLabel.text = targetData.title
         cell.recipeDateLabel.text = targetData.published
         cell.recipeCategoryLabel.text = targetData.indication
         
         //Kingfisherのキャッシュを活用した画像データの設定
         let url = URL(string: targetData.image)
+        cell.recipeImageView.kf.indicatorType = .activity
         cell.recipeImageView.kf.setImage(with: url)
 
         //cellのタグを決定する(LongTapGestureRecognizerからの逆引き用に設定)
@@ -395,11 +404,16 @@ class MakeReciptController: UIViewController, UINavigationControllerDelegate, UI
     //Alamofireでの楽天レシピAPIからランキング上位のレシピ情報をカテゴリー
     fileprivate func loadApiData(categoryId: String) {
 
+        //通信中はCollectionViewの操作をロックする
+        receiptCollectionView.isUserInteractionEnabled = false
+        receiptCollectionView.alpha = 0.35
+
+        //楽天APIへのアクセスを行う
         let parameterList = ["format" : "json", "applicationId" : CommonSetting.apiKey, "categoryId" : categoryId]
         let api = ApiManager(path: "/Recipe/CategoryRanking/20121121", method: .get, parameters: parameterList)
         api.request(success: { (data: Dictionary) in
             
-            //取得結果
+            //取得結果のデータにSwiftyJSONを適用する
             let jsonList = JSON(data)
             let results = jsonList["result"]
 
@@ -424,11 +438,13 @@ class MakeReciptController: UIViewController, UINavigationControllerDelegate, UI
             }
 
             //CollectionViewをリロードする
+            self.receiptCollectionView.isUserInteractionEnabled = true
+            self.receiptCollectionView.alpha = 1
             self.receiptCollectionView.reloadData()
 
         }, fail: { (error: Error?) in
             
-            //エラーハンドリング
+            //エラーハンドリングを行う（AlertControllerを表示）
             let errorAlert = UIAlertController(
                 title: "通信状態エラー",
                 message: "データの取得に失敗しました。通信状態の良い場所ないしはお持ちのWiftに接続した状態で再度更新ボタンを押してお試し下さい。",
@@ -441,6 +457,8 @@ class MakeReciptController: UIViewController, UINavigationControllerDelegate, UI
                     handler: nil
                 )
             )
+            self.receiptCollectionView.isUserInteractionEnabled = true
+            self.receiptCollectionView.alpha = 1
             self.present(errorAlert, animated: true, completion: nil)
         })
     }
@@ -461,12 +479,17 @@ class MakeReciptController: UIViewController, UINavigationControllerDelegate, UI
     //メッセージ表示の初期化を行う
     fileprivate func initTargetMessageSetting() {
 
-        //TODO: データ一時格納用の変数を初期化する
+        //データ一時格納用の変数を初期化する
+        selectedDataList.removeAll()
+        apiDataList.removeAll()
 
-        //選択リセット時または初期表示時の
+        //選択リセット時または初期表示時のメッセージを表示する
         currentYearAndMonthLabel.text = MessageSetting.getDisplayYearAndMonth()
         selectedDayLabel.text = MessageSetting.getClearDateMessage()
         selectedRecipeCountLabel.text = MessageSetting.getClearRecipeMessage()
+
+        //collectionViewのリロードを行う
+        receiptCollectionView.reloadData()
     }
 
     //コンテンツ用のUIScrollViewの初期化を行う
