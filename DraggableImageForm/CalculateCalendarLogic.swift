@@ -17,7 +17,7 @@ private let AD = 1 // 紀元後
  */
 
 public enum Weekday: Int {
-    case Sun, Mon, Tue, Wed, Thu, Fri, Sat
+    case sun, mon, tue, wed, thu, fri, sat
 
     init?(year: Int, month: Int, day: Int) {
         let cal = Calendar.current as NSCalendar
@@ -26,36 +26,53 @@ public enum Weekday: Int {
         self.init(rawValue: weekdayNum - 1)
     }
 
+    //曜日の表記（日,月,火,水,木,金,土の表記）
     var shortName: String {
         switch self {
-        case .Sun: return "日"
-        case .Mon: return "月"
-        case .Tue: return "火"
-        case .Wed: return "水"
-        case .Thu: return "木"
-        case .Fri: return "金"
-        case .Sat: return "土"
+        case .sun: return "日"
+        case .mon: return "月"
+        case .tue: return "火"
+        case .wed: return "水"
+        case .thu: return "木"
+        case .fri: return "金"
+        case .sat: return "土"
         }
     }
 
-    var englishName: String {
-        switch self {
-        case .Sun: return "Sun"
-        case .Mon: return "Mon"
-        case .Tue: return "Tue"
-        case .Wed: return "Wed"
-        case .Thu: return "Thu"
-        case .Fri: return "Fri"
-        case .Sat: return "Sat"
-        }
-    }
-    
+    //曜日の表記（○曜の表記）
     var mediumName: String {
         return shortName + "曜"
     }
-    
+
+    //曜日の表記（○曜日の表記）
     var longName: String {
         return shortName + "曜日"
+    }
+
+    //曜日の英語表記（略したもの）
+    var englishName: String {
+        switch self {
+        case .sun: return "Sun"
+        case .mon: return "Mon"
+        case .tue: return "Tue"
+        case .wed: return "Wed"
+        case .thu: return "Thu"
+        case .fri: return "Fri"
+        case .sat: return "Sat"
+        }
+    }
+
+    //曜日の英語表記（完全スペルのもの）
+    var englishLongName: String {
+        switch self {
+        case .sun: return "Sunday"
+        case .mon: return "Monday"
+        case .tue: return "Tuesday"
+        case .wed: return "Wednesday"
+        case .thu: return "Thursday"
+        case .fri: return "Friday"
+        case .sat: return "Saturday"
+        }
     }
 }
 
@@ -63,18 +80,18 @@ public struct CalculateCalendarLogic {
     
     private enum SpringAutumn {
         /// 春分の日
-        case Spring
-        
+        case spring
+
         /// 秋分の日
-        case Autumn
-        
+        case autumn
+
         var constant: Double {
             switch self {
-            case .Spring: return 20.69115
-            case .Autumn: return 23.09000
+            case .spring: return 20.69115
+            case .autumn: return 23.09000
             }
         }
-        
+
         /// 春分の日・秋分の日を計算する
         /// 参考：http://koyomi8.com/reki_doc/doc_0330.htm
         func calcDay(year: Int) -> Int {
@@ -83,7 +100,7 @@ public struct CalculateCalendarLogic {
             return Int(constant + x1 - Double(x2))
         }
     }
-    
+
     public init() {} // FIXME: static化した後はprivateにする
     
     /**
@@ -97,16 +114,16 @@ public struct CalculateCalendarLogic {
      *
      */
     public func judgeJapaneseHoliday(year: Int, month: Int, day: Int) -> Bool {
-        
+
         let cal = Calendar.current as NSCalendar
         guard let date = cal.date(
             era: AD, year: year, month: month, day: day, hour: 0, minute: 0, second: 0, nanosecond: 0) else {
-            fatalError() // FIXME: throwにしたほうがよい？
+                fatalError() // FIXME: throwにしたほうがよい？
         }
         let weekdayNum = cal.component(.weekday, from: date) // 1:日曜日 ～ 7:土曜日
-        
+
         guard let weekday = Weekday(rawValue: weekdayNum - 1) else { fatalError("weekdayIndex is invalid.") }
-        
+
         /// 国民の祝日に関する法律（こくみんのしゅくじつにかんするほうりつ）は、
         /// 1948年（昭和23年）7月20日に公布・即日施行された日本の法律である。通称祝日法。
         /// See also: https://ja.wikipedia.org/wiki/国民の祝日に関する法律
@@ -121,186 +138,186 @@ public struct CalculateCalendarLogic {
         /// See also: https://ja.wikipedia.org/wiki/%E7%9A%87%E9%9C%8A%E7%A5%AD
 
         switch (year, month, day, weekday) {
-            
-            //1月1日: 元旦
-            case (_, 1, 1, _):
-                return true
 
-            //1月2日: 振替休日
-            case (year, 1, 2, .Mon) where year >= AlternateHolidaysLawYear:
-                return true
-            
-            //(1).1月15日(1999年まで)、(2).1月の第2月曜日(2000年から): 成人の日
-            case (year, 1, 15, _) where year <= 1999:
-                return true
-            
-            case (year, 1, 8...14, .Mon) where year >= 2000:
-                return true
-            
-            //1月16日: 成人の日の振替休日(1999年まで)
-            case (year, 1, 16, .Mon) where year >= AlternateHolidaysLawYear && year <= 1999:
-                return true
+        //1月1日: 元旦
+        case (_, 1, 1, _):
+            return true
 
-            //2月11日: 建国記念の日
-            case (_, 2, 11, _):
-                return true
-            
-            //2月12日: 振替休日
-            case (year, 2, 12, .Mon) where year >= AlternateHolidaysLawYear:
-                return true
-            
-            //3月20日 or 21日: 春分の日(計算値によって算出)
-            case (year, 3, day, _)
-                where PublicHolidaysLawYear < year && day == SpringAutumn.Spring.calcDay(year: year):
-                
-                return true
+        //1月2日: 振替休日
+        case (year, 1, 2, .mon) where year >= AlternateHolidaysLawYear:
+            return true
 
-            //春分の日の次が月曜日: 振替休日
-            case (year, 3, day, .Mon)
-                where year >= AlternateHolidaysLawYear && day == SpringAutumn.Spring.calcDay(year: year) + 1:
-                
-                return true
-            
-            //4月29日: 1949年から1989年までは天皇誕生日、1990年から2006年まではみどりの日、2007年以降は昭和の日
-            case (year, 4, 29, _) where PublicHolidaysLawYear < year:
-                return true
-            
-            //4月30日: 振替休日
-            case (year, 4, 30, .Mon) where year >= AlternateHolidaysLawYear:
-                return true
-            
-            //5月3日: 1949年から憲法記念日
-            case (year, 5, 3, _) where PublicHolidaysLawYear < year:
-                return true
+        //(1).1月15日(1999年まで)、(2).1月の第2月曜日(2000年から): 成人の日
+        case (year, 1, 15, _) where year <= 1999:
+            return true
 
-            //5月4日: (1)1988年以前は振替休日、(2).1988年から2006年まで国民の休日、2007年以降はみどりの日
-            case (year, 5, 4, .Mon) where year < 1988:
-                return true
+        case (year, 1, 8...14, .mon) where year >= 2000:
+            return true
 
-            case (1988...2006, 5, 4, .Tue),
-                 (1988...2006, 5, 4, .Wed),
-                 (1988...2006, 5, 4, .Thu),
-                 (1988...2006, 5, 4, .Fri),
-                 (1988...2006, 5, 4, .Sat):
-                
-                return true
+        //1月16日: 成人の日の振替休日(1999年まで)
+        case (year, 1, 16, .mon) where year >= AlternateHolidaysLawYear && year <= 1999:
+            return true
 
-            case (year, 5, 4, _) where year > 2006:
-                return true
-            
-            //5月5日: 1949年からこどもの日
-            case (year, 5, 5, _) where PublicHolidaysLawYear < year:
-                return true
-            
-            //ゴールデンウィークの振替休日
-            case (year, 5, 6, _) where year >= AlternateHolidaysLawYear && getGoldenWeekAlterHoliday(year: year, weekday: weekday):
-                return true
-            
-            //(1).7月20日(1996年から2002年まで)、(2).7月の第3月曜日(2003年から): 海の日
-            case (1996...2002, 7, 20, _):
-                return true
-            
-            //(2).7月の第3月曜日(2003年から): 海の日
-            case (year, 7, 15...21, .Mon) where 2003 <= year:
-                return true
-            
-            //7月21日: 海の日の振替休日
-            case (1996...2002, 7, 21, .Mon):
-                return true
-            
-            //8月11日: 2016年から山の日
-            case (year, 8, 11, _) where year > 2015:
-                return true
-            
-            //8月12日: 振替休日
-            case (year, 8, 12, .Mon) where year > 2015:
-                return true
-            
-            //(1).9月15日(1966年から2002年まで)、(2).9月の第3月曜日(2003年から): 敬老の日
-            case (1966...2002, 9, 15, _):
-                return true
-            
-            case (year, 9, 15...21, .Mon) where year > 2002:
-                return true
-            
-            //9月16日: 敬老の日の振替休日
-            case (1973...2002, 9, 16, .Mon):
-                return true
-            
-            //9月22日 or 23日: 秋分の日(計算値によって算出)
-            case (year, 9, day, _)
-                where PublicHolidaysLawYear <= year && day == SpringAutumn.Autumn.calcDay(year: year):
-                
-                return true
-            
-            //秋分の日の次が月曜日: 振替休日
-            case (year, 9, day, .Mon)
-                where year >= AlternateHolidaysLawYear && day == SpringAutumn.Autumn.calcDay(year: year) + 1:
-                
-                return true
-            
-            //シルバーウィークの振替休日である
-            case (_, 9, _, _)
-                where oldPeopleDay(year: year) < day
-                    && day < SpringAutumn.Autumn.calcDay(year: year)
-                    && getAlterHolidaySliverWeek(year: year):
-                return true
-            
-            //(1).10月10日(1966年から1999年まで)、(2).10月の第2月曜日(2000年から): 体育の日
-            case (1966...1999, 10, 10, _):
-                return true
-            
-            case (year, 10, 8...14, .Mon) where year > 1999:
-                return true
-            
-            //10月11日: 体育の日の振替休日
-            case (1966...1999, 10, 11, .Mon):
-                return true
-            
-            //11月3日: 1948年から文化の日
-            case (year, 11, 3, _) where PublicHolidaysLawYear <= year:
-                return true
-            
-            //11月4日: 振替休日
-            case (year, 11, 4, .Mon) where year >= AlternateHolidaysLawYear:
-                return true
-            
-            //11月23日: 1948年から勤労感謝の日
-            case (year, 11, 23, _) where PublicHolidaysLawYear <= year:
-                return true
-            
-            //11月24日: 振替休日
-            case (year, 11, 24, .Mon) where year >= AlternateHolidaysLawYear:
-                return true
-            
-            //12月23日: 1989年から天皇誕生日
-            case (year, 12, 23, _) where year > 1989:
-                return true
-            
-            //12月24日: 振替休日
-            case (year, 12, 24, .Mon) where year > 1989:
-                return true
-            
-            //※昔の祝日はこちら
-            //4月10日: 1959年だけ皇太子明仁親王の結婚の儀
-            case (1959, 4, 10, _):
-                return true
+        //2月11日: 建国記念の日
+        case (_, 2, 11, _):
+            return true
 
-            //2月24日: 1989年だけ昭和天皇の大喪の礼
-            case (1989, 2, 24, _):
-                return true
-            
-            //11月12日: 1989年だけ昭和天皇の大喪の礼
-            case (1989, 11, 12, _):
-                return true
-            
-            //6月9日: 1993年だけ皇太子徳仁親王の結婚の儀
-            case (1993, 6, 9, _):
-                return true
-            
-            //祝祭日ではない時
-            default:
-                return false
+        //2月12日: 振替休日
+        case (year, 2, 12, .mon) where year >= AlternateHolidaysLawYear:
+            return true
+
+        //3月20日 or 21日: 春分の日(計算値によって算出)
+        case (year, 3, day, _)
+            where PublicHolidaysLawYear < year && day == SpringAutumn.spring.calcDay(year: year):
+
+            return true
+
+        //春分の日の次が月曜日: 振替休日
+        case (year, 3, day, .mon)
+            where year >= AlternateHolidaysLawYear && day == SpringAutumn.spring.calcDay(year: year) + 1:
+
+            return true
+
+        //4月29日: 1949年から1989年までは天皇誕生日、1990年から2006年まではみどりの日、2007年以降は昭和の日
+        case (year, 4, 29, _) where PublicHolidaysLawYear < year:
+            return true
+
+        //4月30日: 振替休日
+        case (year, 4, 30, .mon) where year >= AlternateHolidaysLawYear:
+            return true
+
+        //5月3日: 1949年から憲法記念日
+        case (year, 5, 3, _) where PublicHolidaysLawYear < year:
+            return true
+
+        //5月4日: (1)1988年以前は振替休日、(2).1988年から2006年まで国民の休日、2007年以降はみどりの日
+        case (year, 5, 4, .mon) where year < 1988:
+            return true
+
+        case (1988...2006, 5, 4, .tue),
+             (1988...2006, 5, 4, .wed),
+             (1988...2006, 5, 4, .thu),
+             (1988...2006, 5, 4, .fri),
+             (1988...2006, 5, 4, .sat):
+
+            return true
+
+        case (year, 5, 4, _) where year > 2006:
+            return true
+
+        //5月5日: 1949年からこどもの日
+        case (year, 5, 5, _) where PublicHolidaysLawYear < year:
+            return true
+
+        //ゴールデンウィークの振替休日
+        case (year, 5, 6, _) where year >= AlternateHolidaysLawYear && getGoldenWeekAlterHoliday(year: year, weekday: weekday):
+            return true
+
+        //(1).7月20日(1996年から2002年まで)、(2).7月の第3月曜日(2003年から): 海の日
+        case (1996...2002, 7, 20, _):
+            return true
+
+        //(2).7月の第3月曜日(2003年から): 海の日
+        case (year, 7, 15...21, .mon) where 2003 <= year:
+            return true
+
+        //7月21日: 海の日の振替休日
+        case (1996...2002, 7, 21, .mon):
+            return true
+
+        //8月11日: 2016年から山の日
+        case (year, 8, 11, _) where year > 2015:
+            return true
+
+        //8月12日: 振替休日
+        case (year, 8, 12, .mon) where year > 2015:
+            return true
+
+        //(1).9月15日(1966年から2002年まで)、(2).9月の第3月曜日(2003年から): 敬老の日
+        case (1966...2002, 9, 15, _):
+            return true
+
+        case (year, 9, 15...21, .mon) where year > 2002:
+            return true
+
+        //9月16日: 敬老の日の振替休日
+        case (1973...2002, 9, 16, .mon):
+            return true
+
+        //9月22日 or 23日: 秋分の日(計算値によって算出)
+        case (year, 9, day, _)
+            where PublicHolidaysLawYear <= year && day == SpringAutumn.autumn.calcDay(year: year):
+
+            return true
+
+        //秋分の日の次が月曜日: 振替休日
+        case (year, 9, day, .mon)
+            where year >= AlternateHolidaysLawYear && day == SpringAutumn.autumn.calcDay(year: year) + 1:
+
+            return true
+
+        //シルバーウィークの振替休日である
+        case (_, 9, _, _)
+            where oldPeopleDay(year: year) < day
+                && day < SpringAutumn.autumn.calcDay(year: year)
+                && getAlterHolidaySliverWeek(year: year):
+            return true
+
+        //(1).10月10日(1966年から1999年まで)、(2).10月の第2月曜日(2000年から): 体育の日
+        case (1966...1999, 10, 10, _):
+            return true
+
+        case (year, 10, 8...14, .mon) where year > 1999:
+            return true
+
+        //10月11日: 体育の日の振替休日
+        case (1966...1999, 10, 11, .mon):
+            return true
+
+        //11月3日: 1948年から文化の日
+        case (year, 11, 3, _) where PublicHolidaysLawYear <= year:
+            return true
+
+        //11月4日: 振替休日
+        case (year, 11, 4, .mon) where year >= AlternateHolidaysLawYear:
+            return true
+
+        //11月23日: 1948年から勤労感謝の日
+        case (year, 11, 23, _) where PublicHolidaysLawYear <= year:
+            return true
+
+        //11月24日: 振替休日
+        case (year, 11, 24, .mon) where year >= AlternateHolidaysLawYear:
+            return true
+
+        //12月23日: 1989年から天皇誕生日
+        case (year, 12, 23, _) where year > 1989:
+            return true
+
+        //12月24日: 振替休日
+        case (year, 12, 24, .mon) where year > 1989:
+            return true
+
+        //※昔の祝日はこちら
+        //4月10日: 1959年だけ皇太子明仁親王の結婚の儀
+        case (1959, 4, 10, _):
+            return true
+
+        //2月24日: 1989年だけ昭和天皇の大喪の礼
+        case (1989, 2, 24, _):
+            return true
+
+        //11月12日: 1989年だけ昭和天皇の大喪の礼
+        case (1989, 11, 12, _):
+            return true
+
+        //6月9日: 1993年だけ皇太子徳仁親王の結婚の儀
+        case (1993, 6, 9, _):
+            return true
+
+        //祝祭日ではない時
+        default:
+            return false
         }
     }
 
@@ -313,8 +330,8 @@ public struct CalculateCalendarLogic {
      */
     private func getGoldenWeekAlterHoliday(year: Int, weekday: Weekday) -> Bool {
         switch weekday {
-        case .Mon, .Tue, 
-             .Wed where 2007 <= year:
+        case .mon, .tue,
+             .wed where 2007 <= year:
             return true
         default:
             return false
@@ -328,9 +345,9 @@ public struct CalculateCalendarLogic {
      *
      */
     private func getAlterHolidaySliverWeek(year: Int) -> Bool {
-        return oldPeopleDay(year: year) + 2 == SpringAutumn.Autumn.calcDay(year: year)
+        return oldPeopleDay(year: year) + 2 == SpringAutumn.autumn.calcDay(year: year)
     }
-    
+
     /**
      * 指定した年の敬老の日を調べる
      */

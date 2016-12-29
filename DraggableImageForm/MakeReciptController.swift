@@ -205,7 +205,7 @@ class MakeReciptController: UIViewController, UINavigationControllerDelegate, UI
     }
 
     //セルを長押しした際(UILongPressGestureRecognizerで実行された際)に発動する処理
-    func longPressCell(sender: UILongPressGestureRecognizer)  {
+    func longPressCell(sender: UILongPressGestureRecognizer) {
 
         //長押ししたセルのタグ名と現在位置を設定する
         let targetTag: Int = (sender.view?.tag)!
@@ -428,7 +428,20 @@ class MakeReciptController: UIViewController, UINavigationControllerDelegate, UI
 
         }, fail: { (error: Error?) in
             
-            //TODO: エラーハンドリングをする必要がある
+            //エラーハンドリング
+            let errorAlert = UIAlertController(
+                title: "通信状態エラー",
+                message: "データの取得に失敗しました。通信状態の良い場所ないしはお持ちのWiftに接続した状態で再度更新ボタンを押してお試し下さい。",
+                preferredStyle: UIAlertControllerStyle.alert
+            )
+            errorAlert.addAction(
+                UIAlertAction(
+                    title: "OK",
+                    style: UIAlertActionStyle.default,
+                    handler: nil
+                )
+            )
+            self.present(errorAlert, animated: true, completion: nil)
         })
     }
     
