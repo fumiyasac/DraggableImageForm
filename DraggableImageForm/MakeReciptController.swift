@@ -256,10 +256,9 @@ class MakeReciptController: UIViewController, UINavigationControllerDelegate, UI
 
             //セル内のサムネイル画像を表示させないようにする
             targetCell?.recipeImageView.isHidden = true
-        }
 
         //UILongPressGestureRecognizerが動作中の際の処理
-        if sender.state == UIGestureRecognizerState.changed {
+        } else if sender.state == UIGestureRecognizerState.changed {
 
             //動いた分の距離を加算する
             draggableImageView.frame = CGRect(
@@ -291,10 +290,9 @@ class MakeReciptController: UIViewController, UINavigationControllerDelegate, UI
                 dragAreaButton.backgroundColor = UIColor.lightGray
                 isSelectedFlag = false
             }
-        }
 
         //UILongPressGestureRecognizerが終了した際の処理
-        if sender.state == UIGestureRecognizerState.ended {
+        } else if sender.state == UIGestureRecognizerState.ended {
             
             //ドラッグ可能なImageViewを削除する
             targetImage = nil
@@ -309,6 +307,9 @@ class MakeReciptController: UIViewController, UINavigationControllerDelegate, UI
             
             if isSelectedFlag {
 
+                //データ追加の際には一時的にcollectionViewを選択不可にしておく
+                receiptCollectionView.isPrefetchingEnabled = false
+
                 //登録できる最大数以下の場合は選択時の処理を行う
                 if selectedDataList.count < RecipeSetting.recipeMaxCount {
 
@@ -317,15 +318,18 @@ class MakeReciptController: UIViewController, UINavigationControllerDelegate, UI
 
                     //CollectionView内のデータを1件削除して更新する処理を作成する
                     apiDataList.remove(at: targetTag)
-                    receiptCollectionView.reloadData()
 
                     //レシピの現在選択数を表示する
                     selectedRecipeCountLabel.text = MessageSetting.getCountRecipeMessage(count: selectedDataList.count)
+
+                    //collectionViewをリロードする
+                    receiptCollectionView.reloadData()
                 }
             }
 
             //選択状態フラグをリセットする
             isSelectedFlag = false
+            receiptCollectionView.isPrefetchingEnabled = true
         }
 
     }
@@ -351,6 +355,7 @@ class MakeReciptController: UIViewController, UINavigationControllerDelegate, UI
         
         //Kingfisherのキャッシュを活用した画像データの設定
         let url = URL(string: targetData.image)
+        cell.recipeImageView.image = nil
         cell.recipeImageView.kf.indicatorType = .activity
         cell.recipeImageView.kf.setImage(with: url)
 
