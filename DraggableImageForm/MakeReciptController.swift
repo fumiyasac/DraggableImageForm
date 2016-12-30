@@ -79,8 +79,8 @@ class MakeReciptController: UIViewController, UINavigationControllerDelegate, UI
     var apiDataList: [(id: String, indication: String, published: String, title: String, image: String, url: String)] = []
     
     //選択された日を設定する
-    var targetDay: Int? = nil
-    
+    var selectedDay: Int? = nil
+
     //MakeReciptControllerクラス内のUIパーツ
     @IBOutlet weak var calendarScrollView: UIScrollView!
     @IBOutlet weak var receiptCollectionView: UICollectionView!
@@ -178,7 +178,7 @@ class MakeReciptController: UIViewController, UINavigationControllerDelegate, UI
 
     //カレンダーのボタンを押した時のアクション
     func calendarButtonTapped(button: UIButton) {
-        targetDay = button.tag
+        selectedDay = button.tag
         selectedDayLabel.text = MessageSetting.getSelectedDateMessage(day: button.tag)
     }
     
@@ -194,7 +194,25 @@ class MakeReciptController: UIViewController, UINavigationControllerDelegate, UI
     
     //現在データのハンドリングを行うアクション
     func handleButtonTapped(button: UIButton) {
-        print("Handle button tapped.")
+
+        //データが正しく選択されている場合のみポップアップを表示する
+        if selectedDay != nil && selectedDataList.count > 0 {
+
+            //遷移元からポップアップ用のAddControllerのインスタンスを作成する
+            let popupVC = UIStoryboard(name: "Add", bundle: nil).instantiateViewController(withIdentifier: "AddController") as! AddController
+            
+            //ポップアップ用のViewConrollerを設定し、modalPresentationStyle(= .overCurrentContext)と背景色(= UIColor.clear)を設定する
+            popupVC.modalPresentationStyle = .overCurrentContext
+            popupVC.view.backgroundColor = UIColor.clear
+            
+            //変数の受け渡しを行う
+            popupVC.targetSelectedDataList = selectedDataList
+            popupVC.targetDate = String(CalendarView.getCalendarOfCurrentYear()) + "/" + String(format: "%02d", CalendarView.getCalendarOfCurrentMonth()) + "/" + String(format: "%02d", selectedDay!)
+            
+            //ポップアップ用のViewControllerへ遷移
+            self.present(popupVC, animated: false, completion: nil)
+        }
+
     }
 
     //Archiveボタンを押した時のアクション
