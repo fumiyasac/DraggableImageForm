@@ -73,10 +73,10 @@ class MakeReciptController: UIViewController, UINavigationControllerDelegate, UI
     fileprivate var layoutOnceFlag: Bool = false
     
     //データ格納用の配列
-    var selectedDataList: [(indication: String, published: String, title: String, image: String, url: String)] = []
+    var selectedDataList: [(id: String, indication: String, published: String, title: String, image: String, url: String)] = []
     
     //APIから取得したデータを格納する配列
-    var apiDataList: [(indication: String, published: String, title: String, image: String, url: String)] = []
+    var apiDataList: [(id: String, indication: String, published: String, title: String, image: String, url: String)] = []
     
     //選択された日を設定する
     var targetDay: Int? = nil
@@ -210,7 +210,7 @@ class MakeReciptController: UIViewController, UINavigationControllerDelegate, UI
         let pressPoint: CGPoint = sender.location(ofTouch: 0, in: self.view)
 
         //タグの値(=indexPath.row)の値を元にデータを抽出する
-        let selectedData: (indication: String, published: String, title: String, image: String, url: String) = apiDataList[targetTag]
+        let selectedData: (id: String, indication: String, published: String, title: String, image: String, url: String) = apiDataList[targetTag]
         
         //対象の画像サイズと中心位置を算出する
         let targetWidth = RecipeCell.cellOfSize().width
@@ -426,12 +426,13 @@ class MakeReciptController: UIViewController, UINavigationControllerDelegate, UI
                 
                 //CollectionViewへ表示するためのデータをまとめたタプル
                 let targetData = (
+                    String(describing: result["recipeId"]),
                     String(describing: result["recipeIndication"]),
                     published,
                     String(describing: result["recipeTitle"]),
                     String(describing: result["foodImageUrl"]),
                     String(describing: result["recipeUrl"])
-                    ) as (indication: String, published: String, title: String, image: String, url: String)
+                    ) as (id: String, indication: String, published: String, title: String, image: String, url: String)
 
                 //表示用のデータを追加する
                 self.apiDataList.append(targetData)
@@ -469,6 +470,7 @@ class MakeReciptController: UIViewController, UINavigationControllerDelegate, UI
         //UIパーツの表示時の設定をここに記載する
         dragAreaButton.addTarget(self, action: #selector(MakeReciptController.handleButtonTapped(button:)), for: .touchUpInside)
 
+        //ボタンに関するターゲットの設定を行う
         reloadDataButton.addTarget(self, action: #selector(MakeReciptController.reloadButtonTapped(button:)), for: .touchUpInside)
         reloadDataButton.layer.cornerRadius = CGFloat(reloadDataButton.frame.width / 2)
         

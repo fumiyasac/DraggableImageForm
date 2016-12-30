@@ -6,7 +6,6 @@ target 'DraggableImageForm' do
   pod 'RealmSwift'
   pod 'Alamofire'
   pod 'SwiftyJSON'
-  pod 'MBCircularProgressBar'
   pod 'Kingfisher'
 
   post_install do |installer|

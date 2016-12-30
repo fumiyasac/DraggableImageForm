@@ -1,7 +1,6 @@
 PODS:
   - Alamofire (4.2.0)
-  - Kingfisher (3.2.2)
-  - MBCircularProgressBar (0.3.5)
+  - Kingfisher (3.2.4)
   - Realm (2.0.3):
     - Realm/Headers (= 2.0.3)
   - Realm/Headers (2.0.3)
@@ -12,18 +11,16 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - Kingfisher
-  - MBCircularProgressBar
   - RealmSwift
   - SwiftyJSON
 
 SPEC CHECKSUMS:
   Alamofire: aa2e09d871c9160ac53c90e83c68064a94e3dfbe
-  Kingfisher: 821466474ad7ffc375a4aecadfa05068cfed67b3
-  MBCircularProgressBar: 0b795b722a5eb5b0923822f90474e2576a1a7855
+  Kingfisher: 8d80f39da403cd9c9ee11984e1655f4d6a566cdb
   Realm: 5f008bfe3c8c47142eddfc30b8c1584cde22db24
   RealmSwift: 5afb451f65b682242f272dbb52d5c6f6e343c980
   SwiftyJSON: 38a8ea2006779c0fc4c310cb2ee8195327740faf
 
-PODFILE CHECKSUM: 0607bb2ebdf74f9dae7e5929761f8859f138588b
+PODFILE CHECKSUM: fc8979477f4cce8b0f47f90f44cca7cee3dc8b05
 
 COCOAPODS: 1.2.0.beta.1
