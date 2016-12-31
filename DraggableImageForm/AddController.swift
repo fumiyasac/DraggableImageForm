@@ -21,6 +21,9 @@ class AddController: UIViewController, UITableViewDelegate, UITableViewDataSourc
     @IBOutlet weak var recipeTableView: UITableView!
     @IBOutlet weak var memoTextField: UITextField!
 
+    //初回キーボード表示用のメンバ変数
+    var lastKeyboardFrame: CGRect = CGRect.zero
+
     //データ格納用の配列
     var targetSelectedDataList: [(id: String, indication: String, published: String, title: String, image: String, url: String)] = []
 
@@ -29,6 +32,27 @@ class AddController: UIViewController, UITableViewDelegate, UITableViewDataSourc
         didSet {
             self.dateTextField.text = targetDate
         }
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        //通知（キーボード）に関する処理を登録する
+        registerNotification()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        //ポップアップ表示を実行する
+        showAnimatePopup()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        //通知（キーボード）に関する処理を解除する
+        unregisterNotification()
     }
 
     override func viewDidLoad() {
@@ -41,7 +65,6 @@ class AddController: UIViewController, UITableViewDelegate, UITableViewDataSourc
 
         //textFieldのデリゲート
         memoTextField.delegate = self
-
         
         //UI設定及び値のセットを行う
         initDefaultUiSetting()
@@ -58,22 +81,22 @@ class AddController: UIViewController, UITableViewDelegate, UITableViewDataSourc
     /* (UITableViewDelegate) */
 
     //テーブルのセクションのセル数を設定する
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    internal func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return targetSelectedDataList.count
     }
 
     /* (UITableViewDataSource) */
 
     //Editableの状態にする
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+    internal func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
 
     //Buttonを拡張＆データ削除処理
-    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+    internal func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
         
         //レシピを見るボタン
-        let myViewButton: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "View") { (action, index) -> Void in
+        let myViewButton: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "閲覧") { (action, index) -> Void in
 
             //テーブルビューを編集不可にする
             tableView.isEditing = false
@@ -85,10 +108,10 @@ class AddController: UIViewController, UITableViewDelegate, UITableViewDataSourc
             safariViewController.delegate = self
             self.present(safariViewController, animated: true, completion: nil)
         }
-        myViewButton.backgroundColor = UIColor.orange
+        myViewButton.backgroundColor = ColorConverter.colorWithHexString(hex: WebColorLists.lightOrangeCode.rawValue)
 
         //削除ボタン
-        let myDeleteButton: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "Delete") { (action, index) -> Void in
+        let myDeleteButton: UITableViewRowAction = UITableViewRowAction(style: .normal, title: "削除") { (action, index) -> Void in
             
             //テーブルビューを編集不可にする
             tableView.isEditing = false
@@ -101,13 +124,12 @@ class AddController: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 self.removeAnimatePopup()
             }
         }
-        myDeleteButton.backgroundColor = UIColor.red
-
+        myDeleteButton.backgroundColor = ColorConverter.colorWithHexString(hex: WebColorLists.lightBrownCode.rawValue)
         return [myViewButton, myDeleteButton]
     }
 
-    //TableView: 表示するセルの中身を設定する
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    //表示するセルの中身を設定する
+    internal func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         //Xibファイルを元にデータを作成する
         let cell = tableView.dequeueReusableCell(withIdentifier: "TargetRecipeCell") as? TargetRecipeCell
@@ -129,14 +151,43 @@ class AddController: UIViewController, UITableViewDelegate, UITableViewDataSourc
         return cell!
     }
 
-    //Viewの表示が完了した際に呼び出されるメソッド
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    /* (UITextFieldDelegate) */
 
-        //ポップアップ表示を実行する
-        showAnimatePopup()
+    internal func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
     }
 
+    /* (Observer Functions) */
+
+    //通知登録処理
+    func registerNotification() {
+
+        //キーボードの開閉時の通知登録を行う
+        let center: NotificationCenter = NotificationCenter.default
+        center.addObserver(self, selector: #selector(AddController.keyboardWillShow(notification:)), name: Notification.Name.UIKeyboardWillShow, object: nil)
+        center.addObserver(self, selector: #selector(AddController.keyboardWillHide(notification:)), name: Notification.Name.UIKeyboardWillHide, object: nil)
+    }
+
+    //通知登録解除処理
+    func unregisterNotification() {
+
+        //キーボードの開閉時の通知登録を解除する
+        let center: NotificationCenter = NotificationCenter.default
+        center.removeObserver(self, name: Notification.Name.UIKeyboardWillShow, object: nil)
+        center.removeObserver(self, name: Notification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    //Keyboard表示前処理
+    func keyboardWillShow(notification: Notification) {
+        movePopupPosition(notification: notification, showKeyboard: true)
+    }
+    
+    //Keyboard非表示前処理
+    func keyboardWillHide(notification: Notification) {
+        movePopupPosition(notification: notification, showKeyboard: false)
+    }
+    
     //ポップアップを閉じる時のアクション
     @IBAction func closePopupAction(_ sender: UIButton) {
 
@@ -147,8 +198,10 @@ class AddController: UIViewController, UITableViewDelegate, UITableViewDataSourc
     //レシピを登録する時のアクション
     @IBAction func saveRecipeAction(_ sender: UIButton) {
 
-        closeButton.isEnabled = false
-        saveButton.isEnabled = false
+        view.endEditing(true)
+
+        //closeButton.isEnabled = false
+        //saveButton.isEnabled = false
 
         //TODO: Realmにデータを保存する処理
     }
@@ -163,6 +216,11 @@ class AddController: UIViewController, UITableViewDelegate, UITableViewDataSourc
     fileprivate func initDefaultUiSetting() {
         
         //UIパーツの表示時の設定をここに記載する
+        popupView.center = CGPoint(
+            x: DeviceSize.screenWidth() / 2,
+            y: DeviceSize.screenHeight() / 2
+        )
+        
         closeButton.isEnabled = true
         closeButton.layer.cornerRadius = CGFloat(closeButton.frame.width / 2)
         closeButton.layer.borderWidth = 2.0
@@ -205,4 +263,48 @@ class AddController: UIViewController, UITableViewDelegate, UITableViewDataSourc
         })
     }
 
+    //テーブルビューの位置補正を行う
+    fileprivate func movePopupPosition(notification: Notification, showKeyboard: Bool) -> () {
+        
+        if showKeyboard {
+            
+            //keyboardのサイズを取得
+            var keyboardFrame: CGRect = CGRect.zero
+            if let userInfo = notification.userInfo {
+                if let keyboard = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue {
+                    keyboardFrame = keyboard.cgRectValue
+                }
+            }
+            
+            //前の表示時のキーボード高さが0(初めてキーボードを表示)の場合にはUITableViewの制約を変更する
+            //※ キーボードが表示されている状態で次の入力項目に移った場合はこの処理を行わない
+            if lastKeyboardFrame.height == 0 {
+
+                lastKeyboardFrame = keyboardFrame
+                UIView.animate(withDuration: 0.26, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations:{
+                    
+                    self.popupView.center = CGPoint(
+                        x: DeviceSize.screenWidth() / 2,
+                        y: DeviceSize.screenHeight() / 2 - keyboardFrame.height
+                    )
+                    
+                    self.view.layoutIfNeeded()
+                }, completion: nil)
+            }
+            
+        } else {
+            
+            //キーボードが隠れたらUITableViewの制約を元に戻す
+            UIView.animate(withDuration: 0.26, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations:{
+
+                self.popupView.center = CGPoint(
+                    x: DeviceSize.screenWidth() / 2,
+                    y: DeviceSize.screenHeight() / 2
+                )
+
+            }, completion: { finished in
+                self.lastKeyboardFrame = CGRect.zero
+            })
+        }
+    }
 }

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		430F9C67BB45E5533A151F06 /* Pods_DraggableImageForm.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8AB9F7BD0A9E807BBACC9C34 /* Pods_DraggableImageForm.framework */; };
+		DE055BF51E178DBC00914CF5 /* DeviceSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE055BF41E178DBC00914CF5 /* DeviceSize.swift */; };
 		DE0F466A1DF8599100145416 /* Gallery.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE0F46691DF8599100145416 /* Gallery.storyboard */; };
 		DE0F466C1DF85A1700145416 /* GalleryController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE0F466B1DF85A1700145416 /* GalleryController.swift */; };
 		DE11B53C1DF1BE5700EE9E75 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE11B53B1DF1BE5700EE9E75 /* AppDelegate.swift */; };
@@ -59,6 +60,7 @@
 		8AB9F7BD0A9E807BBACC9C34 /* Pods_DraggableImageForm.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DraggableImageForm.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F2DA21F883CF9BF1544E48C /* Pods-DraggableImageForm.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DraggableImageForm.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DraggableImageForm/Pods-DraggableImageForm.debug.xcconfig"; sourceTree = "<group>"; };
 		920496E9693AD2CD3B94706F /* Pods-DraggableImageForm.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DraggableImageForm.release.xcconfig"; path = "Pods/Target Support Files/Pods-DraggableImageForm/Pods-DraggableImageForm.release.xcconfig"; sourceTree = "<group>"; };
+		DE055BF41E178DBC00914CF5 /* DeviceSize.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeviceSize.swift; sourceTree = "<group>"; };
 		DE0F46691DF8599100145416 /* Gallery.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Gallery.storyboard; sourceTree = "<group>"; };
 		DE0F466B1DF85A1700145416 /* GalleryController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GalleryController.swift; sourceTree = "<group>"; };
 		DE11B5381DF1BE5700EE9E75 /* DraggableImageForm.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DraggableImageForm.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -205,6 +207,7 @@
 				DE35F2D71E13F67000117202 /* CategoryList.swift */,
 				DE291DE51E16FCF3008BFB30 /* ColorConverter.swift */,
 				DE291DE71E1702EC008BFB30 /* DateConverter.swift */,
+				DE055BF41E178DBC00914CF5 /* DeviceSize.swift */,
 			);
 			name = Structs;
 			sourceTree = "<group>";
@@ -524,6 +527,7 @@
 				DEFF33351E0AED1600D7F0BF /* RecipeCell.swift in Sources */,
 				DE11B53E1DF1BE5700EE9E75 /* ViewController.swift in Sources */,
 				DEFF332F1E0ADB6A00D7F0BF /* CalculateCalendarLogic.swift in Sources */,
+				DE055BF51E178DBC00914CF5 /* DeviceSize.swift in Sources */,
 				DE11B53C1DF1BE5700EE9E75 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
