@@ -299,7 +299,8 @@ class MakeReciptController: UIViewController, UINavigationControllerDelegate, UI
             if ((minX <= centerX && centerX <= maxX) && (minY <= centerY && centerY <= maxY)) {
 
                 //ぶつかる範囲内にドラッグ可能なImageViewがある場合
-                dragAreaButton.backgroundColor = UIColor.orange
+                dragAreaButton.backgroundColor = ColorConverter.colorWithHexString(hex: WebColorLists.lightOrangeCode.rawValue)
+
                 isSelectedFlag = true
 
             } else {

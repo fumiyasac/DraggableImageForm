@@ -125,6 +125,7 @@ class AddController: UIViewController, UITableViewDelegate, UITableViewDataSourc
             }
         }
         myDeleteButton.backgroundColor = ColorConverter.colorWithHexString(hex: WebColorLists.lightBrownCode.rawValue)
+
         return [myViewButton, myDeleteButton]
     }
 
@@ -275,20 +276,17 @@ class AddController: UIViewController, UITableViewDelegate, UITableViewDataSourc
                     keyboardFrame = keyboard.cgRectValue
                 }
             }
-            
-            //前の表示時のキーボード高さが0(初めてキーボードを表示)の場合にはUITableViewの制約を変更する
+
+            //前の表示時のキーボード高さが0(初めてキーボードを表示した)の場合にはポップアップ位置をずらす
             //※ キーボードが表示されている状態で次の入力項目に移った場合はこの処理を行わない
             if lastKeyboardFrame.height == 0 {
 
                 lastKeyboardFrame = keyboardFrame
                 UIView.animate(withDuration: 0.26, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations:{
-                    
-                    self.popupView.center = CGPoint(
-                        x: DeviceSize.screenWidth() / 2,
-                        y: DeviceSize.screenHeight() / 2 - keyboardFrame.height
-                    )
-                    
-                    self.view.layoutIfNeeded()
+
+                    //キーボードの分だけ上にずらす
+                    self.popupView.center = CGPoint(x: DeviceSize.screenWidth() / 2, y: DeviceSize.screenHeight() / 2 - keyboardFrame.height)
+
                 }, completion: nil)
             }
             
@@ -297,10 +295,8 @@ class AddController: UIViewController, UITableViewDelegate, UITableViewDataSourc
             //キーボードが隠れたらUITableViewの制約を元に戻す
             UIView.animate(withDuration: 0.26, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations:{
 
-                self.popupView.center = CGPoint(
-                    x: DeviceSize.screenWidth() / 2,
-                    y: DeviceSize.screenHeight() / 2
-                )
+                //キーボードの分を元に戻す
+                self.popupView.center = CGPoint(x: DeviceSize.screenWidth() / 2, y: DeviceSize.screenHeight() / 2)
 
             }, completion: { finished in
                 self.lastKeyboardFrame = CGRect.zero
