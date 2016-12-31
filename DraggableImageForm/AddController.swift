@@ -29,6 +29,8 @@ class AddController: UIViewController, UITableViewDelegate, UITableViewDataSourc
 
     //選択された日を設定する
     var targetDate: String = "" {
+        
+        //値がセットされたタイミングで日付をセット
         didSet {
             self.dateTextField.text = targetDate
         }
@@ -199,12 +201,32 @@ class AddController: UIViewController, UITableViewDelegate, UITableViewDataSourc
     //レシピを登録する時のアクション
     @IBAction func saveRecipeAction(_ sender: UIButton) {
 
+        //キーボードを閉じる
         view.endEditing(true)
 
-        //closeButton.isEnabled = false
-        //saveButton.isEnabled = false
+        //ボタンを非活性状態にする
+        closeButton.isEnabled = false
+        saveButton.isEnabled = false
 
-        //TODO: Realmにデータを保存する処理
+        //Realmにデータを保存する処理(もうちょっと綺麗にリファクタする)
+        let archiveObject = Archive.create()
+        let archive_id = Archive.getLastId()
+        archiveObject.memo = memoTextField.text!
+        archiveObject.created = DateConverter.convertStringToDate(dateTextField.text)
+        archiveObject.save()
+
+        for targetData in targetSelectedDataList {
+            let recipeObject = Recipe.create()
+            recipeObject.archive_id = archive_id
+            recipeObject.rakuten_id = targetData.id
+            recipeObject.rakuten_indication = targetData.indication
+            recipeObject.rakuten_published = targetData.published
+            recipeObject.rakuten_title = targetData.title
+            recipeObject.rakuten_image = targetData.image
+            recipeObject.rakuten_url = targetData.url
+            recipeObject.save()
+        }
+        removeAnimatePopup()
     }
 
     override func didReceiveMemoryWarning() {

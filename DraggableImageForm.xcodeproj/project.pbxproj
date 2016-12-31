@@ -24,8 +24,8 @@
 		DE291DE41E16FA49008BFB30 /* WebColoerLists.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE291DE31E16FA49008BFB30 /* WebColoerLists.swift */; };
 		DE291DE61E16FCF3008BFB30 /* ColorConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE291DE51E16FCF3008BFB30 /* ColorConverter.swift */; };
 		DE291DE81E1702EC008BFB30 /* DateConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE291DE71E1702EC008BFB30 /* DateConverter.swift */; };
-		DE30839C1E1165B800F595F8 /* BaseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE30839B1E1165B800F595F8 /* BaseData.swift */; };
-		DE30839E1E1165D500F595F8 /* RecipeData.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE30839D1E1165D500F595F8 /* RecipeData.swift */; };
+		DE30839C1E1165B800F595F8 /* Archive.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE30839B1E1165B800F595F8 /* Archive.swift */; };
+		DE30839E1E1165D500F595F8 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE30839D1E1165D500F595F8 /* Recipe.swift */; };
 		DE35AD651E138A4D0032C4B5 /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE35AD641E138A4D0032C4B5 /* APIManager.swift */; };
 		DE35F2D81E13F67000117202 /* CategoryList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE35F2D71E13F67000117202 /* CategoryList.swift */; };
 		DE764FBB1E168D4B0092E612 /* Add.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE764FBA1E168D4B0092E612 /* Add.storyboard */; };
@@ -82,8 +82,8 @@
 		DE291DE31E16FA49008BFB30 /* WebColoerLists.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebColoerLists.swift; sourceTree = "<group>"; };
 		DE291DE51E16FCF3008BFB30 /* ColorConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorConverter.swift; sourceTree = "<group>"; };
 		DE291DE71E1702EC008BFB30 /* DateConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateConverter.swift; sourceTree = "<group>"; };
-		DE30839B1E1165B800F595F8 /* BaseData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseData.swift; sourceTree = "<group>"; };
-		DE30839D1E1165D500F595F8 /* RecipeData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeData.swift; sourceTree = "<group>"; };
+		DE30839B1E1165B800F595F8 /* Archive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Archive.swift; sourceTree = "<group>"; };
+		DE30839D1E1165D500F595F8 /* Recipe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
 		DE35AD641E138A4D0032C4B5 /* APIManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		DE35F2D71E13F67000117202 /* CategoryList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryList.swift; sourceTree = "<group>"; };
 		DE764FBA1E168D4B0092E612 /* Add.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Add.storyboard; sourceTree = "<group>"; };
@@ -215,8 +215,8 @@
 		DE30839A1E11649D00F595F8 /* Realm */ = {
 			isa = PBXGroup;
 			children = (
-				DE30839B1E1165B800F595F8 /* BaseData.swift */,
-				DE30839D1E1165D500F595F8 /* RecipeData.swift */,
+				DE30839B1E1165B800F595F8 /* Archive.swift */,
+				DE30839D1E1165D500F595F8 /* Recipe.swift */,
 			);
 			name = Realm;
 			sourceTree = "<group>";
@@ -515,8 +515,8 @@
 				DEFF33331E0ADDE000D7F0BF /* CommonSetting.swift in Sources */,
 				DE35F2D81E13F67000117202 /* CategoryList.swift in Sources */,
 				DE291DE41E16FA49008BFB30 /* WebColoerLists.swift in Sources */,
-				DE30839C1E1165B800F595F8 /* BaseData.swift in Sources */,
-				DE30839E1E1165D500F595F8 /* RecipeData.swift in Sources */,
+				DE30839C1E1165B800F595F8 /* Archive.swift in Sources */,
+				DE30839E1E1165D500F595F8 /* Recipe.swift in Sources */,
 				DE764FBD1E16BE030092E612 /* AddController.swift in Sources */,
 				DE291DE81E1702EC008BFB30 /* DateConverter.swift in Sources */,
 				DEE21AFD1DF6E34300ED28B5 /* MakeReciptController.swift in Sources */,

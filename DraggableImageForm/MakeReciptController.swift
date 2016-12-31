@@ -121,6 +121,12 @@ class MakeReciptController: UIViewController, UINavigationControllerDelegate, UI
         //配置したUIパーツに対するターゲットや初期設定
         initDefaultUiSetting()
         initTargetMessageSetting()
+        
+        
+        let aaa = Archive.fetchAllCalorieListSortByDate()
+        print(aaa)
+        let bbb = Recipe.fetchAllCalorieList()
+        print(bbb)
     }
 
     override func didReceiveMemoryWarning() {
