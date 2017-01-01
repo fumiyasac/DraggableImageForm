@@ -326,7 +326,7 @@
         <!--Archive Recipt Controller-->
         <scene sceneID="hew-xP-SxY">
             <objects>
-                <viewController id="hg2-zF-pns" customClass="ArchiveReciptController" customModule="DraggableImageForm" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="hg2-zF-pns" customClass="ArchiveReciptController" customModule="DraggableImageForm" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Egx-Ce-zCA"/>
                         <viewControllerLayoutGuide type="bottom" id="sAq-SD-gZR"/>
@@ -334,38 +334,24 @@
                     <view key="view" contentMode="scaleToFill" id="4wQ-Dv-EQY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7ih-CF-p4i">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="7ih-CF-p4i" firstAttribute="leading" secondItem="4wQ-Dv-EQY" secondAttribute="leading" id="9RM-fd-xck"/>
+                            <constraint firstItem="7ih-CF-p4i" firstAttribute="top" secondItem="Egx-Ce-zCA" secondAttribute="bottom" id="Q8u-n3-dne"/>
+                            <constraint firstAttribute="trailing" secondItem="7ih-CF-p4i" secondAttribute="trailing" id="SPu-Vn-BKx"/>
+                            <constraint firstItem="sAq-SD-gZR" firstAttribute="top" secondItem="7ih-CF-p4i" secondAttribute="bottom" id="kk9-46-7MJ"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="chW-XU-O6L" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2367" y="-165"/>
-        </scene>
-        <!--Page View Controller-->
-        <scene sceneID="U5d-l9-gx1">
-            <objects>
-                <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="pageCurl" navigationOrientation="horizontal" spineLocation="min" id="UNh-B4-tmr" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="YQu-DI-FSK" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3834" y="-165"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="Tfz-81-kEF">
-            <objects>
-                <viewController id="7kq-uJ-OKE" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="KCC-iP-Ata"/>
-                        <viewControllerLayoutGuide type="bottom" id="XV3-dU-ckm"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="JRY-fb-NSj">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="f0B-u0-TRs" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3097" y="-165"/>
+            <point key="canvasLocation" x="2365.5999999999999" y="-165.06746626686657"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="msj-Pd-oEj">
