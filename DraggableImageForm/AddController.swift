@@ -208,13 +208,26 @@ class AddController: UIViewController, UITableViewDelegate, UITableViewDataSourc
         closeButton.isEnabled = false
         saveButton.isEnabled = false
 
-        //Realmにデータを保存する処理(もうちょっと綺麗にリファクタする)
+        //Realmにデータを保存してポップアップを閉じる
+        saveArchiveData()
+        removeAnimatePopup()
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+    }
+
+    /* (fileprivate functions) */
+
+    //Realmへの保存処理を行う(Archive:1件・Recipe:n件)
+    fileprivate func saveArchiveData() {
+        
         let archiveObject = Archive.create()
         let archive_id = Archive.getLastId()
         archiveObject.memo = memoTextField.text!
         archiveObject.created = DateConverter.convertStringToDate(dateTextField.text)
         archiveObject.save()
-
+        
         for targetData in targetSelectedDataList {
             let recipeObject = Recipe.create()
             recipeObject.archive_id = archive_id
@@ -226,15 +239,8 @@ class AddController: UIViewController, UITableViewDelegate, UITableViewDataSourc
             recipeObject.rakuten_url = targetData.url
             recipeObject.save()
         }
-        removeAnimatePopup()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
-
-    /* (fileprivate functions) */
-
+    
     //UI表示の初期化を行う
     fileprivate func initDefaultUiSetting() {
         
