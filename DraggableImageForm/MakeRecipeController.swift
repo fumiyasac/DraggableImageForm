@@ -96,8 +96,8 @@ class MakeRecipeController: UIViewController, UINavigationControllerDelegate, UI
 
     //メニューボタンの属性値
     let attrsButton = [
-        NSForegroundColorAttributeName : UIColor.gray,
-        NSFontAttributeName : UIFont(name: "Georgia", size: 14)!
+        NSForegroundColorAttributeName : UIColor.white,
+        NSFontAttributeName : UIFont(name: "Georgia", size: 12)!
     ]
 
     override func viewDidLoad() {
@@ -110,11 +110,11 @@ class MakeRecipeController: UIViewController, UINavigationControllerDelegate, UI
         //NavigationControllerに関する設定（タイトル・左右メニュー）
         navigationItem.title = "直感レシピ"
 
-        let leftMenuButton = UIBarButtonItem(title: "Menu", style: .plain, target: self, action: #selector(MakeRecipeController.reloadButtonTapped(button:)))
+        let leftMenuButton = UIBarButtonItem(title: "メニュー", style: .plain, target: self, action: #selector(MakeRecipeController.reloadButtonTapped(button:)))
         leftMenuButton.setTitleTextAttributes(attrsButton, for: .normal)
         navigationItem.leftBarButtonItem = leftMenuButton
 
-        let rightMenuButton = UIBarButtonItem(title: "Archive", style: .plain, target: self, action: #selector(MakeRecipeController.archiveButtonTapped(button:)))
+        let rightMenuButton = UIBarButtonItem(title: "アーカイブ", style: .plain, target: self, action: #selector(MakeRecipeController.archiveButtonTapped(button:)))
         rightMenuButton.setTitleTextAttributes(attrsButton, for: .normal)
         navigationItem.rightBarButtonItem = rightMenuButton
 

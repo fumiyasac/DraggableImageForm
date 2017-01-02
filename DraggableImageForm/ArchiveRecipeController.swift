@@ -43,7 +43,50 @@ class ArchiveRecipeController: UIViewController, UITableViewDelegate, UITableVie
     internal func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return archiveList.count
     }
-    
+
+    //セルを表示しようとする時の動作を設定する
+    /**
+     * willDisplay(UITableViewDelegateのメソッド)に関して
+     *
+     * 参考: Cocoa API解説(macOS/iOS) tableView:willDisplayCell:forRowAtIndexPath:
+     * https://goo.gl/Ykp30Q
+     */
+    internal func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        
+        /**
+         * CoreAnimationを利用したアニメーションをセルの表示時に付与する（拡大とアルファの重ねがけ）
+         *
+         * 参考:【iOS Swift入門 #185】Core Animationでアニメーションの加速・減速をする
+         * http://swift-studying.com/blog/swift/?p=1162
+         */
+        
+        //アニメーションの作成
+        let groupAnimation = CAAnimationGroup()
+        groupAnimation.fillMode = kCAFillModeBackwards
+        groupAnimation.duration = 0.28
+        groupAnimation.beginTime = CACurrentMediaTime() + 0.16
+        groupAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseIn)
+        
+        //拡大するアニメーション
+        let scaleAnimation = CABasicAnimation(keyPath: "transform.scale")
+        scaleAnimation.fromValue = 0.64
+        scaleAnimation.toValue = 1.0
+        
+        //透過を変更するアニメーション
+        let opacityAnimation = CABasicAnimation(keyPath: "opacity")
+        opacityAnimation.fromValue = 0.0
+        opacityAnimation.toValue = 1.0
+        
+        //作成した個別のアニメーションをグループ化
+        groupAnimation.animations = [scaleAnimation, opacityAnimation]
+        
+        //セルのLayerにアニメーションを追加
+        cell.layer.add(groupAnimation, forKey: nil)
+        
+        //アニメーション終了後は元のサイズになるようにする
+        cell.layer.transform = CATransform3DIdentity
+    }
+
     /* (UITableViewDataSource) */
     
     //表示するセルの中身を設定する
@@ -66,7 +109,7 @@ class ArchiveRecipeController: UIViewController, UITableViewDelegate, UITableVie
 
             //レシピギャラリー一覧ページを表示する
             cell?.showGalleryClosure = {
-                print("showGalleryClosure! indexPath:\(indexPath.row)")
+                //TODO: ポップアップ同様の遷移を行う
             }
 
             //データ表示用のUIAlertControllerを表示する
@@ -83,13 +126,13 @@ class ArchiveRecipeController: UIViewController, UITableViewDelegate, UITableVie
                         title: "OK",
                         style: UIAlertActionStyle.default,
                         handler: { (action: UIAlertAction!) in
-                            
+
                             //Realmから該当データを1件削除する処理
                             for recipe in recipes {
                                 recipe.delete()
                             }
                             archiveData.delete()
-                            
+
                             //登録されているデータの再セットを行う
                             self.archiveList = Archive.fetchAllCalorieListSortByDate()
                     })
