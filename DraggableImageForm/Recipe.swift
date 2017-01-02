@@ -66,6 +66,13 @@ class Recipe: Object {
         }
     }
 
+    //インスタンス削除用メソッド
+    func delete() {
+        try! Recipe.realm.write {
+            Recipe.realm.delete(self)
+        }
+    }
+
     //アーカイブIDに紐づくデータを全件取得をする
     static func fetchAllRecipeListByArchiveId(archive_id: Int) -> [Recipe] {
         let recipes = realm.objects(Recipe.self).filter("archive_id = %@", archive_id).sorted(byProperty: "id", ascending: true)

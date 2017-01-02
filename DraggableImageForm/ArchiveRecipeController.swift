@@ -56,24 +56,57 @@ class ArchiveRecipeController: UIViewController, UITableViewDelegate, UITableVie
         if !archiveList.isEmpty {
 
             //該当のArchiveデータとそれに紐づくRecipeデータを取得
-            let targetData = archiveList[indexPath.row]
-            let recipes: [Recipe] = Recipe.fetchAllRecipeListByArchiveId(archive_id: targetData.id)
-            
-            var recipeImageUrlList: [String] = []
-            for (_, recipe) in recipes.enumerated() {
-                recipeImageUrlList.append(recipe.rakuten_image)
-            }
-            
+            let archiveData = archiveList[indexPath.row]
+            let recipes: [Recipe] = Recipe.fetchAllRecipeListByArchiveId(archive_id: archiveData.id)
+
             //1枚目の画像を見せておくようにする
-            let url = URL(string: recipeImageUrlList.first!)
+            let url = URL(string: (recipes.first?.rakuten_image)!)
             cell?.archiveImageView.kf.indicatorType = .activity
             cell?.archiveImageView.kf.setImage(with: url)
-            
-            //TODO: クロージャーの処理の中身を記載する
 
+            //レシピギャラリー一覧ページを表示する
+            cell?.showGalleryClosure = {
+                print("showGalleryClosure! indexPath:\(indexPath.row)")
+            }
+
+            //データ表示用のUIAlertControllerを表示する
+            cell?.deleteArchiveClosure = {
+
+                //データ削除の確認用ポップアップを表示する
+                let deleteAlert = UIAlertController(
+                    title: "データ削除",
+                    message: "このデータを削除しますか？(削除をする場合にはこのデータに紐づくレシピデータも一緒に削除されます。)",
+                    preferredStyle: UIAlertControllerStyle.alert
+                )
+                deleteAlert.addAction(
+                    UIAlertAction(
+                        title: "OK",
+                        style: UIAlertActionStyle.default,
+                        handler: { (action: UIAlertAction!) in
+                            
+                            //Realmから該当データを1件削除する処理
+                            for recipe in recipes {
+                                recipe.delete()
+                            }
+                            archiveData.delete()
+                            
+                            //登録されているデータの再セットを行う
+                            self.archiveList = Archive.fetchAllCalorieListSortByDate()
+                    })
+                )
+                deleteAlert.addAction(
+                    UIAlertAction(
+                        title: "キャンセル",
+                        style: UIAlertActionStyle.cancel,
+                        handler: nil
+                    )
+                )                
+                self.present(deleteAlert, animated: true, completion: nil)
+            }
+            
             //アーカイブデータを取得する
-            cell?.archiveDate.text = DateConverter.convertDateToString(targetData.created)
-            cell?.archiveMemo.text = targetData.memo
+            cell?.archiveDate.text = DateConverter.convertDateToString(archiveData.created)
+            cell?.archiveMemo.text = archiveData.memo
         }
 
         cell?.accessoryType = UITableViewCellAccessoryType.none

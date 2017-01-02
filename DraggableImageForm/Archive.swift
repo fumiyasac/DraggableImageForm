@@ -50,7 +50,14 @@ class Archive: Object {
             Archive.realm.add(self)
         }
     }
-    
+
+    //インスタンス削除用メソッド
+    func delete() {
+        try! Archive.realm.write {
+            Archive.realm.delete(self)
+        }
+    }
+
     //登録日順のデータの全件取得をする
     static func fetchAllCalorieListSortByDate() -> [Archive] {
         let archives = realm.objects(Archive.self).sorted(byProperty: "created", ascending: false)

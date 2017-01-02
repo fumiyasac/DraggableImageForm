@@ -25,14 +25,14 @@ class ArchiveCell: UITableViewCell {
 
     /* (Button Actions) */
 
+    //「レシピ一覧へ」ボタン押下時のアクション
     @IBAction func showRecipeGalleryAction(_ sender: UIButton) {
-
-        //TODO: ボタンアクションの設定
+        showGalleryClosure!()
     }
 
+    //「削除する」ボタン押下時のアクション
     @IBAction func deleteRecipeAction(_ sender: UIButton) {
-
-        //TODO: ボタンアクションの設定
+        deleteArchiveClosure!()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
