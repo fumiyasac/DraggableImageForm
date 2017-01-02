@@ -7,11 +7,17 @@
 //
 
 import UIKit
+import Kingfisher
 
 class ArchiveCell: UITableViewCell {
 
-    //TODO: ArchiveRecipeController.swiftへ処理内容を引き渡すためのクロージャーを設定
+    //ArchiveRecipeController.swiftへ処理内容を引き渡すためのクロージャーを設定
+    var showGalleryClosure: (() -> ())?
+    var deleteArchiveClosure: (() -> ())?
 
+    //セルに表示する画像URLのリスト
+    var imageUrlList: [String] = []
+    
     //UIパーツの配置
     @IBOutlet weak var archiveImageView: UIImageView!
     @IBOutlet weak var archiveDate: UILabel!
@@ -22,13 +28,20 @@ class ArchiveCell: UITableViewCell {
     }
 
     /* (Button Actions) */
+
     @IBAction func showRecipeGalleryAction(_ sender: UIButton) {
-            //TODO: ボタンアクションの設定
+
+        //TODO: ボタンアクションの設定
     }
 
     @IBAction func deleteRecipeAction(_ sender: UIButton) {
-            //TODO: ボタンアクションの設定
+
+        //TODO: ボタンアクションの設定
     }
+
+    /* (Functions) */
+
+    
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

@@ -32,8 +32,8 @@
 		DE35F2D81E13F67000117202 /* CategoryList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE35F2D71E13F67000117202 /* CategoryList.swift */; };
 		DE764FBB1E168D4B0092E612 /* Add.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE764FBA1E168D4B0092E612 /* Add.storyboard */; };
 		DE764FBD1E16BE030092E612 /* AddController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE764FBC1E16BE030092E612 /* AddController.swift */; };
-		DEE21AFD1DF6E34300ED28B5 /* MakeReciptController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEE21AFC1DF6E34300ED28B5 /* MakeReciptController.swift */; };
-		DEE21AFF1DF6E36900ED28B5 /* ArchiveReciptController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEE21AFE1DF6E36900ED28B5 /* ArchiveReciptController.swift */; };
+		DEE21AFD1DF6E34300ED28B5 /* MakeRecipeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEE21AFC1DF6E34300ED28B5 /* MakeRecipeController.swift */; };
+		DEE21AFF1DF6E36900ED28B5 /* ArchiveRecipeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEE21AFE1DF6E36900ED28B5 /* ArchiveRecipeController.swift */; };
 		DEFF332F1E0ADB6A00D7F0BF /* CalculateCalendarLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEFF332E1E0ADB6A00D7F0BF /* CalculateCalendarLogic.swift */; };
 		DEFF33331E0ADDE000D7F0BF /* CommonSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEFF33321E0ADDE000D7F0BF /* CommonSetting.swift */; };
 		DEFF33351E0AED1600D7F0BF /* RecipeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEFF33341E0AED1500D7F0BF /* RecipeCell.swift */; };
@@ -90,8 +90,8 @@
 		DE35F2D71E13F67000117202 /* CategoryList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryList.swift; sourceTree = "<group>"; };
 		DE764FBA1E168D4B0092E612 /* Add.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Add.storyboard; sourceTree = "<group>"; };
 		DE764FBC1E16BE030092E612 /* AddController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddController.swift; sourceTree = "<group>"; };
-		DEE21AFC1DF6E34300ED28B5 /* MakeReciptController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MakeReciptController.swift; sourceTree = "<group>"; };
-		DEE21AFE1DF6E36900ED28B5 /* ArchiveReciptController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArchiveReciptController.swift; sourceTree = "<group>"; };
+		DEE21AFC1DF6E34300ED28B5 /* MakeRecipeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MakeRecipeController.swift; sourceTree = "<group>"; };
+		DEE21AFE1DF6E36900ED28B5 /* ArchiveRecipeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArchiveRecipeController.swift; sourceTree = "<group>"; };
 		DEFF332E1E0ADB6A00D7F0BF /* CalculateCalendarLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculateCalendarLogic.swift; sourceTree = "<group>"; };
 		DEFF33321E0ADDE000D7F0BF /* CommonSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonSetting.swift; sourceTree = "<group>"; };
 		DEFF33341E0AED1500D7F0BF /* RecipeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeCell.swift; sourceTree = "<group>"; };
@@ -172,7 +172,6 @@
 				DE3D96151DF2CB96002C6965 /* Components */,
 				DE3D96141DF2CB7A002C6965 /* Storyboard */,
 				DE3D96111DF2C8B1002C6965 /* ViewController */,
-				DE3D96101DF2C42F002C6965 /* Classes */,
 				DE11B53B1DF1BE5700EE9E75 /* AppDelegate.swift */,
 				DE11B5421DF1BE5700EE9E75 /* Assets.xcassets */,
 				DE11B5441DF1BE5700EE9E75 /* LaunchScreen.storyboard */,
@@ -221,21 +220,12 @@
 			name = Realm;
 			sourceTree = "<group>";
 		};
-		DE3D96101DF2C42F002C6965 /* Classes */ = {
-			isa = PBXGroup;
-			children = (
-				DE3D96181DF2CBDE002C6965 /* Draggable */,
-				DE3D96171DF2CBCF002C6965 /* Transitions */,
-			);
-			name = Classes;
-			sourceTree = "<group>";
-		};
 		DE3D96111DF2C8B1002C6965 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
 				DE11B53D1DF1BE5700EE9E75 /* ViewController.swift */,
-				DEE21AFC1DF6E34300ED28B5 /* MakeReciptController.swift */,
-				DEE21AFE1DF6E36900ED28B5 /* ArchiveReciptController.swift */,
+				DEE21AFC1DF6E34300ED28B5 /* MakeRecipeController.swift */,
+				DEE21AFE1DF6E36900ED28B5 /* ArchiveRecipeController.swift */,
 				DE0F466B1DF85A1700145416 /* GalleryController.swift */,
 				DE764FBC1E16BE030092E612 /* AddController.swift */,
 			);
@@ -270,20 +260,6 @@
 				DE2CD32D1E1978A70098B06C /* ArchiveCell.xib */,
 			);
 			name = TableViewCell;
-			sourceTree = "<group>";
-		};
-		DE3D96171DF2CBCF002C6965 /* Transitions */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Transitions;
-			sourceTree = "<group>";
-		};
-		DE3D96181DF2CBDE002C6965 /* Draggable */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Draggable;
 			sourceTree = "<group>";
 		};
 		DEE21B021DF6E7C200ED28B5 /* Libs */ = {
@@ -518,11 +494,11 @@
 				DE30839E1E1165D500F595F8 /* Recipe.swift in Sources */,
 				DE764FBD1E16BE030092E612 /* AddController.swift in Sources */,
 				DE291DE81E1702EC008BFB30 /* DateConverter.swift in Sources */,
-				DEE21AFD1DF6E34300ED28B5 /* MakeReciptController.swift in Sources */,
+				DEE21AFD1DF6E34300ED28B5 /* MakeRecipeController.swift in Sources */,
 				DE291DE61E16FCF3008BFB30 /* ColorConverter.swift in Sources */,
 				DE0F466C1DF85A1700145416 /* GalleryController.swift in Sources */,
 				DE35AD651E138A4D0032C4B5 /* APIManager.swift in Sources */,
-				DEE21AFF1DF6E36900ED28B5 /* ArchiveReciptController.swift in Sources */,
+				DEE21AFF1DF6E36900ED28B5 /* ArchiveRecipeController.swift in Sources */,
 				DEFF33351E0AED1600D7F0BF /* RecipeCell.swift in Sources */,
 				DE11B53E1DF1BE5700EE9E75 /* ViewController.swift in Sources */,
 				DEFF332F1E0ADB6A00D7F0BF /* CalculateCalendarLogic.swift in Sources */,

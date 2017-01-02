@@ -190,6 +190,8 @@ class AddController: UIViewController, UITableViewDelegate, UITableViewDataSourc
     func keyboardWillHide(notification: Notification) {
         movePopupPosition(notification: notification, showKeyboard: false)
     }
+
+    /* (Button Actions) */
     
     //ポップアップを閉じる時のアクション
     @IBAction func closePopupAction(_ sender: UIButton) {

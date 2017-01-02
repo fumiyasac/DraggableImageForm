@@ -1,5 +1,5 @@
 //
-//  MakeReciptController.swift
+//  MakeRecipeController.swift
 //  DraggableImageForm
 //
 //  Created by 酒井文也 on 2016/12/06.
@@ -61,7 +61,7 @@ struct MessageSetting {
     }
 }
 
-class MakeReciptController: UIViewController, UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class MakeRecipeController: UIViewController, UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
     //ドラッグ可能なイメージビュー
     var draggableImageView: UIImageView!
@@ -110,11 +110,11 @@ class MakeReciptController: UIViewController, UINavigationControllerDelegate, UI
         //NavigationControllerに関する設定（タイトル・左右メニュー）
         navigationItem.title = "直感レシピ"
 
-        let leftMenuButton = UIBarButtonItem(title: "Menu", style: .plain, target: self, action: #selector(MakeReciptController.reloadButtonTapped(button:)))
+        let leftMenuButton = UIBarButtonItem(title: "Menu", style: .plain, target: self, action: #selector(MakeRecipeController.reloadButtonTapped(button:)))
         leftMenuButton.setTitleTextAttributes(attrsButton, for: .normal)
         navigationItem.leftBarButtonItem = leftMenuButton
 
-        let rightMenuButton = UIBarButtonItem(title: "Archive", style: .plain, target: self, action: #selector(MakeReciptController.archiveButtonTapped(button:)))
+        let rightMenuButton = UIBarButtonItem(title: "Archive", style: .plain, target: self, action: #selector(MakeRecipeController.archiveButtonTapped(button:)))
         rightMenuButton.setTitleTextAttributes(attrsButton, for: .normal)
         navigationItem.rightBarButtonItem = rightMenuButton
 
@@ -166,7 +166,7 @@ class MakeReciptController: UIViewController, UINavigationControllerDelegate, UI
 
                 //装飾とターゲットの決定
                 targetButtonList[i].layer.cornerRadius = CGFloat(CalenderSetting.buttonRadius)
-                targetButtonList[i].addTarget(self, action: #selector(MakeReciptController.calendarButtonTapped(button:)), for: .touchUpInside)
+                targetButtonList[i].addTarget(self, action: #selector(MakeRecipeController.calendarButtonTapped(button:)), for: .touchUpInside)
             }
             
             //一度だけ実行するフラグを有効化
@@ -174,7 +174,7 @@ class MakeReciptController: UIViewController, UINavigationControllerDelegate, UI
         }
     }
     
-    /* (Instance Methods) */
+    /* (Functions) */
 
     //カレンダーのボタンを押した時のアクション
     func calendarButtonTapped(button: UIButton) {
@@ -217,7 +217,11 @@ class MakeReciptController: UIViewController, UINavigationControllerDelegate, UI
 
     //Archiveボタンを押した時のアクション
     func archiveButtonTapped(button: UIButton) {
-        print("Archive button tapped.")
+
+        //ボタンがタップがされた場合はアーカイブ表示を行う
+        let toVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ArchiveRecipeController") as! ArchiveRecipeController
+        //toVC.targetImageList = imageList
+        navigationController?.pushViewController(toVC, animated: true)
     }
 
     //セルを長押しした際(UILongPressGestureRecognizerで実行された際)に発動する処理
@@ -382,7 +386,7 @@ class MakeReciptController: UIViewController, UINavigationControllerDelegate, UI
         cell.tag = indexPath.row
         
         //LongTapGestureRecognizerの定義を行う
-        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(MakeReciptController.longPressCell(sender:)))
+        let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(MakeRecipeController.longPressCell(sender:)))
         
         //イベント発生までのタップ時間：0.24秒
         longPressGesture.minimumPressDuration = 0.24
@@ -423,7 +427,7 @@ class MakeReciptController: UIViewController, UINavigationControllerDelegate, UI
         return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
     
-    /* (Fileprivate functions) */
+    /* (Fileprivate Functions) */
 
     //Alamofireでの楽天レシピAPIからランキング上位のレシピ情報をカテゴリー
     fileprivate func loadApiData(categoryId: String) {
@@ -492,13 +496,13 @@ class MakeReciptController: UIViewController, UINavigationControllerDelegate, UI
     fileprivate func initDefaultUiSetting() {
 
         //UIパーツの表示時の設定をここに記載する
-        dragAreaButton.addTarget(self, action: #selector(MakeReciptController.handleButtonTapped(button:)), for: .touchUpInside)
+        dragAreaButton.addTarget(self, action: #selector(MakeRecipeController.handleButtonTapped(button:)), for: .touchUpInside)
 
         //ボタンに関するターゲットの設定を行う
-        reloadDataButton.addTarget(self, action: #selector(MakeReciptController.reloadButtonTapped(button:)), for: .touchUpInside)
+        reloadDataButton.addTarget(self, action: #selector(MakeRecipeController.reloadButtonTapped(button:)), for: .touchUpInside)
         reloadDataButton.layer.cornerRadius = CGFloat(reloadDataButton.frame.width / 2)
         
-        resetDataButton.addTarget(self, action: #selector(MakeReciptController.resetButtonTapped(button:)), for: .touchUpInside)
+        resetDataButton.addTarget(self, action: #selector(MakeRecipeController.resetButtonTapped(button:)), for: .touchUpInside)
         resetDataButton.layer.cornerRadius = CGFloat(resetDataButton.frame.width / 2)
     }
     

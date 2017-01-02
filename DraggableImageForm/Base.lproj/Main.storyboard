@@ -74,10 +74,10 @@
             </objects>
             <point key="canvasLocation" x="870" y="-165"/>
         </scene>
-        <!--Make Recipt Controller-->
+        <!--Make Recipe Controller-->
         <scene sceneID="wA6-O4-GVn">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="2UQ-zL-udG" customClass="MakeReciptController" customModule="DraggableImageForm" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="2UQ-zL-udG" customClass="MakeRecipeController" customModule="DraggableImageForm" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="BQJ-bY-Gs9"/>
                         <viewControllerLayoutGuide type="bottom" id="pcK-M9-a8y"/>
@@ -316,17 +316,16 @@
                         <outlet property="selectDataDisplayArea" destination="d08-sy-JBL" id="0i0-Wh-Eeh"/>
                         <outlet property="selectedDayLabel" destination="JH2-9q-Nkm" id="tQx-Y0-lvO"/>
                         <outlet property="selectedRecipeCountLabel" destination="vXG-zc-yF4" id="Bfz-9H-m4W"/>
-                        <segue destination="hg2-zF-pns" kind="show" id="8ed-Aj-ldV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fu0-bw-eWE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1637.5999999999999" y="-165.06746626686657"/>
         </scene>
-        <!--Archive Recipt Controller-->
+        <!--Archive Recipe Controller-->
         <scene sceneID="hew-xP-SxY">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="hg2-zF-pns" customClass="ArchiveReciptController" customModule="DraggableImageForm" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ArchiveRecipeController" automaticallyAdjustsScrollViewInsets="NO" id="hg2-zF-pns" customClass="ArchiveRecipeController" customModule="DraggableImageForm" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Egx-Ce-zCA"/>
                         <viewControllerLayoutGuide type="bottom" id="sAq-SD-gZR"/>
@@ -336,7 +335,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7ih-CF-p4i">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                         </subviews>
@@ -348,6 +347,9 @@
                             <constraint firstItem="sAq-SD-gZR" firstAttribute="top" secondItem="7ih-CF-p4i" secondAttribute="bottom" id="kk9-46-7MJ"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="archiveRecipeTableView" destination="7ih-CF-p4i" id="qwo-cY-zLb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="chW-XU-O6L" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
