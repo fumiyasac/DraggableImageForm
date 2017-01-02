@@ -66,9 +66,9 @@ class Recipe: Object {
         }
     }
 
-    //登録日順のデータの全件取得をする
-    static func fetchAllCalorieList() -> [Recipe] {
-        let recipes = realm.objects(Recipe.self)
+    //アーカイブIDに紐づくデータを全件取得をする
+    static func fetchAllRecipeListByArchiveId(archive_id: Int) -> [Recipe] {
+        let recipes = realm.objects(Recipe.self).filter("archive_id = %@", archive_id).sorted(byProperty: "id", ascending: true)
         var recipeList: [Recipe] = []
         for recipe in recipes {
             recipeList.append(recipe)

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Kingfisher
 
 class ArchiveCell: UITableViewCell {
 
@@ -15,9 +14,6 @@ class ArchiveCell: UITableViewCell {
     var showGalleryClosure: (() -> ())?
     var deleteArchiveClosure: (() -> ())?
 
-    //セルに表示する画像URLのリスト
-    var imageUrlList: [String] = []
-    
     //UIパーツの配置
     @IBOutlet weak var archiveImageView: UIImageView!
     @IBOutlet weak var archiveDate: UILabel!
@@ -38,10 +34,6 @@ class ArchiveCell: UITableViewCell {
 
         //TODO: ボタンアクションの設定
     }
-
-    /* (Functions) */
-
-    
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

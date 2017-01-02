@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class ArchiveRecipeController: UIViewController, UITableViewDelegate, UITableViewDataSource, UINavigationControllerDelegate {
 
@@ -31,14 +32,16 @@ class ArchiveRecipeController: UIViewController, UITableViewDelegate, UITableVie
         //Xibのセットアップ
         let nibTableView: UINib = UINib(nibName: "ArchiveCell", bundle: nil)
         archiveRecipeTableView.register(nibTableView, forCellReuseIdentifier: "ArchiveCell")
+
+        //アーカイブしたレシピデータを取得する
+        archiveList = Archive.fetchAllCalorieListSortByDate()
     }
 
     /* (UITableViewDelegate) */
     
     //テーブルのセクションのセル数を設定する
     internal func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
-        //return archiveList.count
+        return archiveList.count
     }
     
     /* (UITableViewDataSource) */
@@ -48,16 +51,31 @@ class ArchiveRecipeController: UIViewController, UITableViewDelegate, UITableVie
         
         //Xibファイルを元にデータを作成する
         let cell = tableView.dequeueReusableCell(withIdentifier: "ArchiveCell") as? ArchiveCell
-        
-        //仮のデータを設計してセルに表示させる
-        /*
-        cell?.restaurantName.text = "Mexican Dinning"
-        cell?.restaurantThumbnail.image = UIImage(named: "sample")
-        cell?.restaurantOpen.text = "11:30 ~ 23:00"
-        cell?.restaurantLunchTime.text = "Lunch 11:30 ~ 14:00"
-        cell?.restaurantDetail.text = "このお店はタコスが絶品です。本場のタコスとテキーラで仕事帰りやランチタイムで最高の気分を味わって見ましょう！"
-        */
-        
+
+        //アーカイブデータが空でなければセルにレシピデータを表示する
+        if !archiveList.isEmpty {
+
+            //該当のArchiveデータとそれに紐づくRecipeデータを取得
+            let targetData = archiveList[indexPath.row]
+            let recipes: [Recipe] = Recipe.fetchAllRecipeListByArchiveId(archive_id: targetData.id)
+            
+            var recipeImageUrlList: [String] = []
+            for (_, recipe) in recipes.enumerated() {
+                recipeImageUrlList.append(recipe.rakuten_image)
+            }
+            
+            //1枚目の画像を見せておくようにする
+            let url = URL(string: recipeImageUrlList.first!)
+            cell?.archiveImageView.kf.indicatorType = .activity
+            cell?.archiveImageView.kf.setImage(with: url)
+            
+            //TODO: クロージャーの処理の中身を記載する
+
+            //アーカイブデータを取得する
+            cell?.archiveDate.text = DateConverter.convertDateToString(targetData.created)
+            cell?.archiveMemo.text = targetData.memo
+        }
+
         cell?.accessoryType = UITableViewCellAccessoryType.none
         cell?.selectionStyle = UITableViewCellSelectionStyle.none
         return cell!

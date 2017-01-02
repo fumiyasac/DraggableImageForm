@@ -15,7 +15,7 @@ class Archive: Object {
     static let realm = try! Realm()
     
     //id
-    dynamic fileprivate var id = 0
+    dynamic var id = 0
     
     //メモ
     dynamic var memo = ""

@@ -18,12 +18,12 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="z3B-yt-rh5">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="z3B-yt-rh5">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="199"/>
                     </imageView>
-                    <view alpha="0.45000000000000001" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uje-Dh-e5K">
+                    <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uje-Dh-e5K">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="199"/>
-                        <color key="backgroundColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2017/01/07" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5C3-aC-3Sc">
                         <rect key="frame" x="22" y="38" width="270" height="18"/>
@@ -34,7 +34,7 @@
                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="レシピの登録日：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UoN-tX-Q5w">
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="レシピの選択日：" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UoN-tX-Q5w">
                         <rect key="frame" x="15" y="15" width="290" height="18"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="18" id="CF8-3c-1yc"/>
@@ -60,7 +60,7 @@
                         </constraints>
                         <fontDescription key="fontDescription" type="boldSystem" pointSize="11"/>
                         <state key="normal" title="× 削除する">
-                            <color key="titleColor" red="0.80000000000000004" green="0.20000000000000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="titleColor" red="1" green="0.59999999999999998" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
                         </state>
                         <connections>
                             <action selector="deleteRecipeAction:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="5qt-rO-0p2"/>

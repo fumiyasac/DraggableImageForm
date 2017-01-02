@@ -220,7 +220,6 @@ class MakeRecipeController: UIViewController, UINavigationControllerDelegate, UI
 
         //ボタンがタップがされた場合はアーカイブ表示を行う
         let toVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ArchiveRecipeController") as! ArchiveRecipeController
-        //toVC.targetImageList = imageList
         navigationController?.pushViewController(toVC, animated: true)
     }
 
