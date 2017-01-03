@@ -109,7 +109,19 @@ class ArchiveRecipeController: UIViewController, UITableViewDelegate, UITableVie
 
             //レシピギャラリー一覧ページを表示する
             cell?.showGalleryClosure = {
-                //TODO: ポップアップ同様の遷移を行う
+
+                //遷移元からポップアップ用のGalleryControllerのインスタンスを作成する
+                let galleryVC = UIStoryboard(name: "Gallery", bundle: nil).instantiateViewController(withIdentifier: "GalleryController") as! GalleryController
+                
+                //ポップアップ用のViewConrollerを設定し、modalPresentationStyle(= .overCurrentContext)と背景色(= UIColor.clear)を設定する
+                galleryVC.modalPresentationStyle = .overCurrentContext
+                galleryVC.view.backgroundColor = UIColor.clear
+                
+                //変数の受け渡しを行う
+                galleryVC.recipeData = recipes
+                
+                //ポップアップ用のViewControllerへ遷移
+                self.present(galleryVC, animated: false, completion: nil)
             }
 
             //データ表示用のUIAlertControllerを表示する

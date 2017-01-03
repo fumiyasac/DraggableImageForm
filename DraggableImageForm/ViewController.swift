@@ -96,7 +96,7 @@ class ViewController: UIViewController, MenuOpenDelegate, MenuCloseDelegate {
         if targetStatus == MenuStatus.opened {
             
             //メニューを表示状態にする
-            UIView.animate(withDuration: 0.24, delay: 0, options: .curveEaseOut, animations: {
+            UIView.animate(withDuration: 0.16, delay: 0, options: .curveEaseOut, animations: {
                 
                 self.mainMenuContainer.isUserInteractionEnabled = false
                 self.mainMenuContainer.frame = CGRect(
@@ -106,15 +106,12 @@ class ViewController: UIViewController, MenuOpenDelegate, MenuCloseDelegate {
                     height: self.mainMenuContainer.frame.height
                 )
 
-            }, completion: { finished in
-                self.mainMenuContainer.alpha = 0.64
-            })
+            }, completion: nil)
             
         } else {
             
             //メニューを非表示状態にする
-            self.mainMenuContainer.alpha = 1
-            UIView.animate(withDuration: 0.24, delay: 0, options: .curveEaseOut, animations: {
+            UIView.animate(withDuration: 0.16, delay: 0, options: .curveEaseOut, animations: {
                 
                 self.mainMenuContainer.isUserInteractionEnabled = true
                 self.mainMenuContainer.frame = CGRect(
