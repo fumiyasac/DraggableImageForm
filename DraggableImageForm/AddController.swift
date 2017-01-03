@@ -223,7 +223,8 @@ class AddController: UIViewController, UITableViewDelegate, UITableViewDataSourc
 
     //Realmへの保存処理を行う(Archive:1件・Recipe:n件)
     fileprivate func saveArchiveData() {
-        
+
+        //Realmへの登録処理
         let archiveObject = Archive.create()
         let archive_id = Archive.getLastId()
         archiveObject.memo = memoTextField.text!

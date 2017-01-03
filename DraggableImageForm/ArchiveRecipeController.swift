@@ -60,6 +60,7 @@ class ArchiveRecipeController: UIViewController, UITableViewDelegate, UITableVie
          * http://swift-studying.com/blog/swift/?p=1162
          */
         
+        /* ----- 2017/01/04:処理が表示にそぐわない気もしたのでコメントアウト -----
         //アニメーションの作成
         let groupAnimation = CAAnimationGroup()
         groupAnimation.fillMode = kCAFillModeBackwards
@@ -85,6 +86,7 @@ class ArchiveRecipeController: UIViewController, UITableViewDelegate, UITableVie
         
         //アニメーション終了後は元のサイズになるようにする
         cell.layer.transform = CATransform3DIdentity
+        */
     }
 
     /* (UITableViewDataSource) */

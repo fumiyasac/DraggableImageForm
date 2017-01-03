@@ -9,13 +9,28 @@
 import UIKit
 import Kingfisher
 
-class GalleryController: UIViewController, UIScrollViewDelegate {
+class GalleryController: UIViewController, UIScrollViewDelegate, UIViewControllerTransitioningDelegate {
+
+    //タップ時に選択したimageViewを格納するための変数
+    var selectedImage: UIImageView?
 
     //表示対象の画像URL一覧(サムネイルURL一覧)
-    var recipeData: [Recipe] = []
+    var recipeData: [Recipe] = [] {
+        didSet {
+
+            //アーカイブしたレシピ数を表示する
+            self.totalCount.text = "\(recipeData.count)/20 Recipes"
+        }
+    }
 
     //サムネイル表示用のscrollView
     @IBOutlet weak var thumbnailScrollView: UIScrollView!
+
+    //登録レシピ数を表示するラベル
+    @IBOutlet weak var totalCount: UILabel!
+    
+    //カスタムトランジション用クラスのインスタンス
+    let transition = CustomTransition()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,7 +54,7 @@ class GalleryController: UIViewController, UIScrollViewDelegate {
         initScrollViewDefinition()
 
         //画像サムネイルのサイズの設定
-        let imageWidth  = 240
+        let imageWidth  = Int(180.0 * (DeviceSize.screenWidth() / DeviceSize.screenHeight()))
         let imageHeight = 180
         let imageSpace  = 10
         
@@ -52,6 +67,7 @@ class GalleryController: UIViewController, UIScrollViewDelegate {
         //カレンダーのスクロールビュー内にボタンを配置する
         for i in 0...(recipeData.count - 1) {
 
+            //サムネイルを作成する
             let thumbnailImageView = UIImageView()
             let url = URL(string: (recipeData[i].rakuten_image))
             thumbnailImageView.kf.indicatorType = .activity
@@ -59,16 +75,18 @@ class GalleryController: UIViewController, UIScrollViewDelegate {
             thumbnailImageView.contentMode = .scaleAspectFill
             thumbnailImageView.clipsToBounds = true
 
-            //メニュー用のスクロールビューにボタンを配置
+            //メニュー用のスクロールビューにサムネイルを配置
             thumbnailScrollView.addSubview(thumbnailImageView)
 
-            //サイズ・中心位置の決定
+            //サムネイルのサイズ・中心位置を設定する
             thumbnailImageView.frame = CGRect(
                 x: (imageWidth + imageSpace) * i,
                 y: 0,
                 width: imageWidth,
                 height: imageHeight
             )
+
+            //サムネイルにタグ名とTapGestureを付与する
             thumbnailImageView.tag = i
             thumbnailImageView.isUserInteractionEnabled = true
             let tapGesture = UITapGestureRecognizer(target: self, action: #selector(GalleryController.expandThumbnail(sender:)))
@@ -76,10 +94,38 @@ class GalleryController: UIViewController, UIScrollViewDelegate {
         }
     }
 
+    //サムネイルを拡大表示するためのアクション
     func expandThumbnail(sender: UITapGestureRecognizer) {
-        print(sender.view?.tag)
+
+        //遷移対象をサムネイル画像とデータを設定する
+        selectedImage = sender.view as? UIImageView
+        let tagNumber = sender.view?.tag
+        let selectedRecipeData = recipeData[tagNumber!]
+
+        //カスタムトランジションを適用した画面遷移を行う
+        let garellyDetail = storyboard!.instantiateViewController(withIdentifier: "GalleryDetailController") as! GalleryDetailController
+        garellyDetail.recipe = selectedRecipeData
+        garellyDetail.transitioningDelegate = self
+        self.present(garellyDetail, animated: true, completion: nil)
     }
     
+    /* (UIViewControllerTransitioningDelegate) */
+
+    //進む場合のアニメーションの設定を行う
+    internal func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+
+        transition.originalFrame = selectedImage!.superview!.convert(selectedImage!.frame, to: nil)
+        transition.presenting = true
+        return transition
+    }
+    
+    //戻る場合のアニメーションの設定を行う
+    internal func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+
+        transition.presenting = false
+        return transition
+    }
+
     /* (Button Actions) */
     
     //ポップアップを閉じるアクション

@@ -39,6 +39,26 @@
                                     <action selector="closeGalleryAction:" destination="thq-cw-KBS" eventType="touchUpInside" id="HD1-Ys-6fG"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="登録レシピ一覧" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RT3-Qz-RX7">
+                                <rect key="frame" x="98" y="70" width="180" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="FJ0-c1-lVn"/>
+                                    <constraint firstAttribute="width" constant="180" id="Sdp-hI-bHY"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Mv-fr-lee">
+                                <rect key="frame" x="97.5" y="105" width="180" height="18"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="180" id="0yb-HY-iwY"/>
+                                    <constraint firstAttribute="height" constant="18" id="glt-qN-YYr"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="12"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kUd-yb-AaT">
                                 <rect key="frame" x="0.0" y="487" width="375" height="180"/>
                                 <constraints>
@@ -55,12 +75,17 @@
                             <constraint firstItem="6BR-OT-41M" firstAttribute="top" secondItem="qp8-oA-ddb" secondAttribute="bottom" constant="10" id="S5n-kq-yCv"/>
                             <constraint firstItem="lq0-8C-YVb" firstAttribute="top" secondItem="tpC-ch-QVJ" secondAttribute="top" id="dJx-IX-j87"/>
                             <constraint firstItem="uEl-aG-Mv5" firstAttribute="top" secondItem="lq0-8C-YVb" secondAttribute="bottom" id="dRR-K4-dZq"/>
+                            <constraint firstItem="4Mv-fr-lee" firstAttribute="centerX" secondItem="tpC-ch-QVJ" secondAttribute="centerX" id="f6C-wM-cAI"/>
                             <constraint firstItem="kUd-yb-AaT" firstAttribute="leading" secondItem="tpC-ch-QVJ" secondAttribute="leading" id="fJI-0M-j8V"/>
+                            <constraint firstItem="RT3-Qz-RX7" firstAttribute="top" secondItem="qp8-oA-ddb" secondAttribute="bottom" constant="50" id="qbJ-gm-op7"/>
+                            <constraint firstItem="4Mv-fr-lee" firstAttribute="top" secondItem="RT3-Qz-RX7" secondAttribute="bottom" constant="5" id="wQt-8I-mPT"/>
+                            <constraint firstItem="RT3-Qz-RX7" firstAttribute="centerX" secondItem="tpC-ch-QVJ" secondAttribute="centerX" id="wmm-1k-yyY"/>
                             <constraint firstAttribute="trailing" secondItem="kUd-yb-AaT" secondAttribute="trailing" id="yS3-id-Fhh"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="thumbnailScrollView" destination="kUd-yb-AaT" id="Onn-jz-UtI"/>
+                        <outlet property="totalCount" destination="4Mv-fr-lee" id="ryA-rj-Qg7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V9N-K6-4eV" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -70,7 +95,7 @@
         <!--Gallery Detail Controller-->
         <scene sceneID="cD4-Q4-MfB">
             <objects>
-                <viewController id="HXJ-3O-d7R" customClass="GalleryDetailController" customModule="DraggableImageForm" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="GalleryDetailController" id="HXJ-3O-d7R" customClass="GalleryDetailController" customModule="DraggableImageForm" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="lsE-3l-Qi2"/>
                         <viewControllerLayoutGuide type="bottom" id="khh-42-l9j"/>
@@ -91,6 +116,9 @@
                             <constraint firstItem="khh-42-l9j" firstAttribute="top" secondItem="kht-Ja-6pL" secondAttribute="bottom" id="alS-Du-dRd"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="backgroundImageView" destination="kht-Ja-6pL" id="LME-mu-WDE"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IhU-vN-shM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
