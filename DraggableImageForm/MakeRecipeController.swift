@@ -10,6 +10,11 @@ import UIKit
 import SwiftyJSON
 import Kingfisher
 
+//メニューボタンを開く処理を実装するためのプロトコル
+protocol MenuOpenDelegate {
+    func openMenuStatus(status: MenuStatus)
+}
+
 //選択用レシピ表示＆登録用のレシピ最大数に関する定義
 struct RecipeSetting {
     static let recipeMaxCount = 20
@@ -63,6 +68,9 @@ struct MessageSetting {
 
 class MakeRecipeController: UIViewController, UINavigationControllerDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
+    //メニュー部分開閉用のプロトコルのための変数
+    var delegate: MenuOpenDelegate! = nil
+
     //ドラッグ可能なイメージビュー
     var draggableImageView: UIImageView!
     
@@ -110,7 +118,7 @@ class MakeRecipeController: UIViewController, UINavigationControllerDelegate, UI
         //NavigationControllerに関する設定（タイトル・左右メニュー）
         navigationItem.title = "直感レシピ"
 
-        let leftMenuButton = UIBarButtonItem(title: "メニュー", style: .plain, target: self, action: #selector(MakeRecipeController.reloadButtonTapped(button:)))
+        let leftMenuButton = UIBarButtonItem(title: "メニュー", style: .plain, target: self, action: #selector(MakeRecipeController.menuButtonTapped(button:)))
         leftMenuButton.setTitleTextAttributes(attrsButton, for: .normal)
         navigationItem.leftBarButtonItem = leftMenuButton
 
@@ -215,7 +223,14 @@ class MakeRecipeController: UIViewController, UINavigationControllerDelegate, UI
 
     }
 
-    //Archiveボタンを押した時のアクション
+    //メニューボタンを押した時のアクション
+    func menuButtonTapped(button: UIButton) {
+        
+        //デリゲートメソッドの実行（処理の内容はViewControllerに記載する）
+        self.delegate.openMenuStatus(status: MenuStatus.opened)
+    }
+    
+    //アーカイブボタンを押した時のアクション
     func archiveButtonTapped(button: UIButton) {
 
         //ボタンがタップがされた場合はアーカイブ表示を行う

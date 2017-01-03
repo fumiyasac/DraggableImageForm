@@ -13,7 +13,7 @@ class TargetRecipeCell: UITableViewCell {
     //UIパーツの配置
     @IBOutlet weak var recipeMiniImage: UIImageView!
     @IBOutlet weak var recipeName: UILabel!
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
     }

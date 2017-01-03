@@ -24,6 +24,7 @@
 		DE291DE41E16FA49008BFB30 /* WebColoerLists.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE291DE31E16FA49008BFB30 /* WebColoerLists.swift */; };
 		DE291DE61E16FCF3008BFB30 /* ColorConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE291DE51E16FCF3008BFB30 /* ColorConverter.swift */; };
 		DE291DE81E1702EC008BFB30 /* DateConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE291DE71E1702EC008BFB30 /* DateConverter.swift */; };
+		DE2CCE701E1B41250049B0C7 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2CCE6F1E1B41250049B0C7 /* MenuController.swift */; };
 		DE2CD32E1E1978A70098B06C /* ArchiveCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE2CD32C1E1978A70098B06C /* ArchiveCell.swift */; };
 		DE2CD32F1E1978A70098B06C /* ArchiveCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE2CD32D1E1978A70098B06C /* ArchiveCell.xib */; };
 		DE30839C1E1165B800F595F8 /* Archive.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE30839B1E1165B800F595F8 /* Archive.swift */; };
@@ -82,6 +83,7 @@
 		DE291DE31E16FA49008BFB30 /* WebColoerLists.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebColoerLists.swift; sourceTree = "<group>"; };
 		DE291DE51E16FCF3008BFB30 /* ColorConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ColorConverter.swift; sourceTree = "<group>"; };
 		DE291DE71E1702EC008BFB30 /* DateConverter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateConverter.swift; sourceTree = "<group>"; };
+		DE2CCE6F1E1B41250049B0C7 /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
 		DE2CD32C1E1978A70098B06C /* ArchiveCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArchiveCell.swift; sourceTree = "<group>"; };
 		DE2CD32D1E1978A70098B06C /* ArchiveCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArchiveCell.xib; sourceTree = "<group>"; };
 		DE30839B1E1165B800F595F8 /* Archive.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Archive.swift; sourceTree = "<group>"; };
@@ -211,6 +213,24 @@
 			name = Structs;
 			sourceTree = "<group>";
 		};
+		DE306DE21E1B745F001023D6 /* Archive */ = {
+			isa = PBXGroup;
+			children = (
+				DE2CD32C1E1978A70098B06C /* ArchiveCell.swift */,
+				DE2CD32D1E1978A70098B06C /* ArchiveCell.xib */,
+			);
+			name = Archive;
+			sourceTree = "<group>";
+		};
+		DE306DE31E1B7463001023D6 /* TargetRecipe */ = {
+			isa = PBXGroup;
+			children = (
+				DE291DDF1E16E31F008BFB30 /* TargetRecipeCell.swift */,
+				DE291DE01E16E31F008BFB30 /* TargetRecipeCell.xib */,
+			);
+			name = TargetRecipe;
+			sourceTree = "<group>";
+		};
 		DE30839A1E11649D00F595F8 /* Realm */ = {
 			isa = PBXGroup;
 			children = (
@@ -228,6 +248,7 @@
 				DEE21AFE1DF6E36900ED28B5 /* ArchiveRecipeController.swift */,
 				DE0F466B1DF85A1700145416 /* GalleryController.swift */,
 				DE764FBC1E16BE030092E612 /* AddController.swift */,
+				DE2CCE6F1E1B41250049B0C7 /* MenuController.swift */,
 			);
 			name = ViewController;
 			sourceTree = "<group>";
@@ -254,10 +275,8 @@
 		DE3D96161DF2CBA0002C6965 /* TableViewCell */ = {
 			isa = PBXGroup;
 			children = (
-				DE291DDF1E16E31F008BFB30 /* TargetRecipeCell.swift */,
-				DE291DE01E16E31F008BFB30 /* TargetRecipeCell.xib */,
-				DE2CD32C1E1978A70098B06C /* ArchiveCell.swift */,
-				DE2CD32D1E1978A70098B06C /* ArchiveCell.xib */,
+				DE306DE31E1B7463001023D6 /* TargetRecipe */,
+				DE306DE21E1B745F001023D6 /* Archive */,
 			);
 			name = TableViewCell;
 			sourceTree = "<group>";
@@ -500,6 +519,7 @@
 				DE35AD651E138A4D0032C4B5 /* APIManager.swift in Sources */,
 				DEE21AFF1DF6E36900ED28B5 /* ArchiveRecipeController.swift in Sources */,
 				DEFF33351E0AED1600D7F0BF /* RecipeCell.swift in Sources */,
+				DE2CCE701E1B41250049B0C7 /* MenuController.swift in Sources */,
 				DE11B53E1DF1BE5700EE9E75 /* ViewController.swift in Sources */,
 				DEFF332F1E0ADB6A00D7F0BF /* CalculateCalendarLogic.swift in Sources */,
 				DE055BF51E178DBC00914CF5 /* DeviceSize.swift in Sources */,
