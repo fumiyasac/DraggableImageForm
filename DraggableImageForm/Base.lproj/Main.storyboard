@@ -372,7 +372,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="240"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="設定やその他コンテンツ" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wBZ-ze-jSu">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="設定やその他コンテンツ(作成中)" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wBZ-ze-jSu">
                                 <rect key="frame" x="0.0" y="20" width="375" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="DQJ-6V-c5P"/>
@@ -382,9 +382,9 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o3m-YV-UxQ">
-                                <rect key="frame" x="0.0" y="180" width="375" height="60"/>
+                                <rect key="frame" x="0.0" y="200" width="375" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="WYZ-UP-ih6"/>
+                                    <constraint firstAttribute="height" constant="40" id="WYZ-UP-ih6"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
                                 <state key="normal" title="▲ CLOSE">
@@ -395,29 +395,20 @@
                                 </connections>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="6ta-xe-ACR">
-                                <rect key="frame" x="0.0" y="70" width="375" height="110"/>
+                                <rect key="frame" x="0.0" y="90" width="375" height="110"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="MLM-Vn-KEf">
-                                    <size key="itemSize" width="50" height="50"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="MLM-Vn-KEf">
+                                    <size key="itemSize" width="90" height="90"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
-                                <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="0aV-UM-ZEz">
-                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </view>
-                                    </collectionViewCell>
-                                </cells>
+                                <cells/>
                             </collectionView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="下のメニューから選択してください。" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lr9-Yv-nmd">
-                                <rect key="frame" x="0.0" y="50" width="375" height="20"/>
+                                <rect key="frame" x="0.0" y="50" width="375" height="40"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="20" id="sWo-f5-DKc"/>
+                                    <constraint firstAttribute="height" constant="40" id="sWo-f5-DKc"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -441,6 +432,9 @@
                             <constraint firstAttribute="trailing" secondItem="lr9-Yv-nmd" secondAttribute="trailing" id="yp8-DN-GY8"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="menuCollectionView" destination="6ta-xe-ACR" id="ndN-TN-7bi"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lKY-hb-KXy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

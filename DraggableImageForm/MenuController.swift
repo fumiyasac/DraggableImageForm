@@ -13,15 +13,55 @@ protocol MenuCloseDelegate {
     func closeMenuStatus(status: MenuStatus)
 }
 
-class MenuController: UIViewController {
+class MenuController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+
+    //UIパーツの配置
+    @IBOutlet weak var menuCollectionView: UICollectionView!
 
     //メニュー部分開閉用のプロトコルのための変数
     var delegate: MenuCloseDelegate!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        //コレクションビューのデリゲート・データソース
+        menuCollectionView.delegate = self
+        menuCollectionView.dataSource = self
+
+        //画像のセルを定義する
+        let nibCell: UINib = UINib(nibName: "MenuThumbCell", bundle: nil)
+        menuCollectionView.register(nibCell, forCellWithReuseIdentifier: "MenuThumbCell")
     }
 
+    /* (UICollectionViewDelegate) */
+    
+    //このコレクションビューのセクション数を決める
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    /* (UICollectionViewDataSource) */
+    
+    //このコレクションビューのセル数を決める
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    //このコレクションビューのセル内へ写真の配置を行う
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MenuThumbCell", for: indexPath) as? MenuThumbCell
+
+        return cell!
+    }
+    
+    //このコレクションビューのセルをタップした際の写真を選択する
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        //TODO: 選択した際のアクションを決定する
+        //let selectedCell = collectionView.cellForItem(at: indexPath) as? MenuThumbCell
+    }
+    
     /* (Button Actions) */
     @IBAction func closeMenuAction(_ sender: UIButton) {
 

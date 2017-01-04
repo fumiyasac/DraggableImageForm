@@ -19,7 +19,7 @@ class GalleryController: UIViewController, UIScrollViewDelegate, UIViewControlle
         didSet {
 
             //アーカイブしたレシピ数を表示する
-            self.totalCount.text = "\(recipeData.count)/20 Recipes"
+            self.totalCount.text = "合計: \(recipeData.count)件登録中"
         }
     }
 
@@ -37,6 +37,9 @@ class GalleryController: UIViewController, UIScrollViewDelegate, UIViewControlle
         
         //スクロールビューのデリゲート
         thumbnailScrollView.delegate = self
+
+        //初回呼び出し時にはコンテンツ全体を非表示状態にしておく
+        self.view.alpha = 0.0
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -152,21 +155,20 @@ class GalleryController: UIViewController, UIScrollViewDelegate, UIViewControlle
     
     //ポップアップアニメーションを実行する（実行するまではアルファが0でこのUIViewControllerが拡大している状態）
     fileprivate func showAnimatePopup() {
-        self.view.transform = CGAffineTransform(scaleX: 1.38, y: 1.38)
+
         UIView.animate(withDuration: 0.16, animations: {
             
-            //おおもとのViewのアルファ値を1.0にして拡大比率を元に戻す
+            //おおもとのViewのアルファ値を1.0に戻す
             self.view.alpha = 1.0
-            self.view.transform = CGAffineTransform(scaleX: 1.0, y: 1.0)
         })
     }
     
     //ポップアップアニメーションを閉じる（実行するまではアルファが1でこのUIViewControllerが等倍の状態）
     fileprivate func removeAnimatePopup() {
+
         UIView.animate(withDuration: 0.16, animations: {
             
-            //おおもとのViewのアルファ値を0.0にして拡大比率を拡大した状態に変更
-            self.view.transform = CGAffineTransform(scaleX: 1.38, y: 1.38)
+            //おおもとのViewのアルファ値を0.0に変更する
             self.view.alpha = 0.0
             
         }, completion:{ finished in
