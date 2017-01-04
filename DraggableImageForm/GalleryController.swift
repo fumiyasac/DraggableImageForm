@@ -114,6 +114,14 @@ class GalleryController: UIViewController, UIScrollViewDelegate, UIViewControlle
     
     /* (UIViewControllerTransitioningDelegate) */
 
+    /**
+     * カスタムトランジションは下記のサンプルをSwift3に置き換えて再実装
+     * (実装の詳細はCustomTransition.swiftを参考)
+     * 
+     * 参考：iOS Animation Tutorial: Custom View Controller Presentation Transitions
+     * https://www.raywenderlich.com/113845/ios-animation-tutorial-custom-view-controller-presentation-transitions
+     */
+
     //進む場合のアニメーションの設定を行う
     internal func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
 
