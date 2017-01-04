@@ -37,6 +37,7 @@
 		DE764FBB1E168D4B0092E612 /* Add.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE764FBA1E168D4B0092E612 /* Add.storyboard */; };
 		DE764FBD1E16BE030092E612 /* AddController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE764FBC1E16BE030092E612 /* AddController.swift */; };
 		DE935CCD1E1BFD1400079493 /* CustomTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE935CCC1E1BFD1400079493 /* CustomTransition.swift */; };
+		DED929E31E1D1D2300FC1836 /* MenuMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED929E21E1D1D2300FC1836 /* MenuMaker.swift */; };
 		DEE21AFD1DF6E34300ED28B5 /* MakeRecipeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEE21AFC1DF6E34300ED28B5 /* MakeRecipeController.swift */; };
 		DEE21AFF1DF6E36900ED28B5 /* ArchiveRecipeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEE21AFE1DF6E36900ED28B5 /* ArchiveRecipeController.swift */; };
 		DEFF332F1E0ADB6A00D7F0BF /* CalculateCalendarLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEFF332E1E0ADB6A00D7F0BF /* CalculateCalendarLogic.swift */; };
@@ -100,6 +101,7 @@
 		DE764FBA1E168D4B0092E612 /* Add.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Add.storyboard; sourceTree = "<group>"; };
 		DE764FBC1E16BE030092E612 /* AddController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddController.swift; sourceTree = "<group>"; };
 		DE935CCC1E1BFD1400079493 /* CustomTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTransition.swift; sourceTree = "<group>"; };
+		DED929E21E1D1D2300FC1836 /* MenuMaker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuMaker.swift; sourceTree = "<group>"; };
 		DEE21AFC1DF6E34300ED28B5 /* MakeRecipeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MakeRecipeController.swift; sourceTree = "<group>"; };
 		DEE21AFE1DF6E36900ED28B5 /* ArchiveRecipeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArchiveRecipeController.swift; sourceTree = "<group>"; };
 		DEFF332E1E0ADB6A00D7F0BF /* CalculateCalendarLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculateCalendarLogic.swift; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 				DE291DE51E16FCF3008BFB30 /* ColorConverter.swift */,
 				DE291DE71E1702EC008BFB30 /* DateConverter.swift */,
 				DE055BF41E178DBC00914CF5 /* DeviceSize.swift */,
+				DED929E21E1D1D2300FC1836 /* MenuMaker.swift */,
 			);
 			name = Structs;
 			sourceTree = "<group>";
@@ -563,6 +566,7 @@
 				DE626C721E1CB6E1005DA231 /* MenuThumbCell.swift in Sources */,
 				DE935CCD1E1BFD1400079493 /* CustomTransition.swift in Sources */,
 				DE1F0EBF1E1BCBB100A107A3 /* GalleryDetailController.swift in Sources */,
+				DED929E31E1D1D2300FC1836 /* MenuMaker.swift in Sources */,
 				DE11B53C1DF1BE5700EE9E75 /* AppDelegate.swift in Sources */,
 				DE2CD32E1E1978A70098B06C /* ArchiveCell.swift in Sources */,
 			);

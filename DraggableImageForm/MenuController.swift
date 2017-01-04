@@ -20,6 +20,13 @@ class MenuController: UIViewController, UICollectionViewDelegate, UICollectionVi
 
     //メニュー部分開閉用のプロトコルのための変数
     var delegate: MenuCloseDelegate!
+
+    //メニュー用のデータ
+    var menuData: [[String]] = [] {
+        didSet {
+            self.menuCollectionView.reloadData()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +34,9 @@ class MenuController: UIViewController, UICollectionViewDelegate, UICollectionVi
         //コレクションビューのデリゲート・データソース
         menuCollectionView.delegate = self
         menuCollectionView.dataSource = self
+
+        //メニュー用のデータをセットする
+        menuData = MenuMaker.setMenuList()
 
         //画像のセルを定義する
         let nibCell: UINib = UINib(nibName: "MenuThumbCell", bundle: nil)
@@ -44,7 +54,7 @@ class MenuController: UIViewController, UICollectionViewDelegate, UICollectionVi
     
     //このコレクションビューのセル数を決める
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return menuData.count
     }
     
     //このコレクションビューのセル内へ写真の配置を行う
@@ -52,6 +62,11 @@ class MenuController: UIViewController, UICollectionViewDelegate, UICollectionVi
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MenuThumbCell", for: indexPath) as? MenuThumbCell
 
+        //メニューのデータを設定する
+        let targetMenu = menuData[indexPath.row]
+        cell?.thumbImageView.image = UIImage(named: targetMenu[0])
+        cell?.thumbMenuName.text = targetMenu[1]
+        
         return cell!
     }
     

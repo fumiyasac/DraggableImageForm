@@ -12,6 +12,7 @@ class MenuThumbCell: UICollectionViewCell {
 
     //UIパーツの配置
     @IBOutlet weak var thumbImageView: UIImageView!
+    @IBOutlet weak var thumbMenuName: UILabel!
 
     override func awakeFromNib() {
         super.awakeFromNib()
