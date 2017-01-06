@@ -295,7 +295,7 @@ class AddController: UIViewController, UITableViewDelegate, UITableViewDataSourc
         })
     }
 
-    //テーブルビューの位置補正を行う
+    //ポップアップの位置補正を行う
     fileprivate func movePopupPosition(notification: Notification, showKeyboard: Bool) -> () {
         
         if showKeyboard {
@@ -323,7 +323,7 @@ class AddController: UIViewController, UITableViewDelegate, UITableViewDataSourc
             
         } else {
             
-            //キーボードが隠れたらUITableViewの制約を元に戻す
+            //キーボードが隠れた場合のアニメーション
             UIView.animate(withDuration: 0.26, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations:{
 
                 //キーボードの分を元に戻す
