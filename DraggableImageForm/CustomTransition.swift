@@ -16,7 +16,7 @@ class CustomTransition: NSObject, UIViewControllerAnimatedTransitioning {
     //トランジションの方向(present: true, dismiss: false)
     var presenting    = true
 
-    //アニメーションの実体となるContainerViewのサイズ
+    //アニメーション対象なるサムネイル画像の位置やサイズ情報を格納するメンバ変数
     var originalFrame = CGRect.zero
     
     //アニメーションの時間を定義する
@@ -72,7 +72,7 @@ class CustomTransition: NSObject, UIViewControllerAnimatedTransitioning {
         //アファイン変換の倍率を設定する
         let scaleTransform = CGAffineTransform(scaleX: xScaleFactor, y: yScaleFactor)
 
-        //進む場合の遷移時には画面いっぱいに画像を表示させるようにする
+        //進む場合の遷移時には画面いっぱいに画像を表示させるようにするための位置補正を行う
         if presenting {
             targetView.transform = scaleTransform
             targetView.center = CGPoint(x: initialFrame.midX, y: initialFrame.midY)

@@ -190,7 +190,7 @@ class MakeRecipeController: UIViewController, UINavigationControllerDelegate, UI
         selectedDayLabel.text = MessageSetting.getSelectedDateMessage(day: button.tag)
     }
     
-    //Reloadボタンを押した時のアクション
+    //Addボタンを押した時のアクション
     func reloadButtonTapped(button: UIButton) {
         loadApiData(categoryId: CategoryList.fetchTargetCategory())
     }
@@ -443,7 +443,7 @@ class MakeRecipeController: UIViewController, UINavigationControllerDelegate, UI
     
     /* (Fileprivate Functions) */
 
-    //Alamofireでの楽天レシピAPIからランキング上位のレシピ情報をカテゴリー
+    //Alamofireでの楽天レシピAPIからランキング上位のレシピ情報を選択カテゴリーを元に取得する
     fileprivate func loadApiData(categoryId: String) {
 
         //通信中はCollectionViewの操作をロックする

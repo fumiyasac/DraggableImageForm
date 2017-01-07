@@ -125,6 +125,7 @@ class GalleryController: UIViewController, UIScrollViewDelegate, UIViewControlle
     //進む場合のアニメーションの設定を行う
     internal func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
 
+        //選択したサムネイル画像の位置とサイズの情報を引き渡す
         transition.originalFrame = selectedImage!.superview!.convert(selectedImage!.frame, to: nil)
         transition.presenting = true
         return transition
@@ -189,6 +190,5 @@ class GalleryController: UIViewController, UIScrollViewDelegate, UIViewControlle
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
     
 }
