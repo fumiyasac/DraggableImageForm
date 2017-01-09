@@ -101,7 +101,7 @@ class ViewController: UIViewController, MenuOpenDelegate, MenuCloseDelegate {
                 self.mainMenuContainer.isUserInteractionEnabled = false
                 self.mainMenuContainer.frame = CGRect(
                     x: 0,
-                    y: 240,
+                    y: 320,
                     width: self.mainMenuContainer.frame.width,
                     height: self.mainMenuContainer.frame.height
                 )

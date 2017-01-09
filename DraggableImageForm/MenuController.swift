@@ -13,11 +13,14 @@ protocol MenuCloseDelegate {
     func closeMenuStatus(status: MenuStatus)
 }
 
-class MenuController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class MenuController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UITextViewDelegate {
 
     //UIパーツの配置
     @IBOutlet weak var menuCollectionView: UICollectionView!
 
+    //楽天ウェブサービスのクレジット表記用のテキストフィールド
+    @IBOutlet weak var creditLinkText: UITextView!
+    
     //メニュー部分開閉用のプロトコルのための変数
     var delegate: MenuCloseDelegate!
 
@@ -41,6 +44,10 @@ class MenuController: UIViewController, UICollectionViewDelegate, UICollectionVi
         //画像のセルを定義する
         let nibCell: UINib = UINib(nibName: "MenuThumbCell", bundle: nil)
         menuCollectionView.register(nibCell, forCellWithReuseIdentifier: "MenuThumbCell")
+        
+        //楽天ウェブサービスのクレジット表記をする
+        creditLinkText.delegate = self
+        creditLinkText.attributedText = ConvertHtmlText.activateHtmlTags(targetString: ConvertHtmlText.getCreditText())
     }
 
     /* (UICollectionViewDelegate) */
