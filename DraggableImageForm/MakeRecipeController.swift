@@ -396,10 +396,10 @@ class MakeRecipeController: UIViewController, UINavigationControllerDelegate, UI
         cell.recipeImageView.kf.indicatorType = .activity
         cell.recipeImageView.kf.setImage(with: url)
 
-        //cellのタグを決定する(LongTapGestureRecognizerからの逆引き用に設定)
+        //cellのタグを決定する(LongPressGestureRecognizerからの逆引き用に設定)
         cell.tag = indexPath.row
         
-        //LongTapGestureRecognizerの定義を行う
+        //LongPressGestureRecognizerの定義を行う
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(MakeRecipeController.longPressCell(sender:)))
         
         //イベント発生までのタップ時間：0.24秒
@@ -408,7 +408,7 @@ class MakeRecipeController: UIViewController, UINavigationControllerDelegate, UI
         //指のズレを許容する範囲：10px
         longPressGesture.allowableMovement = 10.0
 
-        //セルに対してLongTapGestureRecognizerを付与する
+        //セルに対してLongPressGestureRecognizerを付与する
         cell.addGestureRecognizer(longPressGesture)
 
         return cell
