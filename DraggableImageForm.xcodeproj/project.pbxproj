@@ -37,12 +37,12 @@
 		DE626C731E1CB6E1005DA231 /* MenuThumbCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DE626C711E1CB6E1005DA231 /* MenuThumbCell.xib */; };
 		DE764FBB1E168D4B0092E612 /* Add.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DE764FBA1E168D4B0092E612 /* Add.storyboard */; };
 		DE764FBD1E16BE030092E612 /* AddController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE764FBC1E16BE030092E612 /* AddController.swift */; };
+		DE78EAC71EC6025B00CEE24E /* CommonSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE78EAC61EC6025B00CEE24E /* CommonSetting.swift */; };
 		DE935CCD1E1BFD1400079493 /* CustomTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE935CCC1E1BFD1400079493 /* CustomTransition.swift */; };
 		DED929E31E1D1D2300FC1836 /* MenuMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DED929E21E1D1D2300FC1836 /* MenuMaker.swift */; };
 		DEE21AFD1DF6E34300ED28B5 /* MakeRecipeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEE21AFC1DF6E34300ED28B5 /* MakeRecipeController.swift */; };
 		DEE21AFF1DF6E36900ED28B5 /* ArchiveRecipeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEE21AFE1DF6E36900ED28B5 /* ArchiveRecipeController.swift */; };
 		DEFF332F1E0ADB6A00D7F0BF /* CalculateCalendarLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEFF332E1E0ADB6A00D7F0BF /* CalculateCalendarLogic.swift */; };
-		DEFF33331E0ADDE000D7F0BF /* CommonSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEFF33321E0ADDE000D7F0BF /* CommonSetting.swift */; };
 		DEFF33351E0AED1600D7F0BF /* RecipeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEFF33341E0AED1500D7F0BF /* RecipeCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -102,12 +102,12 @@
 		DE626C711E1CB6E1005DA231 /* MenuThumbCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuThumbCell.xib; sourceTree = "<group>"; };
 		DE764FBA1E168D4B0092E612 /* Add.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Add.storyboard; sourceTree = "<group>"; };
 		DE764FBC1E16BE030092E612 /* AddController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddController.swift; sourceTree = "<group>"; };
+		DE78EAC61EC6025B00CEE24E /* CommonSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonSetting.swift; sourceTree = "<group>"; };
 		DE935CCC1E1BFD1400079493 /* CustomTransition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTransition.swift; sourceTree = "<group>"; };
 		DED929E21E1D1D2300FC1836 /* MenuMaker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuMaker.swift; sourceTree = "<group>"; };
 		DEE21AFC1DF6E34300ED28B5 /* MakeRecipeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MakeRecipeController.swift; sourceTree = "<group>"; };
 		DEE21AFE1DF6E36900ED28B5 /* ArchiveRecipeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArchiveRecipeController.swift; sourceTree = "<group>"; };
 		DEFF332E1E0ADB6A00D7F0BF /* CalculateCalendarLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalculateCalendarLogic.swift; sourceTree = "<group>"; };
-		DEFF33321E0ADDE000D7F0BF /* CommonSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonSetting.swift; sourceTree = "<group>"; };
 		DEFF33341E0AED1500D7F0BF /* RecipeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipeCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -350,8 +350,8 @@
 		DEFF33301E0ADDA700D7F0BF /* Constants */ = {
 			isa = PBXGroup;
 			children = (
-				DEFF33321E0ADDE000D7F0BF /* CommonSetting.swift */,
 				DE291DE31E16FA49008BFB30 /* WebColoerLists.swift */,
+				DE78EAC61EC6025B00CEE24E /* CommonSetting.swift */,
 			);
 			name = Constants;
 			sourceTree = "<group>";
@@ -549,7 +549,6 @@
 			files = (
 				DE291DE11E16E31F008BFB30 /* TargetRecipeCell.swift in Sources */,
 				DE1E5E7E1E0FFAEC0049E6D7 /* CalendarView.swift in Sources */,
-				DEFF33331E0ADDE000D7F0BF /* CommonSetting.swift in Sources */,
 				DE35F2D81E13F67000117202 /* CategoryList.swift in Sources */,
 				DE291DE41E16FA49008BFB30 /* WebColoerLists.swift in Sources */,
 				DE30839C1E1165B800F595F8 /* Archive.swift in Sources */,
@@ -559,6 +558,7 @@
 				DEE21AFD1DF6E34300ED28B5 /* MakeRecipeController.swift in Sources */,
 				DE291DE61E16FCF3008BFB30 /* ColorConverter.swift in Sources */,
 				DE0F466C1DF85A1700145416 /* GalleryController.swift in Sources */,
+				DE78EAC71EC6025B00CEE24E /* CommonSetting.swift in Sources */,
 				DE35AD651E138A4D0032C4B5 /* APIManager.swift in Sources */,
 				DEE21AFF1DF6E36900ED28B5 /* ArchiveRecipeController.swift in Sources */,
 				DEFF33351E0AED1600D7F0BF /* RecipeCell.swift in Sources */,
@@ -725,11 +725,14 @@
 			baseConfigurationReference = 8F2DA21F883CF9BF1544E48C /* Pods-DraggableImageForm.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = S5BF5553KY;
 				INFOPLIST_FILE = DraggableImageForm/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.just1factory.DraggableImageForm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -739,11 +742,13 @@
 			baseConfigurationReference = 920496E9693AD2CD3B94706F /* Pods-DraggableImageForm.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = S5BF5553KY;
 				INFOPLIST_FILE = DraggableImageForm/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = net.just1factory.DraggableImageForm;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
