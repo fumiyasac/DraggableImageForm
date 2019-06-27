@@ -38,6 +38,10 @@ class CollectionNotifier;
 class ExternalCommitHelper;
 class WeakRealmNotifier;
 
+namespace partial_sync {
+class WorkQueue;
+}
+
 // RealmCoordinator manages the weak cache of Realm instances and communication
 // between per-thread Realm instances for a given file
 class RealmCoordinator : public std::enable_shared_from_this<RealmCoordinator> {
@@ -54,6 +58,7 @@ public:
     // configuration is compatible with the existing one
     std::shared_ptr<Realm> get_realm(Realm::Config config);
     std::shared_ptr<Realm> get_realm();
+    void get_realm(Realm::Config config, std::function<void(std::shared_ptr<Realm>, std::exception_ptr)> callback);
 
     Realm::Config get_config() const { return m_config; }
 
@@ -137,6 +142,13 @@ public:
     template<typename Pred>
     std::unique_lock<std::mutex> wait_for_notifiers(Pred&& wait_predicate);
 
+#if REALM_ENABLE_SYNC
+    // A work queue that can be used to perform background work related to partial sync.
+    partial_sync::WorkQueue& partial_sync_work_queue();
+#endif
+
+    AuditInterface* audit_context() const noexcept { return m_audit_context.get(); }
+
 private:
     Realm::Config m_config;
 
@@ -170,13 +182,21 @@ private:
     std::unique_ptr<_impl::ExternalCommitHelper> m_notifier;
     std::function<void(VersionID, VersionID)> m_transaction_callback;
 
+#if REALM_ENABLE_SYNC
     std::shared_ptr<SyncSession> m_sync_session;
+    std::unique_ptr<partial_sync::WorkQueue> m_partial_sync_work_queue;
+#endif
+
+    std::shared_ptr<AuditInterface> m_audit_context;
 
     // must be called with m_notifier_mutex locked
     void pin_version(VersionID version);
 
     void set_config(const Realm::Config&);
-    void create_sync_session();
+    void create_sync_session(bool force_client_reset);
+    void do_get_realm(Realm::Config config, std::shared_ptr<Realm>& realm,
+                      std::unique_lock<std::mutex>& realm_lock);
+    std::shared_ptr<Realm> get_cached_realm(Realm::Config const& config);
 
     void run_async_notifiers();
     void open_helper_shared_group();

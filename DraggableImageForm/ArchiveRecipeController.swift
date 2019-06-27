@@ -133,12 +133,12 @@ class ArchiveRecipeController: UIViewController, UITableViewDelegate, UITableVie
                 let deleteAlert = UIAlertController(
                     title: "データ削除",
                     message: "このデータを削除しますか？(削除をする場合にはこのデータに紐づくレシピデータも一緒に削除されます。)",
-                    preferredStyle: UIAlertControllerStyle.alert
+                    preferredStyle: UIAlertController.Style.alert
                 )
                 deleteAlert.addAction(
                     UIAlertAction(
                         title: "OK",
-                        style: UIAlertActionStyle.default,
+                        style: UIAlertAction.Style.default,
                         handler: { (action: UIAlertAction!) in
 
                             //Realmから該当データを1件削除する処理
@@ -154,7 +154,7 @@ class ArchiveRecipeController: UIViewController, UITableViewDelegate, UITableVie
                 deleteAlert.addAction(
                     UIAlertAction(
                         title: "キャンセル",
-                        style: UIAlertActionStyle.cancel,
+                        style: UIAlertAction.Style.cancel,
                         handler: nil
                     )
                 )                
@@ -166,8 +166,8 @@ class ArchiveRecipeController: UIViewController, UITableViewDelegate, UITableVie
             cell?.archiveMemo.text = archiveData.memo
         }
 
-        cell?.accessoryType = UITableViewCellAccessoryType.none
-        cell?.selectionStyle = UITableViewCellSelectionStyle.none
+        cell?.accessoryType = UITableViewCell.AccessoryType.none
+        cell?.selectionStyle = UITableViewCell.SelectionStyle.none
         return cell!
     }
 

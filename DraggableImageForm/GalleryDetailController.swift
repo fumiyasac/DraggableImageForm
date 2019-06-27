@@ -45,7 +45,7 @@ class GalleryDetailController: UIViewController, UIViewControllerTransitioningDe
     }
 
     //前の画面に戻るアクションをTapGestureをトリガーにして実行する
-    func backThumbnail(sender: UITapGestureRecognizer) {
+    @objc func backThumbnail(sender: UITapGestureRecognizer) {
         presentingViewController?.dismiss(animated: true, completion: nil)
     }
 

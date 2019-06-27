@@ -98,7 +98,7 @@ class GalleryController: UIViewController, UIScrollViewDelegate, UIViewControlle
     }
 
     //サムネイルを拡大表示するためのアクション
-    func expandThumbnail(sender: UITapGestureRecognizer) {
+    @objc func expandThumbnail(sender: UITapGestureRecognizer) {
 
         //遷移対象をサムネイル画像とデータを設定する
         selectedImage = sender.view as? UIImageView

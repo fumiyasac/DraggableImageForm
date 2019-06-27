@@ -148,8 +148,8 @@ class AddController: UIViewController, UITableViewDelegate, UITableViewDataSourc
         cell?.recipeMiniImage.kf.setImage(with: url)
 
         //セルのアクセサリタイプと背景の設定
-        cell!.accessoryType = UITableViewCellAccessoryType.disclosureIndicator
-        cell!.selectionStyle = UITableViewCellSelectionStyle.none
+        cell!.accessoryType = UITableViewCell.AccessoryType.disclosureIndicator
+        cell!.selectionStyle = UITableViewCell.SelectionStyle.none
         
         return cell!
     }
@@ -168,8 +168,8 @@ class AddController: UIViewController, UITableViewDelegate, UITableViewDataSourc
 
         //キーボードの開閉時の通知登録を行う
         let center: NotificationCenter = NotificationCenter.default
-        center.addObserver(self, selector: #selector(AddController.keyboardWillShow(notification:)), name: Notification.Name.UIKeyboardWillShow, object: nil)
-        center.addObserver(self, selector: #selector(AddController.keyboardWillHide(notification:)), name: Notification.Name.UIKeyboardWillHide, object: nil)
+        center.addObserver(self, selector: #selector(AddController.keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        center.addObserver(self, selector: #selector(AddController.keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
     //通知登録解除処理
@@ -177,17 +177,17 @@ class AddController: UIViewController, UITableViewDelegate, UITableViewDataSourc
 
         //キーボードの開閉時の通知登録を解除する
         let center: NotificationCenter = NotificationCenter.default
-        center.removeObserver(self, name: Notification.Name.UIKeyboardWillShow, object: nil)
-        center.removeObserver(self, name: Notification.Name.UIKeyboardWillHide, object: nil)
+        center.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        center.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     //Keyboard表示前処理
-    func keyboardWillShow(notification: Notification) {
+    @objc func keyboardWillShow(notification: Notification) {
         movePopupPosition(notification: notification, showKeyboard: true)
     }
     
     //Keyboard非表示前処理
-    func keyboardWillHide(notification: Notification) {
+    @objc func keyboardWillHide(notification: Notification) {
         movePopupPosition(notification: notification, showKeyboard: false)
     }
 
@@ -303,7 +303,7 @@ class AddController: UIViewController, UITableViewDelegate, UITableViewDataSourc
             //keyboardのサイズを取得
             var keyboardFrame: CGRect = CGRect.zero
             if let userInfo = notification.userInfo {
-                if let keyboard = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue {
+                if let keyboard = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue {
                     keyboardFrame = keyboard.cgRectValue
                 }
             }
@@ -313,7 +313,7 @@ class AddController: UIViewController, UITableViewDelegate, UITableViewDataSourc
             if lastKeyboardFrame.height == 0 {
 
                 lastKeyboardFrame = keyboardFrame
-                UIView.animate(withDuration: 0.26, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations:{
+                UIView.animate(withDuration: 0.26, delay: 0, options: UIView.AnimationOptions.curveEaseOut, animations:{
 
                     //キーボードの分だけ上にずらす
                     self.popupView.center = CGPoint(x: DeviceSize.screenWidth() / 2, y: DeviceSize.screenHeight() / 2 - keyboardFrame.height)
@@ -324,7 +324,7 @@ class AddController: UIViewController, UITableViewDelegate, UITableViewDataSourc
         } else {
             
             //キーボードが隠れた場合のアニメーション
-            UIView.animate(withDuration: 0.26, delay: 0, options: UIViewAnimationOptions.curveEaseOut, animations:{
+            UIView.animate(withDuration: 0.26, delay: 0, options: UIView.AnimationOptions.curveEaseOut, animations:{
 
                 //キーボードの分を元に戻す
                 self.popupView.center = CGPoint(x: DeviceSize.screenWidth() / 2, y: DeviceSize.screenHeight() / 2)

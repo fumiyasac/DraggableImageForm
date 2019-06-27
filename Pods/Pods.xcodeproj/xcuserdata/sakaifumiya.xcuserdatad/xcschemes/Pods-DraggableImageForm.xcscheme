@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0700"
+   LastUpgradeVersion = "1100"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "363AF41AB9BB923C686CDA8DD9351BAD"
+               BlueprintIdentifier = "FB7B283426F39A9820B46B82A45CA005"
                BuildableName = "Pods_DraggableImageForm.framework"
                BlueprintName = "Pods-DraggableImageForm"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "363AF41AB9BB923C686CDA8DD9351BAD"
+            BlueprintIdentifier = "FB7B283426F39A9820B46B82A45CA005"
             BuildableName = "Pods_DraggableImageForm.framework"
             BlueprintName = "Pods-DraggableImageForm"
             ReferencedContainer = "container:Pods.xcodeproj">

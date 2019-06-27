@@ -15,13 +15,13 @@ class Archive: Object {
     static let realm = try! Realm()
     
     //id
-    dynamic var id = 0
+    @objc dynamic var id = 0
     
     //メモ
-    dynamic var memo = ""
+    @objc dynamic var memo = ""
 
     //登録日
-    dynamic var created = Date(timeIntervalSince1970: 0)
+    @objc dynamic var created = Date(timeIntervalSince1970: 0)
 
     //PrimaryKeyの設定
     override static func primaryKey() -> String? {
@@ -60,7 +60,7 @@ class Archive: Object {
 
     //登録日順のデータの全件取得をする
     static func fetchAllCalorieListSortByDate() -> [Archive] {
-        let archives = realm.objects(Archive.self).sorted(byProperty: "created", ascending: false)
+        let archives = realm.objects(Archive.self).sorted(byKeyPath: "created", ascending: false)
         var archiveList: [Archive] = []
         for archive in archives {
             archiveList.append(archive)
