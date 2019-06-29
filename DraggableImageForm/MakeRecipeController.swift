@@ -464,7 +464,7 @@ class MakeRecipeController: UIViewController, UINavigationControllerDelegate, UI
                 
                 //レシピの公開日をyyyy:MM:ddの形式にする
                 let recipePublishday = String(describing: result["recipePublishday"])
-                let published = recipePublishday.substring(to: recipePublishday.index(recipePublishday.startIndex, offsetBy: 10))
+                let published = String(recipePublishday[..<recipePublishday.index(recipePublishday.startIndex, offsetBy: 10)])
                 
                 //CollectionViewへ表示するためのデータをまとめたタプル
                 let targetData = (
