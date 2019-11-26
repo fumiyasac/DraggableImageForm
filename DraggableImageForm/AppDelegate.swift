@@ -14,11 +14,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
 
-    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
 
         //戻るボタンの色をWhiteに変更する
         UINavigationBar.appearance().tintColor = UIColor.white
-        
+
+        // DarkModeのキャンセル（Info.plistについても念のため記載）
+        if #available(iOS 13.0, *) {
+            window?.overrideUserInterfaceStyle = .light
+        }
+
         return true
     }
 

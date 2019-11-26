@@ -104,8 +104,8 @@ class MakeRecipeController: UIViewController, UINavigationControllerDelegate, UI
 
     //メニューボタンの属性値
     let attrsButton = [
-        NSForegroundColorAttributeName : UIColor.white,
-        NSFontAttributeName : UIFont(name: "Georgia", size: 12)!
+        convertFromNSAttributedStringKey(NSAttributedString.Key.foregroundColor) : UIColor.white,
+        convertFromNSAttributedStringKey(NSAttributedString.Key.font) : UIFont(name: "Georgia", size: 12)!
     ]
 
     override func viewDidLoad() {
@@ -119,11 +119,11 @@ class MakeRecipeController: UIViewController, UINavigationControllerDelegate, UI
         navigationItem.title = "直感レシピ"
 
         let leftMenuButton = UIBarButtonItem(title: "メニュー", style: .plain, target: self, action: #selector(MakeRecipeController.menuButtonTapped(button:)))
-        leftMenuButton.setTitleTextAttributes(attrsButton, for: .normal)
+        leftMenuButton.setTitleTextAttributes(convertToOptionalNSAttributedStringKeyDictionary(attrsButton), for: .normal)
         navigationItem.leftBarButtonItem = leftMenuButton
 
         let rightMenuButton = UIBarButtonItem(title: "アーカイブ", style: .plain, target: self, action: #selector(MakeRecipeController.archiveButtonTapped(button:)))
-        rightMenuButton.setTitleTextAttributes(attrsButton, for: .normal)
+        rightMenuButton.setTitleTextAttributes(convertToOptionalNSAttributedStringKeyDictionary(attrsButton), for: .normal)
         navigationItem.rightBarButtonItem = rightMenuButton
 
         //配置したUIパーツに対するターゲットや初期設定
@@ -185,23 +185,23 @@ class MakeRecipeController: UIViewController, UINavigationControllerDelegate, UI
     /* (Functions) */
 
     //カレンダーのボタンを押した時のアクション
-    func calendarButtonTapped(button: UIButton) {
+    @objc func calendarButtonTapped(button: UIButton) {
         selectedDay = button.tag
         selectedDayLabel.text = MessageSetting.getSelectedDateMessage(day: button.tag)
     }
     
     //Addボタンを押した時のアクション
-    func reloadButtonTapped(button: UIButton) {
+    @objc func reloadButtonTapped(button: UIButton) {
         loadApiData(categoryId: CategoryList.fetchTargetCategory())
     }
 
     //Resetボタンを押した時のアクション
-    func resetButtonTapped(button: UIButton) {
+    @objc func resetButtonTapped(button: UIButton) {
         initTargetMessageSetting()
     }
     
     //現在データのハンドリングを行うアクション
-    func handleButtonTapped(button: UIButton) {
+    @objc func handleButtonTapped(button: UIButton) {
 
         //データが正しく選択されている場合のみポップアップを表示する
         if selectedDay != nil && selectedDataList.count > 0 {
@@ -210,9 +210,9 @@ class MakeRecipeController: UIViewController, UINavigationControllerDelegate, UI
             let popupVC = UIStoryboard(name: "Add", bundle: nil).instantiateViewController(withIdentifier: "AddController") as! AddController
             
             //ポップアップ用のViewConrollerを設定し、modalPresentationStyle(= .overCurrentContext)と背景色(= UIColor.clear)を設定する
-            popupVC.modalPresentationStyle = .overCurrentContext
+            popupVC.modalPresentationStyle = .overFullScreen
             popupVC.view.backgroundColor = UIColor.clear
-            
+
             //変数の受け渡しを行う
             popupVC.targetSelectedDataList = selectedDataList
             popupVC.targetDate = String(CalendarView.getCalendarOfCurrentYear()) + "/" + String(format: "%02d", CalendarView.getCalendarOfCurrentMonth()) + "/" + String(format: "%02d", selectedDay!)
@@ -224,14 +224,14 @@ class MakeRecipeController: UIViewController, UINavigationControllerDelegate, UI
     }
 
     //メニューボタンを押した時のアクション
-    func menuButtonTapped(button: UIButton) {
+    @objc func menuButtonTapped(button: UIButton) {
         
         //デリゲートメソッドの実行（処理の内容はViewControllerに記載する）
         self.delegate.openMenuStatus(status: MenuStatus.opened)
     }
     
     //アーカイブボタンを押した時のアクション
-    func archiveButtonTapped(button: UIButton) {
+    @objc func archiveButtonTapped(button: UIButton) {
 
         //ボタンがタップがされた場合はアーカイブ表示を行う
         let toVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ArchiveRecipeController") as! ArchiveRecipeController
@@ -239,7 +239,7 @@ class MakeRecipeController: UIViewController, UINavigationControllerDelegate, UI
     }
 
     //セルを長押しした際(UILongPressGestureRecognizerで実行された際)に発動する処理
-    func longPressCell(sender: UILongPressGestureRecognizer) {
+    @objc func longPressCell(sender: UILongPressGestureRecognizer) {
 
         //長押ししたセルのタグ名と現在位置を設定する
         let targetTag: Int = (sender.view?.tag)!
@@ -273,7 +273,7 @@ class MakeRecipeController: UIViewController, UINavigationControllerDelegate, UI
         }
         
         //UILongPressGestureRecognizerが開始された際の処理
-        if sender.state == UIGestureRecognizerState.began {
+        if sender.state == UIGestureRecognizer.State.began {
             
             //ドラッグ可能なImageViewを作成する
             draggableImageView = UIImageView()
@@ -294,7 +294,7 @@ class MakeRecipeController: UIViewController, UINavigationControllerDelegate, UI
             targetCell?.recipeImageView.isHidden = true
 
         //UILongPressGestureRecognizerが動作中の際の処理
-        } else if sender.state == UIGestureRecognizerState.changed {
+        } else if sender.state == UIGestureRecognizer.State.changed {
 
             //動いた分の距離を加算する
             draggableImageView.frame = CGRect(
@@ -329,7 +329,7 @@ class MakeRecipeController: UIViewController, UINavigationControllerDelegate, UI
             }
 
         //UILongPressGestureRecognizerが終了した際の処理
-        } else if sender.state == UIGestureRecognizerState.ended {
+        } else if sender.state == UIGestureRecognizer.State.ended {
             
             //ドラッグ可能なImageViewを削除する
             targetImage = nil
@@ -464,7 +464,7 @@ class MakeRecipeController: UIViewController, UINavigationControllerDelegate, UI
                 
                 //レシピの公開日をyyyy:MM:ddの形式にする
                 let recipePublishday = String(describing: result["recipePublishday"])
-                let published = recipePublishday.substring(to: recipePublishday.index(recipePublishday.startIndex, offsetBy: 10))
+                let published = String(recipePublishday[..<recipePublishday.index(recipePublishday.startIndex, offsetBy: 10)])
                 
                 //CollectionViewへ表示するためのデータをまとめたタプル
                 let targetData = (
@@ -491,12 +491,12 @@ class MakeRecipeController: UIViewController, UINavigationControllerDelegate, UI
             let errorAlert = UIAlertController(
                 title: "通信状態エラー",
                 message: "データの取得に失敗しました。通信状態の良い場所ないしはお持ちのWiftに接続した状態で再度更新ボタンを押してお試し下さい。",
-                preferredStyle: UIAlertControllerStyle.alert
+                preferredStyle: UIAlertController.Style.alert
             )
             errorAlert.addAction(
                 UIAlertAction(
                     title: "OK",
-                    style: UIAlertActionStyle.default,
+                    style: UIAlertAction.Style.default,
                     handler: nil
                 )
             )
@@ -549,4 +549,15 @@ class MakeRecipeController: UIViewController, UINavigationControllerDelegate, UI
         calendarScrollView.scrollsToTop = false
     }
 
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromNSAttributedStringKey(_ input: NSAttributedString.Key) -> String {
+	return input.rawValue
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToOptionalNSAttributedStringKeyDictionary(_ input: [String: Any]?) -> [NSAttributedString.Key: Any]? {
+	guard let input = input else { return nil }
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (NSAttributedString.Key(rawValue: key), value)})
 }

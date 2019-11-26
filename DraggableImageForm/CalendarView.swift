@@ -40,7 +40,7 @@ struct CalendarView {
             let weekdayString = weekday?.englishName
             
             //タグと日付の設定を行う
-            button.setTitle(weekdayString! + "\n" + String(i), for: UIControlState())
+            button.setTitle(weekdayString! + "\n" + String(i), for: UIControl.State())
             button.titleLabel!.font = UIFont(name: "Arial", size: 12)!
             button.titleLabel!.numberOfLines = 2
             button.titleLabel!.textAlignment = .center

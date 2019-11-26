@@ -15,28 +15,28 @@ class Recipe: Object {
     static let realm = try! Realm()
 
     //id
-    dynamic fileprivate var id = 0
+    @objc dynamic fileprivate var id = 0
 
     //archive_id
-    dynamic var archive_id = 0
+    @objc dynamic var archive_id = 0
 
     //楽天レシピid
-    dynamic var rakuten_id = ""
+    @objc dynamic var rakuten_id = ""
 
     //楽天レシピ調理時間のめやす
-    dynamic var rakuten_indication = ""
+    @objc dynamic var rakuten_indication = ""
 
     //楽天レシピ公開日
-    dynamic var rakuten_published = ""
+    @objc dynamic var rakuten_published = ""
 
     //楽天レシピタイトル
-    dynamic var rakuten_title = ""
+    @objc dynamic var rakuten_title = ""
 
     //楽天レシピ画像URL
-    dynamic var rakuten_image = ""
+    @objc dynamic var rakuten_image = ""
 
     //楽天レシピURL
-    dynamic var rakuten_url = ""
+    @objc dynamic var rakuten_url = ""
 
     //PrimaryKeyの設定
     override static func primaryKey() -> String? {
@@ -75,7 +75,7 @@ class Recipe: Object {
 
     //アーカイブIDに紐づくデータを全件取得をする
     static func fetchAllRecipeListByArchiveId(archive_id: Int) -> [Recipe] {
-        let recipes = realm.objects(Recipe.self).filter("archive_id = %@", archive_id).sorted(byProperty: "id", ascending: true)
+        let recipes = realm.objects(Recipe.self).filter("archive_id = %@", archive_id).sorted(byKeyPath: "id", ascending: true)
         var recipeList: [Recipe] = []
         for recipe in recipes {
             recipeList.append(recipe)

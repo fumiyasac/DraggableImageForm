@@ -98,7 +98,7 @@ class GalleryController: UIViewController, UIScrollViewDelegate, UIViewControlle
     }
 
     //サムネイルを拡大表示するためのアクション
-    func expandThumbnail(sender: UITapGestureRecognizer) {
+    @objc func expandThumbnail(sender: UITapGestureRecognizer) {
 
         //遷移対象をサムネイル画像とデータを設定する
         selectedImage = sender.view as? UIImageView
@@ -109,6 +109,9 @@ class GalleryController: UIViewController, UIScrollViewDelegate, UIViewControlle
         let garellyDetail = storyboard!.instantiateViewController(withIdentifier: "GalleryDetailController") as! GalleryDetailController
         garellyDetail.recipe = selectedRecipeData
         garellyDetail.transitioningDelegate = self
+        if #available(iOS 13.0, *) {
+            garellyDetail.modalPresentationStyle = .fullScreen
+        }
         self.present(garellyDetail, animated: true, completion: nil)
     }
     

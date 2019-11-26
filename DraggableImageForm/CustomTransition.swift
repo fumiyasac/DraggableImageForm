@@ -81,7 +81,7 @@ class CustomTransition: NSObject, UIViewControllerAnimatedTransitioning {
 
         //アニメーションの実体となるContainerViewに必要なものを追加する
         containerView.addSubview(toView)
-        containerView.bringSubview(toFront: targetView)
+        containerView.bringSubviewToFront(targetView)
         
         UIView.animate(withDuration: duration, delay: 0.0, options: .curveEaseOut, animations: {
 

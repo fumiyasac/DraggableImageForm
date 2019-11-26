@@ -32,12 +32,12 @@ struct ConvertHtmlText {
         //HTMLに対応した文字列に直す処理とオプションの設定を行う
         let encodedData = htmlText.data(using: String.Encoding.utf8)!
         let attributedOptions : [String : AnyObject] = [
-            NSDocumentTypeDocumentAttribute : NSHTMLTextDocumentType as AnyObject,
-            NSCharacterEncodingDocumentAttribute: NSNumber(value: String.Encoding.utf8.rawValue) as AnyObject,
-            NSParagraphStyleAttributeName : paragraph
+            convertFromNSAttributedStringDocumentAttributeKey(NSAttributedString.DocumentAttributeKey.documentType) : convertFromNSAttributedStringDocumentType(NSAttributedString.DocumentType.html) as AnyObject,
+            convertFromNSAttributedStringDocumentAttributeKey(NSAttributedString.DocumentAttributeKey.characterEncoding): NSNumber(value: String.Encoding.utf8.rawValue) as AnyObject,
+            convertFromNSAttributedStringKey(NSAttributedString.Key.paragraphStyle) : paragraph
         ]
         
-        let attributedString = try! NSAttributedString(data: encodedData, options: attributedOptions, documentAttributes: nil)
+        let attributedString = try! NSAttributedString(data: encodedData, options: convertToNSAttributedStringDocumentReadingOptionKeyDictionary(attributedOptions), documentAttributes: nil)
         
         return attributedString
     }
@@ -49,4 +49,24 @@ struct ConvertHtmlText {
             "<b><a href=\"http://webservice.rakuten.co.jp/\" target=\"_blank\">Supported by 楽天ウェブサービス</a></b><br><br>" +
         "<span style=\"color:#ffffff;\">このサンプル内で利用しているレシピデータに関しては「楽天ウェブサービス」様が提供している「楽天レシピカテゴリ別ランキングAPI」のデータを利用しています。<br><br>またこのサンプルに関してはAPIキーを含んでいませんので、データの取得及びパラメータの設定方法に関しては、「楽天ウェブサービス」様の公式ドキュメント及び本サンプルのAPIアクセス部分のロジックを参考にして実装を行って下さい。<br><br>（楽天ウェブサービスのアカウント取得に関しては上記のリンクより取得をしてください）</span>"
     }
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromNSAttributedStringDocumentAttributeKey(_ input: NSAttributedString.DocumentAttributeKey) -> String {
+	return input.rawValue
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromNSAttributedStringDocumentType(_ input: NSAttributedString.DocumentType) -> String {
+	return input.rawValue
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromNSAttributedStringKey(_ input: NSAttributedString.Key) -> String {
+	return input.rawValue
+}
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertToNSAttributedStringDocumentReadingOptionKeyDictionary(_ input: [String: Any]) -> [NSAttributedString.DocumentReadingOptionKey: Any] {
+	return Dictionary(uniqueKeysWithValues: input.map { key, value in (NSAttributedString.DocumentReadingOptionKey(rawValue: key), value)})
 }
