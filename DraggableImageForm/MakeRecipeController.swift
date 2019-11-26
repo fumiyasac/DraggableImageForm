@@ -210,9 +210,9 @@ class MakeRecipeController: UIViewController, UINavigationControllerDelegate, UI
             let popupVC = UIStoryboard(name: "Add", bundle: nil).instantiateViewController(withIdentifier: "AddController") as! AddController
             
             //ポップアップ用のViewConrollerを設定し、modalPresentationStyle(= .overCurrentContext)と背景色(= UIColor.clear)を設定する
-            popupVC.modalPresentationStyle = .overCurrentContext
+            popupVC.modalPresentationStyle = .overFullScreen
             popupVC.view.backgroundColor = UIColor.clear
-            
+
             //変数の受け渡しを行う
             popupVC.targetSelectedDataList = selectedDataList
             popupVC.targetDate = String(CalendarView.getCalendarOfCurrentYear()) + "/" + String(format: "%02d", CalendarView.getCalendarOfCurrentMonth()) + "/" + String(format: "%02d", selectedDay!)

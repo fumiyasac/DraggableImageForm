@@ -32,8 +32,6 @@
 #import "RLMRealmConfiguration_Private.hpp"
 #import "RLMRealmUtil.hpp"
 #import "RLMSchema_Private.hpp"
-#import "RLMSyncManager_Private.h"
-#import "RLMSyncUtil_Private.hpp"
 #import "RLMThreadSafeReference_Private.hpp"
 #import "RLMUpdateChecker.hpp"
 #import "RLMUtil.hpp"
@@ -42,12 +40,20 @@
 #include "object_store.hpp"
 #include "schema.hpp"
 #include "shared_realm.hpp"
+#include "thread_safe_reference.hpp"
 
 #include <realm/disable_sync_to_disk.hpp>
 #include <realm/util/scope_exit.hpp>
 #include <realm/version.hpp>
 
+#if REALM_ENABLE_SYNC
+#import "RLMSyncManager_Private.h"
+#import "RLMSyncSession_Private.hpp"
+#import "RLMSyncUtil_Private.hpp"
+
+#import "sync/async_open_task.hpp"
 #import "sync/sync_session.hpp"
+#endif
 
 using namespace realm;
 using util::File;
@@ -101,6 +107,13 @@ static void RLMAddSkipBackupAttributeToItemAtPath(std::string const& path) {
     }
 }
 @end
+
+#if !REALM_ENABLE_SYNC
+@interface RLMAsyncOpenTask : NSObject
+@end
+@implementation RLMAsyncOpenTask
+@end
+#endif
 
 static bool shouldForciblyDisableEncryption() {
     static bool disableEncryption = getenv("REALM_DISABLE_ENCRYPTION");
@@ -189,6 +202,7 @@ NSData *RLMRealmValidatedEncryptionKey(NSData *key) {
 // causes issues for asyncOpen because it means that when our download completes
 // we don't actually have the full Realm state yet.
 static void waitForPartialSyncSubscriptions(Realm::Config const& config) {
+#if REALM_ENABLE_SYNC
     auto realm = Realm::get_shared_realm(config);
     auto table = ObjectStore::table_for_object_type(realm->read_group(), "__ResultSets");
 
@@ -216,15 +230,23 @@ static void waitForPartialSyncSubscriptions(Realm::Config const& config) {
         });
     });
     CFRunLoopRun();
+#else
+    static_cast<void>(config);
+#endif
 }
 
-+ (void)asyncOpenWithConfiguration:(RLMRealmConfiguration *)configuration
-                     callbackQueue:(dispatch_queue_t)callbackQueue
-                          callback:(RLMAsyncOpenRealmCallback)callback {
-    static dispatch_queue_t queue = dispatch_queue_create("io.realm.asyncOpenDispatchQueue", DISPATCH_QUEUE_CONCURRENT);
-    auto openCompletion = [=](std::shared_ptr<Realm> realm, std::exception_ptr err) {
+static dispatch_queue_t s_async_open_queue = dispatch_queue_create("io.realm.asyncOpenDispatchQueue",
+                                                                   DISPATCH_QUEUE_CONCURRENT);
+void RLMSetAsyncOpenQueue(dispatch_queue_t queue) {
+    s_async_open_queue = queue;
+}
+
++ (RLMAsyncOpenTask *)asyncOpenWithConfiguration:(RLMRealmConfiguration *)configuration
+                                   callbackQueue:(dispatch_queue_t)callbackQueue
+                                        callback:(RLMAsyncOpenRealmCallback)callback {
+    auto openCompletion = [=](ThreadSafeReference<Realm> ref, std::exception_ptr err) {
         @autoreleasepool {
-            if (!realm) {
+            if (err) {
                 try {
                     std::rethrow_exception(err);
                 }
@@ -248,12 +270,13 @@ static void waitForPartialSyncSubscriptions(Realm::Config const& config) {
                 });
             };
 
+            auto realm = Realm::get_shared_realm(std::move(ref));
             bool needsSubscriptions = realm->is_partial() && ObjectStore::table_for_object_type(realm->read_group(), "__ResultSets")->size() == 0;
             if (needsSubscriptions) {
                 // We need to dispatch back to the work queue to wait for the
                 // subscriptions as we're currently running on the sync worker
                 // thread and blocking it to wait for subscriptions means no syncing
-                dispatch_async(queue, ^{
+                dispatch_async(s_async_open_queue, ^{
                     @autoreleasepool {
                         waitForPartialSyncSubscriptions(realm->config());
                         complete();
@@ -266,12 +289,30 @@ static void waitForPartialSyncSubscriptions(Realm::Config const& config) {
         }
     };
 
-    dispatch_async(queue, ^{
+    RLMAsyncOpenTask *ret = [RLMAsyncOpenTask new];
+    dispatch_async(s_async_open_queue, ^{
         @autoreleasepool {
             Realm::Config& config = configuration.config;
-            realm::Realm::get_shared_realm(config, openCompletion);
+            if (config.sync_config) {
+#if REALM_ENABLE_SYNC
+                auto task = realm::Realm::get_synchronized_realm(config);
+                ret.task = task;
+                task->start(openCompletion);
+#else
+                @throw RLMException(@"Realm was not built with sync enabled");
+#endif
+            }
+            else {
+                try {
+                    openCompletion(realm::_impl::RealmCoordinator::get_coordinator(config)->get_unbound_realm(), nullptr);
+                }
+                catch (...) {
+                    openCompletion({}, std::current_exception());
+                }
+            }
         }
     });
+    return ret;
 }
 
 // ARC tries to eliminate calls to autorelease when the value is then immediately
@@ -606,15 +647,8 @@ REALM_NOINLINE static void translateSharedGroupOpenException(RLMRealmConfigurati
     [self commitWriteTransaction:nil];
 }
 
-- (BOOL)commitWriteTransaction:(NSError **)outError {
-    try {
-        _realm->commit_transaction();
-        return YES;
-    }
-    catch (...) {
-        RLMRealmTranslateException(outError);
-        return NO;
-    }
+- (BOOL)commitWriteTransaction:(NSError **)error {
+    return [self commitWriteTransactionWithoutNotifying:@[] error:error];
 }
 
 - (BOOL)commitWriteTransactionWithoutNotifying:(NSArray<RLMNotificationToken *> *)tokens error:(NSError **)error {
@@ -640,10 +674,18 @@ REALM_NOINLINE static void translateSharedGroupOpenException(RLMRealmConfigurati
 }
 
 - (BOOL)transactionWithBlock:(__attribute__((noescape)) void(^)(void))block error:(NSError **)outError {
+    return [self transactionWithoutNotifying:@[] block:block error:outError];
+}
+
+- (void)transactionWithoutNotifying:(NSArray<RLMNotificationToken *> *)tokens block:(__attribute__((noescape)) void(^)(void))block {
+    [self transactionWithoutNotifying:tokens block:block error:nil];
+}
+
+- (BOOL)transactionWithoutNotifying:(NSArray<RLMNotificationToken *> *)tokens block:(__attribute__((noescape)) void(^)(void))block error:(NSError **)error {
     [self beginWriteTransaction];
     block();
     if (_realm->is_in_transaction()) {
-        return [self commitWriteTransaction:outError];
+        return [self commitWriteTransactionWithoutNotifying:tokens error:error];
     }
     return YES;
 }
@@ -886,6 +928,7 @@ REALM_NOINLINE static void translateSharedGroupOpenException(RLMRealmConfigurati
     return NO;
 }
 
+#if REALM_ENABLE_SYNC
 using Privilege = realm::ComputedPrivileges;
 static bool hasPrivilege(realm::ComputedPrivileges actual, realm::ComputedPrivileges expected) {
     return (static_cast<int>(actual) & static_cast<int>(expected)) == static_cast<int>(expected);
@@ -929,6 +972,7 @@ static bool hasPrivilege(realm::ComputedPrivileges actual, realm::ComputedPrivil
         .create = hasPrivilege(p, Privilege::Create),
     };
 }
+#endif
 
 - (void)registerEnumerator:(RLMFastEnumerator *)enumerator {
     if (!_collectionEnumerators) {

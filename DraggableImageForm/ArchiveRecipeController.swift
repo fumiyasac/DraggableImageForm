@@ -118,7 +118,7 @@ class ArchiveRecipeController: UIViewController, UITableViewDelegate, UITableVie
                 //ポップアップ用のViewConrollerを設定し、modalPresentationStyle(= .overCurrentContext)と背景色(= UIColor.clear)を設定する
                 galleryVC.modalPresentationStyle = .overCurrentContext
                 galleryVC.view.backgroundColor = UIColor.clear
-                
+
                 //変数の受け渡しを行う
                 galleryVC.recipeData = recipes
                 

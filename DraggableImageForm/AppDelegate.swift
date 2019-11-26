@@ -18,7 +18,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         //戻るボタンの色をWhiteに変更する
         UINavigationBar.appearance().tintColor = UIColor.white
-        
+
+        // DarkModeのキャンセル（Info.plistについても念のため記載）
+        if #available(iOS 13.0, *) {
+            window?.overrideUserInterfaceStyle = .light
+        }
+
         return true
     }
 

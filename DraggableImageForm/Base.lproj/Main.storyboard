@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15400" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15404"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -60,7 +58,7 @@
             <objects>
                 <navigationController id="22g-3P-B2H" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="psX-IX-M9R">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.40000000000000002" green="0.20000000000000001" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <textAttributes key="titleTextAttributes">
@@ -84,7 +82,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="　Step1. カレンダーから日付を選択" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sdd-md-kWN">
-                                <rect key="frame" x="0.0" y="64" width="375" height="30"/>
+                                <rect key="frame" x="0.0" y="44" width="375" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="O6k-6P-Hk7"/>
                                 </constraints>
@@ -93,7 +91,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vYK-hY-iA2">
-                                <rect key="frame" x="0.0" y="94" width="375" height="56"/>
+                                <rect key="frame" x="0.0" y="74" width="375" height="56"/>
                                 <subviews>
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8dj-aN-QTd">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="56"/>
@@ -111,7 +109,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="　Step2. 画像からレシピを選択 (出典はメニュー記載)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jip-9p-Blf">
-                                <rect key="frame" x="0.0" y="150" width="375" height="30"/>
+                                <rect key="frame" x="0.0" y="130" width="375" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="w2t-5A-FvB"/>
                                 </constraints>
@@ -120,7 +118,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Fyp-Fs-CHI">
-                                <rect key="frame" x="0.0" y="180" width="375" height="332"/>
+                                <rect key="frame" x="0.0" y="160" width="375" height="352"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="inP-b1-m1O">
                                     <size key="itemSize" width="160" height="160"/>
@@ -140,7 +138,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="160" height="160"/>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="X8Z-mB-RXT">
-                                                    <rect key="frame" x="8" y="28" width="90" height="18"/>
+                                                    <rect key="frame" x="8" y="8" width="90" height="18"/>
                                                     <color key="backgroundColor" red="1" green="0.59999999999999998" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="90" id="Yl2-XN-9JJ"/>
@@ -151,7 +149,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2016/12/25" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ajA-Hw-MYy">
-                                                    <rect key="frame" x="8" y="50" width="90" height="18"/>
+                                                    <rect key="frame" x="8" y="30" width="90" height="18"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="18" id="ar1-4Y-9CR"/>
@@ -335,23 +333,23 @@
         <!--Archive Recipe Controller-->
         <scene sceneID="hew-xP-SxY">
             <objects>
-                <viewController storyboardIdentifier="ArchiveRecipeController" automaticallyAdjustsScrollViewInsets="NO" id="hg2-zF-pns" customClass="ArchiveRecipeController" customModule="DraggableImageForm" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ArchiveRecipeController" id="hg2-zF-pns" customClass="ArchiveRecipeController" customModule="DraggableImageForm" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="4wQ-Dv-EQY">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7ih-CF-p4i">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                            <tableView contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7ih-CF-p4i">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="7ih-CF-p4i" firstAttribute="leading" secondItem="2gx-px-2Y2" secondAttribute="leading" id="9RM-fd-xck"/>
-                            <constraint firstItem="7ih-CF-p4i" firstAttribute="top" secondItem="2gx-px-2Y2" secondAttribute="top" id="Q8u-n3-dne"/>
-                            <constraint firstItem="2gx-px-2Y2" firstAttribute="trailing" secondItem="7ih-CF-p4i" secondAttribute="trailing" id="SPu-Vn-BKx"/>
-                            <constraint firstItem="2gx-px-2Y2" firstAttribute="bottom" secondItem="7ih-CF-p4i" secondAttribute="bottom" id="kk9-46-7MJ"/>
+                            <constraint firstItem="7ih-CF-p4i" firstAttribute="top" secondItem="2gx-px-2Y2" secondAttribute="top" id="Qbn-os-jom"/>
+                            <constraint firstItem="7ih-CF-p4i" firstAttribute="leading" secondItem="2gx-px-2Y2" secondAttribute="leading" id="iEf-hT-4Cr"/>
+                            <constraint firstItem="7ih-CF-p4i" firstAttribute="trailing" secondItem="2gx-px-2Y2" secondAttribute="trailing" id="qtj-Dz-Ebf"/>
+                            <constraint firstItem="7ih-CF-p4i" firstAttribute="bottom" secondItem="4wQ-Dv-EQY" secondAttribute="bottom" id="rqc-c4-btW"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="2gx-px-2Y2"/>
                     </view>
